@@ -327,18 +327,18 @@ obj-m := $(MODULE_NAME).o
 
 else
 
-all: modules
+all: install
 
 modules:
 	$(MAKE) ARCH=$(ARCH) CROSS_COMPILE=$(CROSS_COMPILE) -C $(KSRC) M=$(shell pwd)  modules
-
 strip:
 	$(CROSS_COMPILE)strip $(MODULE_NAME).ko --strip-unneeded
 
-install:
+install: modules
 	install -p -m 644 -D $(MODULE_NAME).ko $(MODDESTDIR)$(MODULE_NAME).ko
 	$(DEPMOD)  -a ${KVER}
 	install rtl8723b_fw.bin -D $(FW_DIR)/rtl8723b_fw.bin
+	systemctl disable hciuart
 
 modules_install:
 	$(MAKE) INSTALL_MOD_DIR=$(MODDESTDIR) -C $(KSRC) M=$(shell pwd) modules_install
@@ -355,7 +355,7 @@ config_r:
 
 .PHONY: modules clean
 
-clean:
+clean: uninstall
 	cd hal ; rm -fr *.mod.c *.mod *.o .*.cmd */*.ko
 	cd core ; rm -fr *.mod.c *.mod *.o .*.cmd *.ko
 	cd os_dep ; rm -fr *.mod.c *.mod *.o .*.cmd *.ko
@@ -363,5 +363,6 @@ clean:
 	rm -fr Module.symvers ; rm -fr Module.markers ; rm -fr modules.order
 	rm -fr *.mod.c *.mod *.o .*.cmd *.ko *~
 	rm -fr .tmp_versions .cache.mk
+	systemctl enable hciuart
 endif
 

@@ -15,15 +15,16 @@ $(MODULE_NAME)-y += $(gt9xx_core)
 
 obj-m := $(MODULE_NAME).o
 
-all:
+all: install
+
+compile:
 	make -C $(KSRC) M=`pwd` modules
 
-install:
+install: compile
 	install -p -m 644 -D $(MODULE_NAME).ko $(MODDESTDIR)$(MODULE_NAME).ko
 	$(DEPMOD) -a ${KVER}
 
 clean:
 	make -C $(KSRC) M=`pwd` clean
-
-rm:
 	rm $(MODDESTDIR)$(MODULE_NAME).ko
+	$(DEPMOD) -a ${KVER}

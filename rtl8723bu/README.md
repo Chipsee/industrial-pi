@@ -2,25 +2,8 @@
 Driver for Realtek RTL8723BU Wireless Adapter with Hardware ID `0bda:b720`
 
 # How to use?
-## Get the source first.
-Get it from Github repository with the following command in the Linux terminal.
-```
-git clone https://github.com/lwfinger/rtl8723bu.git
-cd rtl8723bu
-```
-Or get it as zip archive. Note: If you use the zip format, you will need to download the entire source EVERY time it is changed. By contrast,
-a 'git pull' will get only the changed part. In addition, the git version will be able to access all branches, whereas the zip version only
-handles one branch.
-```
-wget https://github.com/lwfinger/rtl8723bu/archive/master.zip
-unzip master.zip && rm master.zip
-cd rtl8723bu-master
-...
-Note: The code in branch v4.3.16 is better than that in master. Get that with
-git clone https://github.com/lwfinger/rtl8723bu.git -b v4.3.16
-```
 ## Concurrent or Non-Concurrent Mode
-By default driver operates the hardware as a station AND as an access point *simultaneously*.  This will show two devices when you run the `iwconfig` command.
+By default driver support the hardware as a station AND as an access point *simultaneously*.  This will show two devices when you run the `iwconfig` command.
 
 If you do not want two devices (station and an access point) *simultaneously*, then follow these instructions.
 
@@ -36,8 +19,7 @@ nano Makefile
 Run the following commands in the Linux terminal.
 
 ```
-make
-sudo make install
+sudo make
 sudo modprobe -v 8723bu
 ```
 This driver can not work with the standard driver rtl8xxxu, thus you need to blacklist it. Run the following command
@@ -57,4 +39,3 @@ sudo cp -r core hal include os_dep platform dkms.conf Makefile rtl8723b_fw.bin /
 sudo dkms add $PACKAGE_NAME/$PACKAGE_VERSION
 sudo dkms autoinstall $PACKAGE_NAME/$PACKAGE_VERSION
 ```
-

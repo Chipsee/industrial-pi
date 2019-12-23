@@ -11,16 +11,16 @@ $(MODULE_NAME)-y += $(lsm6ds3-core)
 
 obj-m := $(MODULE_NAME).o
 
-all:
+all: install
+
+compile:
 	make -C $(KSRC) M=`pwd` modules
 
-install:
+install: compile
 	install -p -m 644 -D $(MODULE_NAME).ko $(MODDESTDIR)$(MODULE_NAME).ko
 	$(DEPMOD) -a ${KVER}
 
 clean:
 	make -C $(KSRC) M=`pwd` clean
-
-cleanmodule:
-	make -C $(KSRC) M=`pwd` clean
 	rm $(MODDESTDIR)$(MODULE_NAME).ko
+	$(DEPMOD) -a ${KVER}

@@ -32,6 +32,8 @@ modules.builtin
 *.lzo
 *.patch
 *.gcno
+*.symvers
+*.markers
 
 #
 # Top-level generic files
@@ -55,6 +57,16 @@ modules.builtin
 #
 !.gitignore
 !.mailmap
+
+#
+# *.bin in rtl8723bu
+#
+!/rtl8723bu/*.bin
+
+#
+# quectel-CM binary
+#
+/quectel-CM/quectel-CM
 
 #
 # Generated include files

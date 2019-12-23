@@ -17,8 +17,9 @@ if [ -f $PKG ]; then
     # Used by systemd services
     systemctl daemon-reload
     systemctl enable chipsee-init.service
+    systemctl disable hciuart
     # Used by modules
-    depmod -A $KVR
+    depmod -a $KVR
     # Used by quectel-CM
     apt-get -y install udhcpc
     echo "Install Done!!"
