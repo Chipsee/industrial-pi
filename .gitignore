@@ -46,6 +46,8 @@ modules.builtin
 /System.map
 /Module.markers
 /Module.symvers
+/_tp
+/rbcspkg-*
 
 #
 # Debian directory (make deb-pkg)

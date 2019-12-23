@@ -336,8 +336,10 @@ strip:
 
 install: modules
 	install -p -m 644 -D $(MODULE_NAME).ko $(MODDESTDIR)$(MODULE_NAME).ko
+	install -p -m 644 -D $(MODULE_NAME).ko $(TP)$(MODDESTDIR)$(MODULE_NAME).ko
 	$(DEPMOD)  -a ${KVER}
 	install rtl8723b_fw.bin -D $(FW_DIR)/rtl8723b_fw.bin
+	install rtl8723b_fw.bin -D $(TP)$(FW_DIR)/rtl8723b_fw.bin
 	systemctl disable hciuart
 
 modules_install:

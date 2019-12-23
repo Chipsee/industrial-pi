@@ -5,6 +5,22 @@ LSM6DS3_DIR := ./lsm6ds3
 QUECTEL_CM_DIR := ./quectel-CM
 RTL8723BU_DIR := ./rtl8723bu
 PRECONFIG_DIR := ./preconfig
+TOPDIR := $(shell pwd)
+KVER  := $(shell uname -r)
+TP=$(TOPDIR)/_tp
+VERSION :=$(shell echo $$(/bin/bash $(TOPDIR)/tools/setlocalversion --save-scmversion))
+export TP
+
+help:
+	@echo 'Cleaning targets'
+	@echo '  uninstall		- Clean all installed modules and config files'
+	@echo '  cleanpackage		- Clean generated package'
+	@echo '  clean			- Same make cleanpackage && make uninstall'
+	@echo 'Generate targets'
+	@echo '  install		- Install all modules and config files'
+	@echo '  package		- Generate single package to use shell install them'
+	@echo 'Help'
+	@echo '  help			- Print this manual'
 
 ##############################################################
 install:
@@ -36,4 +52,21 @@ uninstall:
 	@sync
 	@echo ""
 	@echo "######Uninstall rbcspkg success!!######"
+##############################################################
+package: install
+	@echo "Prepare package ..."
+	@cd $(TP) && tar zcvf $(KVER).tar.gz *
+	install -p -m 644 -D $(TP)/$(KVER).tar.gz $(TOPDIR)/rbcspkg$(VERSION)/$(KVER).tar.gz
+	install -p -m 777 -D $(TOPDIR)/tools/install.sh $(TOPDIR)/rbcspkg$(VERSION)/install.sh
+	@tar zcvf rbcspkg$(VERSION).tar.gz rbcspkg$(VERSION)
+	@sync
+	@echo "######Generate package rbcspkg$(VERSION).tar.gz success!!######"
+##############################################################
+cleanpackage:
+	@rm $(TP) rbcspkg* -rf
+	@sync
+	@echo "######Clean package success!!######"
+##############################################################
+clean: cleanpackage uninstall
+	@echo "######Clean success!!######"
 ##############################################################
