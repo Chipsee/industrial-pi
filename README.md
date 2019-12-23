@@ -23,3 +23,8 @@ sudo make install
 cd rbcspkg
 sudo make uninstall
 ```
+## More command
+```
+cd rbcspkg
+make help
+```
