@@ -24,6 +24,7 @@ help:
 
 ##############################################################
 install:
+	@dpkg -i $(TOPDIR)/tools/raspberrypi-kernel-headers_1.20190401-1_armhf.deb
 	@make -C $(GT9XX_DIR)
 	@echo "Install GT9XX success!!"
 	@make -C $(LSM6DS3_DIR)
