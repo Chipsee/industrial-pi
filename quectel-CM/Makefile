@@ -10,7 +10,8 @@ release: clean
 	$(CC) -Wall -s QmiWwanCM.c GobiNetCM.c main.c MPQMUX.c QMIThread.c util.c udhcpc.c -o quectel-CM -lpthread
 	install -p -m 777 -D quectel-CM /usr/bin/quectel-CM
 	install -p -m 777 -D quectel-CM $(TP)/usr/bin/quectel-CM
-	apt-get install -y udhcpc > /dev/nul
+	apt-get update > /dev/null
+	apt-get install -y udhcpc > /dev/null
 
 debug: clean
 	$(CC) -Wall -g QmiWwanCM.c GobiNetCM.c main.c MPQMUX.c QMIThread.c util.c udhcpc.c -o quectel-CM -lpthread

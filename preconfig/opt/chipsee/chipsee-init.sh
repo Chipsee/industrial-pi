@@ -41,3 +41,8 @@ echo Goodix-TS 0x5d | tee /sys/bus/i2c/devices/i2c-1/new_device
 modprobe lsm6ds3
 echo lsm6ds3 0x6a | tee /sys/bus/i2c/devices/i2c-1/new_device
 echo "Kernel modules load success!!"
+# Udhcpc
+if [ -f /etc/udhcpc/default.script ]; then
+	mkdir /usr/share/udhcpc -p
+	ln -sf /etc/udhcpc/default.script /usr/share/udhcpc/default.script
+fi
