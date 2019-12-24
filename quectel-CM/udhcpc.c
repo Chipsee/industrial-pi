@@ -201,6 +201,14 @@ static void* udhcpc_thread_function(void*  arg) {
     {
         if (access("/usr/share/udhcpc/default.script", X_OK)) {
             dbg_time("Fail to access /usr/share/udhcpc/default.script, errno: %d (%s)", errno, strerror(errno));
+        }else{
+            snprintf(udhcpc_cmd, sizeof(udhcpc_cmd), "busybox udhcpc -f -n -q -t 5 -i %s -s /usr/share/udhcpc/default.script", (char *)ifname);
+        }
+        
+        if (access("/etc/udhcpc/default.script", X_OK)) {
+            dbg_time("Fail to access /etc/udhcpc/default.script, errno: %d (%s)", errno, strerror(errno));
+        }else{
+            snprintf(udhcpc_cmd, sizeof(udhcpc_cmd), "busybox udhcpc -f -n -q -t 5 -i %s -s /etc/udhcpc/default.script", (char *)ifname);
         }
 
         //-f,--foreground    Run in foreground
@@ -208,7 +216,9 @@ static void* udhcpc_thread_function(void*  arg) {
         //-n,--now        Exit if lease is not obtained
         //-q,--quit        Exit after obtaining lease
         //-t,--retries N        Send up to N discover packets (default 3)
-        snprintf(udhcpc_cmd, sizeof(udhcpc_cmd), "busybox udhcpc -f -n -q -t 5 -i %s", (char *)ifname);
+        //-i,--interface IFACE    Interface to use (default eth0)
+        //-s,--script PROG        Run PROG at DHCP events (default /etc/udhcpc/default.script)
+        //snprintf(udhcpc_cmd, sizeof(udhcpc_cmd), "busybox udhcpc -f -n -q -t 5 -i %s", (char *)ifname);
     }
     else
     {
