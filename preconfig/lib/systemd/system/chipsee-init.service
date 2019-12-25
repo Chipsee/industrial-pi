@@ -8,7 +8,8 @@
 [Unit]
 Description=Chipsee hardware init
 ConditionFileIsExecutable=/opt/chipsee/chipsee-init.sh
-After=network.target
+Requires=sysinit.target
+After=sysinit.target
 
 [Service]
 Type=forking
@@ -18,4 +19,4 @@ RemainAfterExit=yes
 GuessMainPID=no
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=sysinit.target

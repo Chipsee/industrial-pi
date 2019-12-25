@@ -13,12 +13,13 @@ install:
 	install -p -m 777 -D opt/chipsee/test/gpiotest.sh $(TP)/opt/chipsee/test/gpiotest.sh
 	install -p -m 777 -D opt/chipsee/test/uarttest.txt /opt/chipsee/test/uarttest.txt
 	install -p -m 777 -D opt/chipsee/test/uarttest.txt $(TP)/opt/chipsee/test/uarttest.txt
-	systemctl daemon-reload
+	install -p -b -m 755 -D usr/lib/raspi-config/init_resize.sh /usr/lib/raspi-config/init_resize.sh
+	install -p -m 755 -D usr/lib/raspi-config/init_resize.sh $(TP)/usr/lib/raspi-config/init_resize.sh
 	systemctl enable chipsee-init.service
 
 clean: install
 	systemctl disable chipsee-init.service
-	systemctl daemon-reload
 	rm /opt/chipsee -rf
 	mv /etc/lightdm/lightdm.conf~ /etc/lightdm/lightdm.conf
 	mv /boot/config.txt~ /boot/config.txt
+	mv /usr/lib/raspi-config/init_resize.sh~ /usr/lib/raspi-config/init_resize.sh
