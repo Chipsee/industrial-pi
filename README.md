@@ -1,7 +1,7 @@
 # Introduction
 We will use this repo to contain the source code and config for Chipsee Raspberry Computer Module Hardware.
 
-## Supported Raspberry Official System
+# Supported Raspberry Official System
 This repository only support follow [Raspberry Pi official system](https://www.raspberrypi.org/downloads/raspbian/) now:
  - 2019-04-08-raspbian-stretch
  - 2020-02-13-raspbian-buster
