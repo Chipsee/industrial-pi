@@ -24,7 +24,8 @@ help:
 
 ##############################################################
 install:
-	@dpkg -i $(TOPDIR)/tools/raspberrypi-kernel-headers_1.20190401-1_armhf.deb
+	@apt-get update
+	@apt-get install raspberrypi-kernel-headers
 	@make -C $(GT9XX_DIR)
 	@echo "Install GT9XX success!!"
 	@make -C $(LSM6DS3_DIR)
@@ -37,7 +38,7 @@ install:
 	@echo "Install preconfig success!!"
 	@sync
 	@echo ""
-	@echo "######Install rbcspkg success!!######"
+	@echo "######Install industrial-pi drivers success!!######"
 ##############################################################
 uninstall:
 	@make clean -C $(GT9XX_DIR)
@@ -52,19 +53,19 @@ uninstall:
 	@echo "Uninstall preconfig success!!"
 	@sync
 	@echo ""
-	@echo "######Uninstall rbcspkg success!!######"
+	@echo "######Uninstall industrial-pi drivers success!!######"
 ##############################################################
 package: install
 	@echo "Prepare package ..."
 	@cd $(TP) && tar zcvf $(KVER).tar.gz *
-	install -p -m 644 -D $(TP)/$(KVER).tar.gz $(TOPDIR)/rbcspkg$(VERSION)/$(KVER).tar.gz
-	install -p -m 777 -D $(TOPDIR)/tools/install.sh $(TOPDIR)/rbcspkg$(VERSION)/install.sh
-	@tar zcvf rbcspkg$(VERSION).tar.gz rbcspkg$(VERSION)
+	install -p -m 644 -D $(TP)/$(KVER).tar.gz $(TOPDIR)/industrial-pi$(VERSION)/$(KVER).tar.gz
+	install -p -m 777 -D $(TOPDIR)/tools/install.sh $(TOPDIR)/industrial-pi$(VERSION)/install.sh
+	@tar zcvf industrial-pi$(VERSION).tar.gz industrial-pi$(VERSION)
 	@sync
-	@echo "######Generate package rbcspkg$(VERSION).tar.gz success!!######"
+	@echo "######Generate package industrial-pi$(VERSION).tar.gz success!!######"
 ##############################################################
 cleanpackage:
-	@rm $(TP) rbcspkg* -rf
+	@rm $(TP) industrial-pi* -rf
 	@sync
 	@echo "######Clean package success!!######"
 ##############################################################
