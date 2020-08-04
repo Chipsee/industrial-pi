@@ -29,6 +29,7 @@ static const char *goodix_ts_name = "goodix-ts";
 static const char *goodix_input_phys = "input/ts";
 static struct workqueue_struct *goodix_wq;
 struct i2c_client * i2c_connect_client = NULL; 
+static u8 bgt9271 = FALSE;
 int gtp_rst_gpio;
 int gtp_int_gpio;
 u8 config[GTP_CONFIG_MAX_LENGTH + GTP_ADDR_LENGTH]
@@ -49,6 +50,7 @@ static s8 gtp_i2c_test(struct i2c_client *client);
 void gtp_reset_guitar(struct i2c_client *client, s32 ms);
 s32 gtp_send_cfg(struct i2c_client *client);
 void gtp_int_sync(s32 ms);
+static s8 gtp_request_io_port(struct goodix_ts_data *ts);
 
 static ssize_t gt91xx_config_read_proc(struct file *, char __user *, size_t, loff_t *);
 static ssize_t gt91xx_config_write_proc(struct file *, const char __user *, size_t, loff_t *);
@@ -1393,9 +1395,11 @@ static s32 gtp_init_panel(struct goodix_ts_data *ts)
 #else 
 	GTP_DEBUG("Get config data from header file.");
     	u8 cfg_info_group0[] = CTP_CFG_GROUP0;
+	u8 cfg_10_info_group0[] = CTP_10_CFG_GROUP0;
     	u8 cfg_info_group1[] = CTP_CFG_GROUP1;
     	u8 cfg_info_group2[] = CTP_CFG_GROUP2;
     	u8 cfg_info_group3[] = CTP_CFG_GROUP3;
+	u8 cfg_10_info_group3[] = CTP_10_CFG_GROUP3;
     	u8 cfg_info_group4[] = CTP_CFG_GROUP4;
     	u8 cfg_info_group5[] = CTP_CFG_GROUP5;
 
@@ -1408,6 +1412,13 @@ static s32 gtp_init_panel(struct goodix_ts_data *ts)
                               CFG_GROUP_LEN(cfg_info_group3),
                               CFG_GROUP_LEN(cfg_info_group4),
                               CFG_GROUP_LEN(cfg_info_group5)};
+	if(bgt9271)
+	{
+		send_cfg_buf[0] = cfg_10_info_group0;
+		cfg_info_len[0] = CFG_GROUP_LEN(cfg_10_info_group0);
+		send_cfg_buf[3] = cfg_10_info_group3;
+		cfg_info_len[3] = CFG_GROUP_LEN(cfg_10_info_group3);
+	}
 
     	GTP_DEBUG("Config Groups\' Lengths: %d, %d, %d, %d, %d, %d",
         	cfg_info_len[0], cfg_info_len[1], cfg_info_len[2], cfg_info_len[3],
@@ -1655,6 +1666,7 @@ s32 gtp_read_version(struct i2c_client *client, u16* version)
     {
         *version = (buf[7] << 8) | buf[6];
     }
+
     if (buf[5] == 0x00)
     {
         GTP_INFO("IC Version: %c%c%c_%02x%02x", buf[2], buf[3], buf[4], buf[7], buf[6]);
@@ -1663,6 +1675,7 @@ s32 gtp_read_version(struct i2c_client *client, u16* version)
     {
         GTP_INFO("IC Version: %c%c%c%c_%02x%02x", buf[2], buf[3], buf[4], buf[5], buf[7], buf[6]);
     }
+
     return ret;
 }
 
@@ -1690,11 +1703,70 @@ static s8 gtp_i2c_test(struct i2c_client *client)
         {
             return ret;
         }
-        GTP_ERROR("GTP i2c test failed time %d.",retry);
+        GTP_ERROR("GTP i2c test failed time %d, IO rst: %d, int: %d.",retry, gtp_rst_gpio,gtp_int_gpio);
         msleep(10);
     }
     return ret;
 }
+
+/*******************************************************
+Function:
+    IO test and select Function.
+Input:
+    client:i2c client.
+Output:
+    Executive outcomes.
+        2: succeed, otherwise failed.
+*******************************************************/
+static s8 gtp_io_test(struct i2c_client *client)
+{
+    u8 buf[8] = {GTP_REG_VERSION >> 8, GTP_REG_VERSION & 0xff};
+    s8 ret = -1;
+    struct goodix_ts_data *ts = i2c_get_clientdata(client);
+
+    GTP_DEBUG_FUNC();
+
+    GTP_INFO("GTP i2c test IO rst: %d, int: %d.", gtp_rst_gpio,gtp_int_gpio);
+    ret = gtp_i2c_read(client, buf, sizeof(buf));
+    if (ret < 0)
+    {
+	GTP_ERROR("GTP read version failed");
+        return ret;
+    }
+
+    if (buf[2] =='9' && buf[3] =='2' && buf[4] =='8')
+    {
+        GTP_INFO("IC is GT9271 used by CS12800RA101.");
+        bgt9271=TRUE;
+    } else 
+    {
+	GTP_INFO("IC is GT911 used by CS10600RA070.");
+        bgt9271=FALSE;
+    }
+
+    // if retry 5 times, the i2c is not ok, we need change to another rst/int
+    if (bgt9271)
+    {
+        // free the before io
+        GTP_GPIO_FREE(gtp_rst_gpio);
+        GTP_GPIO_FREE(gtp_int_gpio);
+        // change new io and re-request
+        gtp_rst_gpio = 37;
+        gtp_int_gpio = 38;
+
+        ret = gtp_request_io_port(ts);
+        if (ret < 0)
+        {
+            GTP_ERROR("GTP request IO port failed.");
+            kfree(ts);
+            return ret;
+        }
+       // success
+       GTP_INFO("GTP IO change to rst:%d,int:%d.", gtp_rst_gpio,gtp_int_gpio);
+    }
+    return ret;
+}
+
 
 /*******************************************************
 Function:
@@ -2480,6 +2552,11 @@ static int goodix_ts_probe(struct i2c_client *client, const struct i2c_device_id
         }
     }
 #endif
+    ret = gtp_io_test(client);
+    if (ret < 0)
+    {
+        GTP_ERROR("I2C IO test ERROR!");
+    }
 
     ret = gtp_i2c_test(client);
     if (ret < 0)
@@ -3130,6 +3207,8 @@ static void __exit goodix_ts_exit(void)
     {
         destroy_workqueue(goodix_wq);
     }
+    GTP_GPIO_FREE(gtp_rst_gpio);
+    GTP_GPIO_FREE(gtp_int_gpio);
 }
 
 module_init(goodix_ts_init);

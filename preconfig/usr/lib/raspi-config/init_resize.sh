@@ -186,12 +186,25 @@ if ! check_commands; then
 fi
 
 # Append Chipsee Packages
+echo "Begain Chipsee Packages prepare ^_^" > /var/log/chipseeinit_resize.log
 KVR=`uname -r`
 systemctl enable chipsee-init
 systemctl disable hciuart
 depmod -a $KVR
+
+# Board info
+IS2514=`lsusb | grep -c 0424:2514`
+IS4232=`lsusb | grep -c 0403:6011`
+if [ "$IS2514" = "1" ] || [ "$IS4232" = "1" ]; then
+        echo "Board is CS12800RA101" >> /var/log/chipseeinit_resize.log
+        cp -b /boot/config-cs12800ra101.txt /boot/config.txt
+else
+        echo "Board is CS10600RA070" >> /var/log/chipseeinit_resize.log
+        cp -b /boot/config-cs10600ra070.txt /boot/config.txt
+fi
+
 sync
-echo "Appended Chipsee Packages ^_^" > /var/log/chipseeinit.log
+echo "Appended Chipsee Packages ^_^" >> /var/log/chipseeinit_resize.log
 
 if main; then
   whiptail --infobox "Resized root filesystem. Rebooting in 5 seconds..." 20 60
