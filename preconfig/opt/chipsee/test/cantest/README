@@ -1,0 +1,4 @@
+# use follow commands to test can
+sudo ./cantest.sh can0
+or 
+sudo ./cantest.sh can1
