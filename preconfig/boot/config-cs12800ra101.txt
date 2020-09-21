@@ -101,6 +101,6 @@ hdmi_mode=28
 # MCP23008
 dtoverlay=mcp23017,mcp23008,addr=0x20,noints
 # MCP2517
-dtoverlay=mcp2515-can0,oscillator=20000000,interrupt=6
-dtoverlay=mcp2515-can1,oscillator=20000000,interrupt=5
+dtoverlay=mcp2515-can0,oscillator=8000000,interrupt=6
+dtoverlay=mcp2515-can1,oscillator=8000000,interrupt=5
 #####################################Chipsee Config#####################################
