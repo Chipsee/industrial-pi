@@ -1736,9 +1736,12 @@ static s8 gtp_io_test(struct i2c_client *client)
 
     if (buf[2] =='9' && buf[3] =='2' && buf[4] =='8')
     {
+        GTP_INFO("IC is GT928 used by CS12800RA101.");
+        bgt9271=TRUE;
+    } else if (buf[2] =='9' && buf[3] =='2' && buf[4] =='7') {
         GTP_INFO("IC is GT9271 used by CS12800RA101.");
         bgt9271=TRUE;
-    } else 
+    } else
     {
 	GTP_INFO("IC is GT911 used by CS10600RA070.");
         bgt9271=FALSE;
