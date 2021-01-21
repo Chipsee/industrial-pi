@@ -19,6 +19,7 @@
 #include <linux/interrupt.h>
 #include <linux/workqueue.h>
 #include <asm/unaligned.h>
+#include <linux/version.h>
 
 #ifdef CONFIG_OF
 #include <linux/of.h>
@@ -297,8 +298,11 @@ static inline void lsm6ds3_flush_works(void)
 static inline int64_t lsm6ds3_get_time_ns(void)
 {
 	struct timespec ts;
-
+#if (LINUX_VERSION_CODE <= KERNEL_VERSION( 4,19,169 ))
 	get_monotonic_boottime(&ts);
+#else
+	getboottime(&ts);
+#endif
 
 	return timespec_to_ns(&ts);
 }

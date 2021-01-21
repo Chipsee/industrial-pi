@@ -75,7 +75,7 @@
 #define GTP_DEBUG_FUNC_ON     0
 
 // patched by chipsee(1 lines)
-//#define GTP_CONFIG_OF		  0		// devicetree support
+#define GTP_CONFIG_OF		  1		// devicetree support
 
 #define GTP_SINGLETOUCH		  1
 

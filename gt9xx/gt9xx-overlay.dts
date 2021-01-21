@@ -1,0 +1,46 @@
+// Device tree overlay for I2C connected Goodix multiple touch controller
+/dts-v1/;
+/plugin/;
+
+/ {
+	compatible = "brcm,bcm2835";
+
+	fragment@0 {
+		target = <&gpio>;
+		__overlay__ {
+			gt9xx_pins: gt9xx_pins {
+				brcm,pins = <12 18>; // interrupt and reset
+				brcm,function = <0 0>; // in
+				brcm,pull = <2 2>; // pull-up
+			};
+		};
+	};
+
+	fragment@1 {
+		target = <&i2c1>;
+		__overlay__ {
+			#address-cells = <1>;
+			#size-cells = <0>;
+			status = "okay";
+
+			gt9xx: gt9xx@14 {
+				compatible = "goodix,gt9xx";
+				reg = <0x14>;
+				pinctrl-names = "default";
+				pinctrl-0 = <&gt9xx_pins>;
+				interrupt-parent = <&gpio>;
+				interrupts = <12 2>; // high-to-low edge triggered
+				goodix,irq-gpio = <&gpio 12 0>; // Pin12
+				goodix,rst-gpio = <&gpio 18 1>; // Pin18
+			};
+		};
+	};
+
+	__overrides__ {
+		interrupt = <&gt9xx_pins>,"brcm,pins:0",
+			<&gt9xx>,"interrupts:0",
+			<&gt9xx>,"goodix,irq-gpio:4";
+		reset = <&gt9xx_pins>,"brcm,pins:4",
+			<&gt9xx>,"goodix,rst-gpio:4";
+	};
+};

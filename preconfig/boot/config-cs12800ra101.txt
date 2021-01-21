@@ -80,12 +80,16 @@ enable_uart=1
 # Audio, The latest PCB will use HDMI audio
 #dtoverlay=pwm-2chan,pin=40,pin2=45,func=4,func2=4
 #audio_pwm_mode=2
+gpio=44=op,dh
 # LED
 dtoverlay=pi3-act-led,activelow=off,gpio=36
 dtparam=act_led_trigger=heartbeat
 # SD1
 dtoverlay=sdio,poll_once=off
+# Touch
+dtoverlay=gt9xx,interrupt=38,reset=37
 # HDMI
+gpio=41=op,dh
 ## Follow Can fix some hardware issue
 hdmi_force_hotplug=1
 hdmi_group=2

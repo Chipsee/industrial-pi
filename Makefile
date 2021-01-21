@@ -4,6 +4,7 @@ GT9XX_DIR := ./gt9xx
 LSM6DS3_DIR := ./lsm6ds3
 QUECTEL_CM_DIR := ./quectel-CM
 RTL8723BU_DIR := ./rtl8723bu
+WM8960_DIR := ./wm8960
 PRECONFIG_DIR := ./preconfig
 TOPDIR := $(shell pwd)
 KVER  := $(shell uname -r)
@@ -34,6 +35,8 @@ install:
 	@echo "Install quectel-cm success!!"
 	@make -C $(RTL8723BU_DIR)
 	@echo "Install rtl8723bu success!!"
+	@make -C $(WM8960_DIR)
+	@echo "Install wm8960 success!!"
 	@make -C $(PRECONFIG_DIR)
 	@echo "Install preconfig success!!"
 	@sync
@@ -49,6 +52,8 @@ uninstall:
 	@echo "Uninstall quectel-cm success!!"
 	@make clean -C $(RTL8723BU_DIR)
 	@echo "Uninstall rtl8723bu success!!"
+	@make clean -C $(WM8960_DIR)
+	@echo "Uninstall wm8960 success!!"
 	@make clean -C $(PRECONFIG_DIR)
 	@echo "Uninstall preconfig success!!"
 	@sync

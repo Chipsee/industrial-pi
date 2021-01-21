@@ -5,8 +5,8 @@ install:
 	install -p -m 755 -D boot/config-cs10600ra070.txt $(TP)/boot/config-cs10600ra070.txt
 	install -p -b -m 755 -D boot/config-cs12800ra101.txt /boot/config-cs12800ra101.txt
 	install -p -m 755 -D boot/config-cs12800ra101.txt $(TP)/boot/config-cs12800ra101.txt
-	install -p -b -m 644 -D etc/lightdm/lightdm.conf /etc/lightdm/lightdm.conf
-	install -p -m 644 -D etc/lightdm/lightdm.conf $(TP)/etc/lightdm/lightdm.conf
+	install -p -b -m 755 -D boot/config-lrra4-101.txt /boot/config-lrra4-101.txt
+	install -p -m 755 -D boot/config-lrra4-101.txt $(TP)/boot/config-lrra4-101.txt
 	install -p -m 644 -D lib/systemd/system/chipsee-init.service /lib/systemd/system/chipsee-init.service
 	install -p -m 644 -D lib/systemd/system/chipsee-init.service $(TP)/lib/systemd/system/chipsee-init.service
 	install -p -m 755 -D usr/bin/lt8619cinit /usr/bin/lt8619cinit
@@ -17,6 +17,24 @@ install:
 	install -p -m 777 -D opt/chipsee/test/gpiotest.sh $(TP)/opt/chipsee/test/gpiotest.sh
 	install -p -m 777 -D opt/chipsee/test/uarttest.txt /opt/chipsee/test/uarttest.txt
 	install -p -m 777 -D opt/chipsee/test/uarttest.txt $(TP)/opt/chipsee/test/uarttest.txt
+	install -p -m 777 -D opt/chipsee/test/cantest/canconfig /opt/chipsee/test/cantest/canconfig
+	install -p -m 777 -D opt/chipsee/test/cantest/canconfig $(TP)/opt/chipsee/test/cantest/canconfig
+	install -p -m 777 -D opt/chipsee/test/cantest/candump /opt/chipsee/test/cantest/candump
+	install -p -m 777 -D opt/chipsee/test/cantest/candump $(TP)/opt/chipsee/test/cantest/candump
+	install -p -m 777 -D opt/chipsee/test/cantest/canecho /opt/chipsee/test/cantest/canecho
+	install -p -m 777 -D opt/chipsee/test/cantest/canecho $(TP)/opt/chipsee/test/cantest/canecho
+	install -p -m 777 -D opt/chipsee/test/cantest/cansend /opt/chipsee/test/cantest/cansend
+	install -p -m 777 -D opt/chipsee/test/cantest/cansend $(TP)/opt/chipsee/test/cantest/cansend
+	install -p -m 777 -D opt/chipsee/test/cantest/cansequence /opt/chipsee/test/cantest/cansequence
+	install -p -m 777 -D opt/chipsee/test/cantest/cansequence $(TP)/opt/chipsee/test/cantest/cansequence
+	install -p -m 777 -D opt/chipsee/test/cantest/cantest.sh /opt/chipsee/test/cantest/cantest.sh
+	install -p -m 777 -D opt/chipsee/test/cantest/cantest.sh $(TP)/opt/chipsee/test/cantest/cantest.sh
+	install -p -m 777 -D opt/chipsee/test/cantest/README /opt/chipsee/test/cantest/README
+	install -p -m 777 -D opt/chipsee/test/cantest/README $(TP)/opt/chipsee/test/cantest/README
+	install -p -m 777 -D opt/chipsee/voicecard/asound_2mic.conf /opt/chipsee/voicecard/asound_2mic.conf
+	install -p -m 777 -D opt/chipsee/voicecard/asound_2mic.conf $(TP)/opt/chipsee/voicecard/asound_2mic.conf
+	install -p -m 777 -D opt/chipsee/voicecard/wm8960_asound.state /opt/chipsee/voicecard/wm8960_asound.state
+	install -p -m 777 -D opt/chipsee/voicecard/wm8960_asound.state $(TP)/opt/chipsee/voicecard/wm8960_asound.state
 	install -p -b -m 755 -D usr/lib/raspi-config/init_resize.sh /usr/lib/raspi-config/init_resize.sh
 	install -p -m 755 -D usr/lib/raspi-config/init_resize.sh $(TP)/usr/lib/raspi-config/init_resize.sh
 	systemctl enable chipsee-init.service
@@ -25,7 +43,6 @@ clean: install
 	systemctl disable chipsee-init.service
 	rm /opt/chipsee -rf
 	rm /usr/bin/lt8619cinit
-	mv /etc/lightdm/lightdm.conf~ /etc/lightdm/lightdm.conf
-	mv /boot/config.txt~ /boot/config.txt
 	rm /boot/config-*.txt
 	mv /usr/lib/raspi-config/init_resize.sh~ /usr/lib/raspi-config/init_resize.sh
+	mv /boot/config.txt~ /boot/config.txt

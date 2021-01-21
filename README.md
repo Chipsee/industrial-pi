@@ -1,2 +1,2 @@
 # Introduction
-Release for kernel-4.19.97-v7+, based on `2020-02-13-raspbian-buster-xxx.img`
+Release for kernel-5.4.83-v7l+, based on `2021-01-11-raspios-buster-armhf-xxx.img`
