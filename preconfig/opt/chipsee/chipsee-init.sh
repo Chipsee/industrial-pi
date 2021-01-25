@@ -54,6 +54,12 @@ if [ "$SCREEN_SIZE" = "1280x800" ]; then
 	#insmod /home/pi/cslcd/cs_lcd.ko
 	#echo cs_lcd 0x32 | tee /sys/bus/i2c/devices/i2c-0/new_device
 	#fbi -T 1 -noverbose -a /etc/logo.png
+	if [ ! -f /home/pi/.config/systemd/user/default.target.wants/audioswitch.service ]; then
+		mkdir -p /home/pi/.config/systemd/user/default.target.wants
+		ln -s /usr/lib/systemd/user/audioswitch.service /home/pi/.config/systemd/user/default.target.wants/audioswitch.service
+		chown pi:pi /home/pi/.config/systemd/user/default.target.wants/audioswitch.service
+		reboot
+	fi
 else
 	if [ "x$CMVER" = "x3" ]; then
         	echo "Init GPIO for CS10600RA070"
@@ -214,14 +220,19 @@ if aplay -l | grep -q "bcm2835 ALSA"; then
 fi
 
 # SPEAKER
-#CURRENT_PROFILE=$(pactl list sinks | grep "Active Port"| cut -d ' ' -f 3-)
-#DETIO=6
-#SPKENIO=11
-#echo $DETIO > /sys/class/gpio/export
-#echo $SPKENIO > /sys/class/gpio/export
-#echo in > /sys/class/gpio/gpio$DETIO/direction
-#echo out > /sys/class/gpio/gpio$SPKENIO/direction
-#echo 0 > /sys/class/gpio/gpio$SPKENIO/value
+CURRENT_PROFILE=$(pactl list sinks | grep "Active Port"| cut -d ' ' -f 3-)
+DETIO=6
+SPKENIO=11
+echo $DETIO > /sys/class/gpio/export
+echo $SPKENIO > /sys/class/gpio/export
+echo in > /sys/class/gpio/gpio$DETIO/direction
+echo out > /sys/class/gpio/gpio$SPKENIO/direction
+echo 1 > /sys/class/gpio/gpio$SPKENIO/value
+chmod 777 /sys/class/gpio/gpio$SPKENIO/value
+chmod 777 /sys/class/gpio/gpio$DETIO/value
+# follow contents will execute in audioswitch.service
+# systemctl --user start audioswitch.service
+# systemctl --user enable audioswitch.service
 #COUNT=1
 #while [ 1 ]; do
 #    isdet=`cat /sys/class/gpio/gpio$DETIO/value`
@@ -237,5 +248,8 @@ fi
 #    COUNT=`expr $COUNT + 1`
 #    sleep 1
 #done
+if [ ! -f /home/pi/.config/systemd/user/default.target.wants/audioswitch.service ]; then
+	ln -s /usr/lib/systemd/user/audioswitch.service /home/pi/.config/systemd/user/default.target.wants/audioswitch.service
+fi
 
 exit 0

@@ -9,6 +9,8 @@ install:
 	install -p -m 755 -D boot/config-lrra4-101.txt $(TP)/boot/config-lrra4-101.txt
 	install -p -m 644 -D lib/systemd/system/chipsee-init.service /lib/systemd/system/chipsee-init.service
 	install -p -m 644 -D lib/systemd/system/chipsee-init.service $(TP)/lib/systemd/system/chipsee-init.service
+	install -p -m 644 -D lib/systemd/user/audioswitch.service /lib/systemd/user/audioswitch.service
+	install -p -m 644 -D lib/systemd/user/audioswitch.service $(TP)/lib/systemd/user/audioswitch.service
 	install -p -m 755 -D usr/bin/lt8619cinit /usr/bin/lt8619cinit
 	install -p -m 755 -D usr/bin/lt8619cinit $(TP)/usr/bin/lt8619cinit
 	install -p -m 777 -D opt/chipsee/chipsee-init.sh /opt/chipsee/chipsee-init.sh
