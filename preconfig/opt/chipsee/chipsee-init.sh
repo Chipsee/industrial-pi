@@ -122,7 +122,7 @@ function get_kernel_version() {
 # GPIO
 num=1
 for i in $OUT; do
-echo $i > /sys/class/gpio/export
+[ ! -d /sys/class/gpio/gpio$i ] && echo $i > /sys/class/gpio/export
 echo out > /sys/class/gpio/gpio$i/direction
 chmod a+w /sys/class/gpio/gpio$i/value
 ln -sf /sys/class/gpio/gpio$i/value /dev/chipsee-gpio$num
@@ -130,14 +130,14 @@ num=`expr $num + 1`
 done            
 sleep 1         
 for i in $IN; do
-echo $i > /sys/class/gpio/export
+[ ! -d /sys/class/gpio/gpio$i ] && echo $i > /sys/class/gpio/export
 echo in > /sys/class/gpio/gpio$i/direction
 chmod a+r /sys/class/gpio/gpio$i/value
 ln -sf /sys/class/gpio/gpio$i/value /dev/chipsee-gpio$num
 num=`expr $num + 1`
 done
 # Buzzer
-echo $BUZZER > /sys/class/gpio/export
+[ ! -d /sys/class/gpio/gpio$BUZZER ] && echo $BUZZER > /sys/class/gpio/export
 echo out > /sys/class/gpio/gpio$BUZZER/direction
 chmod a+w /sys/class/gpio/gpio$BUZZER/value 
 ln -sf /sys/class/gpio/gpio$BUZZER/value /dev/buzzer
@@ -159,7 +159,7 @@ if [ "x${is_1a}" != "x" ]; then
     asound_conf=/opt/chipsee/voicecard/asound_2mic.conf
     asound_state=/opt/chipsee/voicecard/wm8960_asound.state
 fi
-if [ "x${overlay}" != "x" && "x$CMVER" = "x4" ]; then
+if [ "x${overlay}" != "x" -a "x${CMVER}" = "x4" ]; then
     echo Install $overlay ...
 
     # Remove old configuration
@@ -196,11 +196,12 @@ EOF
     alsactl restore
 
     # SPEAKER
-    CURRENT_PROFILE=$(pactl list sinks | grep "Active Port"| cut -d ' ' -f 3-)
+    # pactl list need be run as nomal user not root
+    #CURRENT_PROFILE=$(pactl list sinks | grep "Active Port"| cut -d ' ' -f 3-)
     DETIO=6
     SPKENIO=11
-    echo $DETIO > /sys/class/gpio/export
-    echo $SPKENIO > /sys/class/gpio/export
+    [ ! -d /sys/class/gpio/gpio$DETIO ] && echo $DETIO > /sys/class/gpio/export
+    [ ! -d /sys/class/gpio/gpio$SPKENIO ] && echo $SPKENIO > /sys/class/gpio/export
     echo in > /sys/class/gpio/gpio$DETIO/direction
     echo out > /sys/class/gpio/gpio$SPKENIO/direction
     echo 1 > /sys/class/gpio/gpio$SPKENIO/value
