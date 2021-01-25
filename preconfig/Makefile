@@ -15,6 +15,8 @@ install:
 	install -p -m 755 -D usr/bin/lt8619cinit $(TP)/usr/bin/lt8619cinit
 	install -p -m 777 -D opt/chipsee/chipsee-init.sh /opt/chipsee/chipsee-init.sh
 	install -p -m 777 -D opt/chipsee/chipsee-init.sh $(TP)/opt/chipsee/chipsee-init.sh
+	install -p -m 777 -D opt/chipsee/audioswitch.sh /opt/chipsee/audioswitch.sh
+	install -p -m 777 -D opt/chipsee/audioswitch.sh $(TP)/opt/chipsee/audioswitch.sh
 	install -p -m 777 -D opt/chipsee/test/gpiotest.sh /opt/chipsee/test/gpiotest.sh
 	install -p -m 777 -D opt/chipsee/test/gpiotest.sh $(TP)/opt/chipsee/test/gpiotest.sh
 	install -p -m 777 -D opt/chipsee/test/uarttest.txt /opt/chipsee/test/uarttest.txt

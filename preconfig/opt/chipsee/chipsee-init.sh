@@ -54,12 +54,6 @@ if [ "$SCREEN_SIZE" = "1280x800" ]; then
 	#insmod /home/pi/cslcd/cs_lcd.ko
 	#echo cs_lcd 0x32 | tee /sys/bus/i2c/devices/i2c-0/new_device
 	#fbi -T 1 -noverbose -a /etc/logo.png
-	if [ ! -f /home/pi/.config/systemd/user/default.target.wants/audioswitch.service ]; then
-		mkdir -p /home/pi/.config/systemd/user/default.target.wants
-		ln -s /usr/lib/systemd/user/audioswitch.service /home/pi/.config/systemd/user/default.target.wants/audioswitch.service
-		chown pi:pi /home/pi/.config/systemd/user/default.target.wants/audioswitch.service
-		reboot
-	fi
 else
 	if [ "x$CMVER" = "x3" ]; then
         	echo "Init GPIO for CS10600RA070"
@@ -156,12 +150,6 @@ modprobe lsm6ds3
 echo lsm6ds3 0x6a | tee /sys/bus/i2c/devices/i2c-1/new_device
 echo "Kernel modules load success!!"
 
-# Udhcpc for 4G
-if [ -f /etc/udhcpc/default.script ]; then
-        mkdir /usr/share/udhcpc -p
-        ln -sf /etc/udhcpc/default.script /usr/share/udhcpc/default.script
-fi
-
 # Audio
 is_1a=$(i2cdetect -y  1 0x1a 0x1a | egrep "(1a|UU)" | awk '{print $2}')
 overlay=""
@@ -171,7 +159,7 @@ if [ "x${is_1a}" != "x" ]; then
     asound_conf=/opt/chipsee/voicecard/asound_2mic.conf
     asound_state=/opt/chipsee/voicecard/wm8960_asound.state
 fi
-if [ "$overlay" ]; then
+if [ "x${overlay}" != "x" && "x$CMVER" = "x4" ]; then
     echo Install $overlay ...
 
     # Remove old configuration
@@ -203,53 +191,38 @@ EOF
     ln -s $asound_conf /etc/asound.conf
     echo "create $overlay asound status file"
     ln -s $asound_state /var/lib/alsa/asound.state
+
+    # restore the sound state
+    alsactl restore
+
+    # SPEAKER
+    CURRENT_PROFILE=$(pactl list sinks | grep "Active Port"| cut -d ' ' -f 3-)
+    DETIO=6
+    SPKENIO=11
+    echo $DETIO > /sys/class/gpio/export
+    echo $SPKENIO > /sys/class/gpio/export
+    echo in > /sys/class/gpio/gpio$DETIO/direction
+    echo out > /sys/class/gpio/gpio$SPKENIO/direction
+    echo 1 > /sys/class/gpio/gpio$SPKENIO/value
+    chmod 777 /sys/class/gpio/gpio$SPKENIO/value
+    chmod 777 /sys/class/gpio/gpio$DETIO/value
+    # execute other contents in audioswitch.service
+    # systemctl --user start audioswitch.service
+    # systemctl --user enable audioswitch.service
+    # or use this shell to enable audioswitch.service
+    if [ ! -f /home/pi/.config/systemd/user/default.target.wants/audioswitch.service ]; then
+    	mkdir -p /home/pi/.config/systemd/user/default.target.wants
+    	ln -s /usr/lib/systemd/user/audioswitch.service /home/pi/.config/systemd/user/default.target.wants/audioswitch.service
+    	chown pi:pi /home/pi/.config/systemd/user/default.target.wants/audioswitch.service
+    	reboot
+    fi
+
 fi
 
-# restore the sound state
-alsactl restore
-
-#Force 3.5mm ('headphone') jack
-#   The Raspberry Pi 4, released on 24th Jun 2019, has two HDMI ports,
-#   and can drive two displays with audios for two users simultaneously,
-#   in a "multiseat" configuration. The earlier single virtual ALSA
-#   option for re-directing audio playback between headphone jack and HDMI
-#   via a 'Routing' mixer setting was turned off eventually to allow
-#   simultaneous usage of all 3 playback devices.
-if aplay -l | grep -q "bcm2835 ALSA"; then
-    amixer cset numid=3 1 || true
-fi
-
-# SPEAKER
-CURRENT_PROFILE=$(pactl list sinks | grep "Active Port"| cut -d ' ' -f 3-)
-DETIO=6
-SPKENIO=11
-echo $DETIO > /sys/class/gpio/export
-echo $SPKENIO > /sys/class/gpio/export
-echo in > /sys/class/gpio/gpio$DETIO/direction
-echo out > /sys/class/gpio/gpio$SPKENIO/direction
-echo 1 > /sys/class/gpio/gpio$SPKENIO/value
-chmod 777 /sys/class/gpio/gpio$SPKENIO/value
-chmod 777 /sys/class/gpio/gpio$DETIO/value
-# follow contents will execute in audioswitch.service
-# systemctl --user start audioswitch.service
-# systemctl --user enable audioswitch.service
-#COUNT=1
-#while [ 1 ]; do
-#    isdet=`cat /sys/class/gpio/gpio$DETIO/value`
-#    if [ $isdet -eq 0 ] ; then
-#        echo 0 > /sys/class/gpio/gpio$SPKENIO/value
-#        pactl set-sink-port 0 "analog-output-headphones"
-#	echo "$COUNT: Headphone"
-#    else
-#        echo 1 > /sys/class/gpio/gpio$SPKENIO/value
-#        pactl set-sink-port 0 "analog-output-speaker"
-#	echo "$COUNT: Speaker"
-#    fi
-#    COUNT=`expr $COUNT + 1`
-#    sleep 1
-#done
-if [ ! -f /home/pi/.config/systemd/user/default.target.wants/audioswitch.service ]; then
-	ln -s /usr/lib/systemd/user/audioswitch.service /home/pi/.config/systemd/user/default.target.wants/audioswitch.service
+# Udhcpc for 4G
+if [ -f /etc/udhcpc/default.script ]; then
+        mkdir /usr/share/udhcpc -p
+        ln -sf /etc/udhcpc/default.script /usr/share/udhcpc/default.script
 fi
 
 exit 0
