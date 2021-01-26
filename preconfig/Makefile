@@ -7,6 +7,8 @@ install:
 	install -p -m 755 -D boot/config-cs12800ra101.txt $(TP)/boot/config-cs12800ra101.txt
 	install -p -b -m 755 -D boot/config-lrra4-101.txt /boot/config-lrra4-101.txt
 	install -p -m 755 -D boot/config-lrra4-101.txt $(TP)/boot/config-lrra4-101.txt
+	install -p -b -m 755 -D boot/config-cs10600ra4070.txt /boot/config-cs10600ra4070.txt
+	install -p -m 755 -D boot/config-cs10600ra4070.txt $(TP)/boot/config-cs10600ra4070.txt
 	install -p -m 644 -D lib/systemd/system/chipsee-init.service /lib/systemd/system/chipsee-init.service
 	install -p -m 644 -D lib/systemd/system/chipsee-init.service $(TP)/lib/systemd/system/chipsee-init.service
 	install -p -m 644 -D lib/systemd/user/audioswitch.service /lib/systemd/user/audioswitch.service

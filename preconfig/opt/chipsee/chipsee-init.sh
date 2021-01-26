@@ -32,10 +32,6 @@ OVERLAYS=/boot/overlays
 CONFIG=/boot/config.txt
 [ -f /boot/firmware/usercfg.txt ] && CONFIG=/boot/firmware/usercfg.txt
 
-#enable i2c interface
-raspi-gpio set 44 a1
-raspi-gpio set 45 a1
-
 CMVER=`cat /proc/device-tree/model | cut -d " " -f 5`
 SCREEN_SIZE=`fbset | grep -v endmode | grep mode | awk -F '"' '{print $2}'`
 
@@ -67,6 +63,12 @@ else
         	BUZZER=19
 		
 	fi
+fi
+
+#enable i2c0 interface for CM4
+if [ "x$CMVER" = "x4" ]; then
+	raspi-gpio set 44 a1
+	raspi-gpio set 45 a1
 fi
 
 # Funcs

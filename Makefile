@@ -26,7 +26,7 @@ help:
 ##############################################################
 install:
 	@apt-get update
-	@apt-get install raspberrypi-kernel-headers
+	@dpkg -i $(TOPDIR)/tools/*.deb
 	@make -C $(GT9XX_DIR)
 	@echo "Install GT9XX success!!"
 	@make -C $(LSM6DS3_DIR)
@@ -61,6 +61,15 @@ uninstall:
 	@echo "######Uninstall industrial-pi drivers success!!######"
 ##############################################################
 package: install
+	@echo "Prepare package ..."
+	@cd $(TP) && tar zcvf $(KVER).tar.gz *
+	install -p -m 644 -D $(TP)/$(KVER).tar.gz $(TOPDIR)/industrial-pi$(VERSION)/$(KVER).tar.gz
+	install -p -m 777 -D $(TOPDIR)/tools/install.sh $(TOPDIR)/industrial-pi$(VERSION)/install.sh
+	@tar zcvf industrial-pi$(VERSION).tar.gz industrial-pi$(VERSION)
+	@sync
+	@echo "######Generate package industrial-pi$(VERSION).tar.gz success!!######"
+##############################################################
+internalpackage:
 	@echo "Prepare package ..."
 	@cd $(TP) && tar zcvf $(KVER).tar.gz *
 	install -p -m 644 -D $(TP)/$(KVER).tar.gz $(TOPDIR)/industrial-pi$(VERSION)/$(KVER).tar.gz
