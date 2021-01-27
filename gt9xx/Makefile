@@ -5,7 +5,7 @@ ARCH := arm
 CROSS_COMPILE ?=
 KVER  := $(shell uname -r)
 KSRC := /lib/modules/$(KVER)/build
-MODDESTDIR := $(INSTALL_MOD_PATH)/lib/modules/$(KVER)/kernel/drivers/input/touchscreen/
+MODDESTDIR := $(INSTALL_MOD_PATH)/usr/lib/modules/$(KVER)/kernel/drivers/input/touchscreen/
 
 MODULE_NAME := gt9xx
 

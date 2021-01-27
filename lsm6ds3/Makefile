@@ -3,7 +3,7 @@ ARCH := arm
 CROSS_COMPILE ?=
 KVER  := $(shell uname -r)
 KSRC := /lib/modules/$(KVER)/build
-MODDESTDIR := $(INSTALL_MOD_PATH)/lib/modules/$(KVER)/kernel/drivers/input/misc/
+MODDESTDIR := $(INSTALL_MOD_PATH)/usr/lib/modules/$(KVER)/kernel/drivers/input/misc/
 
 MODULE_NAME := lsm6ds3
 lsm6ds3-core += lsm6ds3_core.o lsm6ds3_i2c.o

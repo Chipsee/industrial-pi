@@ -3,7 +3,7 @@ ARCH := arm
 CROSS_COMPILE ?=
 KVER  := $(shell uname -r)
 KSRC := /lib/modules/$(KVER)/build
-MODDESTDIR := $(INSTALL_MOD_PATH)/lib/modules/$(KVER)/kernel/sound/soc/codecs/
+MODDESTDIR := $(INSTALL_MOD_PATH)/usr/lib/modules/$(KVER)/kernel/sound/soc/codecs/
 MODULE_NAME := snd-soc-wm8960
 
 # If KERNELRELEASE is defined, we've been invoked from the
