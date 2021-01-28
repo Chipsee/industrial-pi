@@ -199,19 +199,9 @@ mount / -o remount,rw
 mount -t configfs configfs /sys/kernel/config
 
 ##enable i2c1 interface
+dtparam -d /boot/overlays i2c_arm=on
 modprobe i2c-dev
 modprobe i2c_bcm2835
-## for Chipsee CM4 products enable I2C0
-#dtoverlay -d /boot/overlays i2c0 pins_44_45=1
-#raspi-gpio set 44 a1
-#raspi-gpio set 45 a1
-#echo "I2C0:" >> $LOGF
-#i2cdetect -y 0 >> $LOGF
-#echo "I2C1:" >> $LOGF
-#i2cdetect -y 1 >> $LOGF
-#echo "" >> $LOGF
-#echo "modules:" >> $LOGF
-#lsmod >> $LOGF
 
 KVR=`uname -r`
 systemctl enable chipsee-init
@@ -226,18 +216,30 @@ if [ "X$CMVER" = "X3" ]; then
 	if [ "$IS2514" = "1" ] || [ "$IS4232" = "1" ]; then
         	echo "Board is CS12800RA101" >> $LOGF
         	cp -b /boot/config-cs12800ra101.txt /boot/config.txt
+		echo "CS12800RA101" > /opt/chipsee/.board
 	else
         	echo "Board is CS10600RA070" >> $LOGF
         	cp -b /boot/config-cs10600ra070.txt /boot/config.txt
+		echo "CS10600RA070" > /opt/chipsee/.board
 	fi
 elif [ "X$CMVER" = "X4" ]; then
+	## for Chipsee CM4 products enable I2C0(need to debug -_-)
+	#dtparam -d /boot/overlays audio=off
+	#dtoverlay -d /boot/overlays i2c0 pins_44_45=1
+	#raspi-gpio set 44 a1
+	#raspi-gpio set 45 a1
+	#echo "I2C0:" >> $LOGF
+	#i2cdetect -y 0 >> $LOGF
 	is_1a=$(i2cdetect -y  1 0x1a 0x1a | egrep "(1a|UU)" | awk '{print $2}')
+	echo "is_1a is $is_1a" >> $LOGF
 	if [ "X${is_1a}" = "X1a" ]; then
 		echo "Board is LRRA4-101" >> $LOGF
         	cp -b /boot/config-lrra4-101.txt /boot/config.txt
+		echo "LRRA4-101" > /opt/chipsee/.board
 	else
 		echo "Board is CS10600RA4070" >> $LOGF
         	cp -b /boot/config-cs10600ra4070.txt /boot/config.txt
+		echo "CS10600RA4070" > /opt/chipsee/.board
 	fi
 fi
 sync

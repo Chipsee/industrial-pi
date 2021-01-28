@@ -32,43 +32,90 @@ OVERLAYS=/boot/overlays
 CONFIG=/boot/config.txt
 [ -f /boot/firmware/usercfg.txt ] && CONFIG=/boot/firmware/usercfg.txt
 
+[ ! -f /opt/chipsee/.cmdline.txt ] && cp /boot/cmdline.txt /opt/chipsee/.cmdline.txt && sed -i 's|quiet|quiet init=/usr/lib/raspi-config/init_resize\.sh|' /opt/chipsee/.cmdline.txt
+
 CMVER=`cat /proc/device-tree/model | cut -d " " -f 5`
 SCREEN_SIZE=`fbset | grep -v endmode | grep mode | awk -F '"' '{print $2}'`
-
-if [ "$SCREEN_SIZE" = "1280x800" ]; then
-	if [ "x$CMVER" = "x3" ]; then
-        	echo "Init GPIO for CS12800RA101"
-        	OUT="503 502 501 500" 
-        	IN="496 497 498 499"
-        	BUZZER=40
-	elif [ "x$CMVER" = "x4" ]; then
-        	echo "Init GPIO for LRRA4-101"
-        	BUZZER=12
-	fi
-       	# LVDS
-        lt8619cinit 
-	#insmod /home/pi/cslcd/cs_lcd.ko
-	#echo cs_lcd 0x32 | tee /sys/bus/i2c/devices/i2c-0/new_device
-	#fbi -T 1 -noverbose -a /etc/logo.png
-else
-	if [ "x$CMVER" = "x3" ]; then
-        	echo "Init GPIO for CS10600RA070"
-        	OUT="4 5 6 7"
-        	IN="8 9 10 11" 
-        	BUZZER=21
-	elif [ "x$CMVER" = "x4" ]; then
-        	echo "Init GPIO for CS10600RA4070"
-        	OUT="503 502 501 500" 
-        	IN="496 497 498 499"
-        	BUZZER=19
-		
-	fi
-fi
+BOARD=`cat /opt/chipsee/.board`
 
 #enable i2c0 interface for CM4
 if [ "x$CMVER" = "x4" ]; then
 	raspi-gpio set 44 a1
 	raspi-gpio set 45 a1
+fi
+
+##enable i2c1 interface
+dtparam -d $OVERLAYS i2c_arm=on
+modprobe i2c-dev
+modprobe i2c_bcm2835
+
+if [ "X$CMVER" = "X3" ]; then
+        IS2514=`lsusb | grep -c 0424:2514`
+        IS4232=`lsusb | grep -c 0403:6011`
+        if [ "$IS2514" = "1" ] || [ "$IS4232" = "1" ]; then
+                echo "Board should be CS12800RA101"
+		if [ "x$BOARD" != "xCS12800RA101" ]; then
+			echo "SOM changed, reboot."
+			cp /opt/chipsee/.cmdline.txt /boot/cmdline.txt
+			reboot
+		fi
+        	echo "Init GPIO for CS12800RA101"
+        	OUT="503 502 501 500" 
+        	IN="496 497 498 499"
+        	BUZZER=40
+       		# LVDS
+        	lt8619cinit 
+		#insmod /home/pi/cslcd/cs_lcd.ko
+		#echo cs_lcd 0x32 | tee /sys/bus/i2c/devices/i2c-0/new_device
+		#fbi -T 1 -noverbose -a /etc/logo.png
+        else
+                echo "Board should be CS10600RA070"
+		if [ "x$BOARD" != "xCS10600RA070" ]; then
+			echo "SOM changed, reboot."
+			cp /opt/chipsee/.cmdline.txt /boot/cmdline.txt
+			reboot
+		fi
+        	echo "Init GPIO for CS10600RA070"
+        	OUT="4 5 6 7"
+        	IN="8 9 10 11" 
+        	BUZZER=21
+        fi
+elif [ "X$CMVER" = "X4" ]; then
+        ## for Chipsee CM4 products enable I2C0(need to debug -_-)
+        #dtparam -d $OVERLAYS audio=off
+        #dtoverlay -d $OVERLAYS i2c0 pins_44_45=1
+        #raspi-gpio set 44 a1
+        #raspi-gpio set 45 a1
+        #echo "I2C0:" >> $LOGF
+        #i2cdetect -y 0 >> $LOGF
+        is_1a=$(i2cdetect -y  1 0x1a 0x1a | egrep "(1a|UU)" | awk '{print $2}')
+        echo "is_1a is $is_1a"
+        if [ "X${is_1a}" = "X1a" -o "X${is_1a}" = "XUU" ]; then
+                echo "Board should be LRRA4-101"
+		if [ "x$BOARD" != "xLRRA4-101" ]; then
+			echo "SOM changed, reboot."
+			cp /opt/chipsee/.cmdline.txt /boot/cmdline.txt
+			reboot
+		fi
+        	echo "Init GPIO for LRRA4-101"
+        	BUZZER=12
+       		# LVDS
+        	lt8619cinit 
+		#insmod /home/pi/cslcd/cs_lcd.ko
+		#echo cs_lcd 0x32 | tee /sys/bus/i2c/devices/i2c-0/new_device
+		#fbi -T 1 -noverbose -a /etc/logo.png
+        else
+                echo "Board is CS10600RA4070"
+		if [ "x$BOARD" != "xCS10600RA4070" ]; then
+			echo "SOM changed, reboot."
+			cp /opt/chipsee/.cmdline.txt /boot/cmdline.txt
+			reboot
+		fi
+        	echo "Init GPIO for CS10600RA4070"
+        	OUT="503 502 501 500" 
+        	IN="496 497 498 499"
+        	BUZZER=19
+        fi
 fi
 
 # Funcs
@@ -216,7 +263,7 @@ EOF
     if [ ! -f /home/pi/.config/systemd/user/default.target.wants/audioswitch.service ]; then
     	mkdir -p /home/pi/.config/systemd/user/default.target.wants
     	ln -s /usr/lib/systemd/user/audioswitch.service /home/pi/.config/systemd/user/default.target.wants/audioswitch.service
-    	chown pi:pi /home/pi/.config/systemd/user/default.target.wants/audioswitch.service
+        chown pi:pi /home/pi/.config -R
     	reboot
     fi
 
