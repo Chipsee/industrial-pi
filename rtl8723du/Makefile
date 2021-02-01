@@ -201,10 +201,12 @@ install: modules
 	install -p -m 644 -D $(MODULE_NAME).ko $(MODDESTDIR)$(MODULE_NAME).ko
 	install -p -m 644 -D $(MODULE_NAME).ko $(TP)$(MODDESTDIR)$(MODULE_NAME).ko
 	$(DEPMOD)  -a ${KVER}
+	systemctl disable hciuart
 
 uninstall:
 	rm -f $(MODDESTDIR)/$(MODULE_NAME).ko
 	/sbin/depmod -a ${KVER}
+	systemctl enable hciuart
 
 backup_rtlwifi:
 	@echo "Making backup rtlwifi drivers"

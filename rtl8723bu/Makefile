@@ -349,6 +349,7 @@ uninstall:
 	rm -f $(MODDESTDIR)$(MODULE_NAME).ko
 	$(DEPMOD) -a ${KVER}
 	rm -f $(FW_DIR)/rtl8723b_fw.bin
+	systemctl enable hciuart
 
 config_r:
 	@echo "make config"
