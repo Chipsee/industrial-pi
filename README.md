@@ -2,9 +2,10 @@
 We will use this repo to contain the source code and config for Chipsee Raspberry Computer Module Hardware.
 
 # Supported Raspberry Official System
-This repository only support follow [Raspberry Pi official system](https://www.raspberrypi.org/downloads/raspbian/) now:
+This repository only support follow [Raspberry Pi official system](https://www.raspberrypi.org/software/operating-systems/) now:
  - 2019-04-08-raspbian-stretch
  - 2020-02-13-raspbian-buster
+ - 2020-12-02-raspios-buster
 
 # How to use
 ## Prepare system
@@ -30,3 +31,16 @@ sudo make uninstall
 cd industrial-pi
 make help
 ```
+
+# Supported Chipsee Board
+This repository only support follow Chipsee Industrial Board:
+ - CS10600RA070-V1.0
+ - CS12800RA101-V1.0
+ - CS10600RA4070-V1.0
+ - LRRA4-101-V1.0
+
+# Latest system image
+ - Desktop with Full software [2020-12-02-raspios-buster-armhf-full-chipsee.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20201202/2020-12-02-raspios-buster-armhf-full-chipsee.img.xz)
+ - Desktop with small software [20201202/2020-12-02-raspios-buster-armhf-chipsee.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20201202/2020-12-02-raspios-buster-armhf-chipsee.img.xz)
+ - Lite [2020-12-02-raspios-buster-armhf-lite-chipsee.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20201202/2020-12-02-raspios-buster-armhf-lite-chipsee.img.xz)
+
