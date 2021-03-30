@@ -3,7 +3,7 @@ We will use this repo to contain the source code and config for Chipsee Raspberr
 
 # Supported Raspberry Official System
 This repository only support follow [Raspberry Pi official system](https://www.raspberrypi.org/software/operating-systems/) now:
- - 2019-04-08-raspbian-stretch
+ - 2019-04-08-raspbian-stretch (Not support CM4 products)
  - 2020-02-13-raspbian-buster
  - 2020-12-02-raspios-buster
 
@@ -40,7 +40,7 @@ This repository only support follow Chipsee Industrial Board:
  - LRRA4-101-V1.0
 
 # Latest system image
- - Desktop with Full software [2020-12-02-raspios-buster-armhf-full-chipsee.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20201202/2020-12-02-raspios-buster-armhf-full-chipsee.img.xz)
- - Desktop with small software [20201202/2020-12-02-raspios-buster-armhf-chipsee.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20201202/2020-12-02-raspios-buster-armhf-chipsee.img.xz)
- - Lite [2020-12-02-raspios-buster-armhf-lite-chipsee.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20201202/2020-12-02-raspios-buster-armhf-lite-chipsee.img.xz)
+ - Desktop with Full software [2020-12-02-raspios-buster-armhf-full-chipsee-v2.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20201202/2020-12-02-raspios-buster-armhf-full-chipsee-v2.img.xz)
+ - Desktop with small software [2020-12-02-raspios-buster-armhf-chipsee-v2.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20201202/2020-12-02-raspios-buster-armhf-chipsee-v2.img.xz)
+ - Lite [2020-12-02-raspios-buster-armhf-lite-chipsee-v2.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20201202/2020-12-02-raspios-buster-armhf-lite-chipsee-v2.img.xz)
 
