@@ -34,6 +34,8 @@ CONFIG=/boot/config.txt
 
 [ ! -f /opt/chipsee/.cmdline.txt ] && cp /boot/cmdline.txt /opt/chipsee/.cmdline.txt && sed -i 's|quiet|quiet init=/usr/lib/raspi-config/init_resize\.sh|' /opt/chipsee/.cmdline.txt
 
+! grep -q quiet /boot/cmdline.txt && ! grep -q init_resize /opt/chipsee/.cmdline.txt && sed -i 's|rootwait|rootwait init=/usr/lib/raspi-config/init_resize\.sh|' /opt/chipsee/.cmdline.txt
+
 CMVER=`cat /proc/device-tree/model | cut -d " " -f 5`
 SCREEN_SIZE=`fbset | grep -v endmode | grep mode | awk -F '"' '{print $2}'`
 BOARD=`cat /opt/chipsee/.board`
@@ -91,13 +93,13 @@ elif [ "X$CMVER" = "X4" ]; then
         is_1a=$(i2cdetect -y  1 0x1a 0x1a | egrep "(1a|UU)" | awk '{print $2}')
         echo "is_1a is $is_1a"
         if [ "X${is_1a}" = "X1a" -o "X${is_1a}" = "XUU" ]; then
-                echo "Board should be LRRA4-101"
-		if [ "x$BOARD" != "xLRRA4-101" ]; then
+                echo "Board should be CS12800RA4101"
+		if [ "x$BOARD" != "xCS12800RA4101" ]; then
 			echo "SOM changed, reboot."
 			cp /opt/chipsee/.cmdline.txt /boot/cmdline.txt
 			reboot
 		fi
-        	echo "Init GPIO for LRRA4-101"
+        	echo "Init GPIO for CS12800RA4101"
         	BUZZER=12
        		# LVDS
         	lt8619cinit 

@@ -9,6 +9,7 @@ ConditionUser=!root
 ExecStart=/opt/chipsee/audioswitch.sh start
 RemainAfterExit=yes
 RestartSec=5
+Restart=always
 
 [Install]
 WantedBy=default.target

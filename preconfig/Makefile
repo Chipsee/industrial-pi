@@ -5,8 +5,8 @@ install:
 	install -p -m 755 -D boot/config-cs10600ra070.txt $(TP)/boot/config-cs10600ra070.txt
 	install -p -b -m 755 -D boot/config-cs12800ra101.txt /boot/config-cs12800ra101.txt
 	install -p -m 755 -D boot/config-cs12800ra101.txt $(TP)/boot/config-cs12800ra101.txt
-	install -p -b -m 755 -D boot/config-lrra4-101.txt /boot/config-lrra4-101.txt
-	install -p -m 755 -D boot/config-lrra4-101.txt $(TP)/boot/config-lrra4-101.txt
+	install -p -b -m 755 -D boot/config-cs12800ra4101.txt /boot/config-cs12800ra4101.txt
+	install -p -m 755 -D boot/config-cs12800ra4101.txt $(TP)/boot/config-cs12800ra4101.txt
 	install -p -b -m 755 -D boot/config-cs10600ra4070.txt /boot/config-cs10600ra4070.txt
 	install -p -m 755 -D boot/config-cs10600ra4070.txt $(TP)/boot/config-cs10600ra4070.txt
 	install -p -m 644 -D usr/lib/systemd/system/chipsee-init.service /usr/lib/systemd/system/chipsee-init.service
@@ -23,6 +23,10 @@ install:
 	install -p -m 777 -D opt/chipsee/test/gpiotest.sh $(TP)/opt/chipsee/test/gpiotest.sh
 	install -p -m 777 -D opt/chipsee/test/uarttest.txt /opt/chipsee/test/uarttest.txt
 	install -p -m 777 -D opt/chipsee/test/uarttest.txt $(TP)/opt/chipsee/test/uarttest.txt
+	install -p -m 777 -D opt/chipsee/test/i2cdetect /opt/chipsee/test/i2cdetect
+	install -p -m 777 -D opt/chipsee/test/i2cdetect $(TP)/opt/chipsee/test/i2cdetect
+	install -p -m 777 -D opt/chipsee/test/libi2c.so.0 /opt/chipsee/test/libi2c.so.0
+	install -p -m 777 -D opt/chipsee/test/libi2c.so.0 $(TP)/opt/chipsee/test/libi2c.so.0
 	install -p -m 777 -D opt/chipsee/test/cantest/canconfig /opt/chipsee/test/cantest/canconfig
 	install -p -m 777 -D opt/chipsee/test/cantest/canconfig $(TP)/opt/chipsee/test/cantest/canconfig
 	install -p -m 777 -D opt/chipsee/test/cantest/candump /opt/chipsee/test/cantest/candump
