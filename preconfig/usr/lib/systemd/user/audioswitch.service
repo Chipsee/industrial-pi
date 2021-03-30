@@ -1,8 +1,8 @@
 [Unit]
 Description=audioswitch service
 ConditionFileIsExecutable=/opt/chipsee/audioswitch.sh
-Requires=pulseaudio.service
-After=pulseaudio.service
+#Requires=pulseaudio.service
+#After=pulseaudio.service
 ConditionUser=!root
 
 [Service]
