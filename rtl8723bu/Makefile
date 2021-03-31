@@ -1,4 +1,4 @@
-INSTALL_FW_PATH = $(INSTALL_MOD_PATH)/usr/lib/firmware
+INSTALL_FW_PATH = $(INSTALL_MOD_PATH)/lib/firmware
 FW_DIR	:= $(INSTALL_FW_PATH)/rtl_bt
 
 DEPMOD  = /sbin/depmod
@@ -262,7 +262,7 @@ ARCH ?= $(SUBARCH)
 CROSS_COMPILE ?=
 KVER  := $(shell uname -r)
 KSRC := /lib/modules/$(KVER)/build
-MODDESTDIR := $(INSTALL_MOD_PATH)/usr/lib/modules/$(KVER)/kernel/drivers/net/wireless/
+MODDESTDIR := $(INSTALL_MOD_PATH)/lib/modules/$(KVER)/kernel/drivers/net/wireless/
 INSTALL_PREFIX :=
 endif
 

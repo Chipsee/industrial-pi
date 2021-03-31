@@ -41,7 +41,7 @@ SCREEN_SIZE=`fbset | grep -v endmode | grep mode | awk -F '"' '{print $2}'`
 BOARD=`cat /opt/chipsee/.board`
 
 #enable i2c0 interface for CM4
-if [ "x$CMVER" = "x4" ]; then
+if [ "x$CMVER" = "x4" -o "x$CMVER" = "x1.0" ]; then
 	raspi-gpio set 44 a1
 	raspi-gpio set 45 a1
 fi
@@ -82,7 +82,7 @@ if [ "X$CMVER" = "X3" ]; then
         	IN="8 9 10 11" 
         	BUZZER=21
         fi
-elif [ "X$CMVER" = "X4" ]; then
+elif [ "X$CMVER" = "X4" -o "X$CMVER" = "X1.0" ]; then
         ## for Chipsee CM4 products enable I2C0(need to debug -_-)
         #dtparam -d $OVERLAYS audio=off
         #dtoverlay -d $OVERLAYS i2c0 pins_44_45=1

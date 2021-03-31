@@ -22,7 +22,7 @@ check_commands () {
       sleep 5
       return 1
   fi
-  for COMMAND in grep cut sed parted fdisk findmnt; do
+  for COMMAND in grep cut sed parted fdisk findmnt partprobe; do
     if ! command -v $COMMAND > /dev/null; then
       FAIL_REASON="$COMMAND not found"
       return 1
@@ -75,24 +75,10 @@ get_variables () {
 }
 
 fix_partuuid() {
-  mount -o remount,rw "$ROOT_PART_DEV"
-  mount -o remount,rw "$BOOT_PART_DEV"
-  DISKID="$(tr -dc 'a-f0-9' < /dev/hwrng | dd bs=1 count=8 2>/dev/null)"
-  fdisk "$ROOT_DEV" > /dev/null <<EOF
-x
-i
-0x$DISKID
-r
-w
-EOF
-  if [ "$?" -eq 0 ]; then
-    sed -i "s/${OLD_DISKID}/${DISKID}/g" /etc/fstab
-    sed -i "s/${OLD_DISKID}/${DISKID}/" /boot/cmdline.txt
-    sync
-  fi
+  DISKID="$(fdisk -l "$ROOT_DEV" | sed -n 's/Disk identifier: 0x\([^ ]*\)/\1/p')"
 
-  mount -o remount,ro "$ROOT_PART_DEV"
-  mount -o remount,ro "$BOOT_PART_DEV"
+  sed -i "s/${OLD_DISKID}/${DISKID}/g" /etc/fstab
+  sed -i "s/${OLD_DISKID}/${DISKID}/" /boot/cmdline.txt
 }
 
 check_variables () {
@@ -127,8 +113,8 @@ check_variables () {
 }
 
 check_kernel () {
-  MAJOR="$(uname -r | cut -f1 -d.)"
-  MINOR="$(uname -r | cut -f2 -d.)"
+  local MAJOR=$(uname -r | cut -f1 -d.)
+  local MINOR=$(uname -r | cut -f2 -d.)
   if [ "$MAJOR" -eq "4" ] && [ "$MINOR" -lt "9" ]; then
     return 0
   fi
@@ -171,6 +157,7 @@ main () {
     return 1
   fi
 
+  partprobe "$ROOT_DEV"
   fix_partuuid
 
   return 0
@@ -182,7 +169,7 @@ mount -t tmpfs tmp /run
 mkdir -p /run/systemd
 
 mount /boot
-mount / -o remount,ro
+mount / -o remount,rw
 
 sed -i 's| init=/usr/lib/raspi-config/init_resize\.sh||' /boot/cmdline.txt
 sed -i 's| sdhci\.debug_quirks2=4||' /boot/cmdline.txt
@@ -207,51 +194,50 @@ KVR=`uname -r`
 systemctl enable chipsee-init
 depmod -a $KVR
 
-## Board config 
+## Board config
 CMVER=`cat /proc/device-tree/model | cut -d " " -f 5`
 echo "SOM is CM${CMVER}" >> $LOGF
 if [ "X$CMVER" = "X3" ]; then
-	IS2514=`lsusb | grep -c 0424:2514`
-	IS4232=`lsusb | grep -c 0403:6011`
-	if [ "$IS2514" = "1" ] || [ "$IS4232" = "1" ]; then
-        	echo "Board is CS12800RA101" >> $LOGF
-        	cp -b /boot/config-cs12800ra101.txt /boot/config.txt
-		echo "CS12800RA101" > /opt/chipsee/.board
-	else
-        	echo "Board is CS10600RA070" >> $LOGF
-        	cp -b /boot/config-cs10600ra070.txt /boot/config.txt
-		echo "CS10600RA070" > /opt/chipsee/.board
-	fi
-elif [ "X$CMVER" = "X4" ]; then
-	## for Chipsee CM4 products enable I2C0(need to debug -_-)
-	#dtparam -d /boot/overlays audio=off
-	#dtoverlay -d /boot/overlays i2c0 pins_44_45=1
-	#raspi-gpio set 44 a1
-	#raspi-gpio set 45 a1
-	#echo "I2C0:" >> $LOGF
-	#i2cdetect -y 0 >> $LOGF
-	if ! command -v i2cdetect > /dev/null; then
-		cp /opt/chipsee/test/i2cdetect /usr/sbin/
-		cp /opt/chipsee/test/libi2c.so.0 /usr/lib/arm-linux-gnueabihf/libi2c.so.0.1.1
-		ln -sf /usr/lib/arm-linux-gnueabihf/libi2c.so.0.1.1 /usr/lib/arm-linux-gnueabihf/libi2c.so.0
-	fi
-	is_1a=$(i2cdetect -y  1 0x1a 0x1a | egrep "(1a|UU)" | awk '{print $2}')
-	echo "is_1a is $is_1a" >> $LOGF
-	if [ "X${is_1a}" = "X1a" ]; then
-		echo "Board is CS12800RA4101" >> $LOGF
-        	cp -b /boot/config-cs12800ra4101.txt /boot/config.txt
-		echo "CS12800RA4101" > /opt/chipsee/.board
-	else
-		echo "Board is CS10600RA4070" >> $LOGF
-        	cp -b /boot/config-cs10600ra4070.txt /boot/config.txt
-		echo "CS10600RA4070" > /opt/chipsee/.board
-	fi
-fi
-sync
+        IS2514=`lsusb | grep -c 0424:2514`
+        IS4232=`lsusb | grep -c 0403:6011`
+        if [ "$IS2514" = "1" ] || [ "$IS4232" = "1" ]; then
+                echo "Board is CS12800RA101" >> $LOGF
+                cp -b /boot/config-cs12800ra101.txt /boot/config.txt
+                echo "CS12800RA101" > /opt/chipsee/.board
+        else
+                echo "Board is CS10600RA070" >> $LOGF
+                cp -b /boot/config-cs10600ra070.txt /boot/config.txt
+                echo "CS10600RA070" > /opt/chipsee/.board
+        fi
+elif [ "X$CMVER" = "X4" -o "X$CMVER" = "X1.0" ]; then
+        ## for Chipsee CM4 products enable I2C0(need to debug -_-)
+        #dtparam -d /boot/overlays audio=off
+        #dtoverlay -d /boot/overlays i2c0 pins_44_45=1
+        #raspi-gpio set 44 a1
+        #raspi-gpio set 45 a1
+        #echo "I2C0:" >> $LOGF
+        #i2cdetect -y 0 >> $LOGF
+        if ! command -v i2cdetect > /dev/null; then
+                cp /opt/chipsee/test/i2cdetect /usr/sbin/
+                cp /opt/chipsee/test/libi2c.so.0 /usr/lib/arm-linux-gnueabihf/libi2c.so.0.1.1
+                ln -sf /usr/lib/arm-linux-gnueabihf/libi2c.so.0.1.1 /usr/lib/arm-linux-gnueabihf/libi2c.so.0
+        fi
+        is_1a=$(i2cdetect -y  1 0x1a 0x1a | egrep "(1a|UU)" | awk '{print $2}')
+        echo "is_1a is $is_1a" >> $LOGF
+        if [ "X${is_1a}" = "X1a" ]; then
+                echo "Board is CS12800RA4101" >> $LOGF
+                cp -b /boot/config-cs12800ra4101.txt /boot/config.txt
+                echo "CS12800RA4101" > /opt/chipsee/.board
+        else
+                echo "Board is CS10600RA4070" >> $LOGF
+                cp -b /boot/config-cs10600ra4070.txt /boot/config.txt
+                echo "CS10600RA4070" > /opt/chipsee/.board
+        fi
+fi      
+sync    
 mount / -o remount,ro
 echo "Appended Chipsee init *_*" >> $LOGF
 
-mount /boot -o remount,ro
 sync
 
 echo 1 > /proc/sys/kernel/sysrq
