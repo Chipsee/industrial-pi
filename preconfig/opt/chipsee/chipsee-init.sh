@@ -210,7 +210,7 @@ if [ "x${is_1a}" != "x" ]; then
     asound_conf=/opt/chipsee/voicecard/asound_2mic.conf
     asound_state=/opt/chipsee/voicecard/wm8960_asound.state
 fi
-if [ "x${overlay}" != "x" -a "x${CMVER}" = "x4" ]; then
+if [ "x${overlay}" != "x" -a "x${CMVER}" = "x1.0" ]; then
     echo Install $overlay ...
 
     # Remove old configuration
