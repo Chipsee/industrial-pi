@@ -4,6 +4,8 @@ GT9XX_DIR := ./gt9xx
 LSM6DS3_DIR := ./lsm6ds3
 QUECTEL_CM_DIR := ./quectel-CM
 RTL8723BU_DIR := ./rtl8723bu
+RTL8723DU_DIR := ./rtl8723du
+WM8960_DIR := ./wm8960
 PRECONFIG_DIR := ./preconfig
 TOPDIR := $(shell pwd)
 KVER  := $(shell uname -r)
@@ -25,7 +27,7 @@ help:
 ##############################################################
 install:
 	@apt-get update
-	@apt-get install raspberrypi-kernel-headers
+	@dpkg -i $(TOPDIR)/tools/*.deb
 	@make -C $(GT9XX_DIR)
 	@echo "Install GT9XX success!!"
 	@make -C $(LSM6DS3_DIR)
@@ -34,6 +36,10 @@ install:
 	@echo "Install quectel-cm success!!"
 	@make -C $(RTL8723BU_DIR)
 	@echo "Install rtl8723bu success!!"
+	@make -C $(RTL8723DU_DIR)
+	@echo "Install rtl8723du success!!"
+	@make -C $(WM8960_DIR)
+	@echo "Install wm8960 success!!"
 	@make -C $(PRECONFIG_DIR)
 	@echo "Install preconfig success!!"
 	@sync
@@ -49,6 +55,10 @@ uninstall:
 	@echo "Uninstall quectel-cm success!!"
 	@make clean -C $(RTL8723BU_DIR)
 	@echo "Uninstall rtl8723bu success!!"
+	@make clean -C $(RTL8723DU_DIR)
+	@echo "Uninstall rtl8723du success!!"
+	@make clean -C $(WM8960_DIR)
+	@echo "Uninstall wm8960 success!!"
 	@make clean -C $(PRECONFIG_DIR)
 	@echo "Uninstall preconfig success!!"
 	@sync
@@ -56,6 +66,15 @@ uninstall:
 	@echo "######Uninstall industrial-pi drivers success!!######"
 ##############################################################
 package: install
+	@echo "Prepare package ..."
+	@cd $(TP) && tar zcvf $(KVER).tar.gz *
+	install -p -m 644 -D $(TP)/$(KVER).tar.gz $(TOPDIR)/industrial-pi$(VERSION)/$(KVER).tar.gz
+	install -p -m 777 -D $(TOPDIR)/tools/install.sh $(TOPDIR)/industrial-pi$(VERSION)/install.sh
+	@tar zcvf industrial-pi$(VERSION).tar.gz industrial-pi$(VERSION)
+	@sync
+	@echo "######Generate package industrial-pi$(VERSION).tar.gz success!!######"
+##############################################################
+internalpackage:
 	@echo "Prepare package ..."
 	@cd $(TP) && tar zcvf $(KVER).tar.gz *
 	install -p -m 644 -D $(TP)/$(KVER).tar.gz $(TOPDIR)/industrial-pi$(VERSION)/$(KVER).tar.gz

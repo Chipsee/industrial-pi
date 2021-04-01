@@ -17,7 +17,7 @@ if [ -f $PKG ]; then
     # Used by systemd services
     systemctl daemon-reload
     systemctl enable chipsee-init.service
-    systemctl disable hciuart
+    #systemctl disable hciuart
     # Used by modules
     depmod -a $KVR
     # Used by quectel-CM

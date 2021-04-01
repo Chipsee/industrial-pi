@@ -1,0 +1,15 @@
+[Unit]
+Description=audioswitch service
+ConditionFileIsExecutable=/opt/chipsee/audioswitch.sh
+#Requires=pulseaudio.service
+#After=pulseaudio.service
+ConditionUser=!root
+
+[Service]
+ExecStart=/opt/chipsee/audioswitch.sh start
+RemainAfterExit=yes
+RestartSec=5
+Restart=always
+
+[Install]
+WantedBy=default.target
