@@ -13,12 +13,16 @@ install:
 	install -p -m 644 -D usr/lib/systemd/system/chipsee-init.service $(TP)/usr/lib/systemd/system/chipsee-init.service
 	install -p -m 644 -D usr/lib/systemd/user/audioswitch.service /usr/lib/systemd/user/audioswitch.service
 	install -p -m 644 -D usr/lib/systemd/user/audioswitch.service $(TP)/usr/lib/systemd/user/audioswitch.service
+	install -p -m 644 -D usr/lib/systemd/user/dpms-lcd.service /usr/lib/systemd/user/dpms-lcd.service
+	install -p -m 644 -D usr/lib/systemd/user/dpms-lcd.service $(TP)/usr/lib/systemd/user/dpms-lcd.service
 	install -p -m 755 -D usr/bin/lt8619cinit /usr/bin/lt8619cinit
 	install -p -m 755 -D usr/bin/lt8619cinit $(TP)/usr/bin/lt8619cinit
 	install -p -m 777 -D opt/chipsee/chipsee-init.sh /opt/chipsee/chipsee-init.sh
 	install -p -m 777 -D opt/chipsee/chipsee-init.sh $(TP)/opt/chipsee/chipsee-init.sh
 	install -p -m 777 -D opt/chipsee/audioswitch.sh /opt/chipsee/audioswitch.sh
 	install -p -m 777 -D opt/chipsee/audioswitch.sh $(TP)/opt/chipsee/audioswitch.sh
+	install -p -m 777 -D opt/chipsee/dpms-lcd.sh /opt/chipsee/dpms-lcd.sh
+	install -p -m 777 -D opt/chipsee/dpms-lcd.sh $(TP)/opt/chipsee/dpms-lcd.sh
 	install -p -m 777 -D opt/chipsee/test/gpiotest.sh /opt/chipsee/test/gpiotest.sh
 	install -p -m 777 -D opt/chipsee/test/gpiotest.sh $(TP)/opt/chipsee/test/gpiotest.sh
 	install -p -m 777 -D opt/chipsee/test/uarttest.txt /opt/chipsee/test/uarttest.txt

@@ -265,11 +265,15 @@ EOF
     if [ ! -f /home/pi/.config/systemd/user/default.target.wants/audioswitch.service ]; then
     	mkdir -p /home/pi/.config/systemd/user/default.target.wants
     	ln -s /usr/lib/systemd/user/audioswitch.service /home/pi/.config/systemd/user/default.target.wants/audioswitch.service
+	ln -s /usr/lib/systemd/user/dpms-lcd.service /home/pi/.config/systemd/user/default.target.wants/dpms-lcd.service
         chown pi:pi /home/pi/.config -R
     	reboot
     fi
 
 fi
+
+# Backlight Control
+chmod a+w /sys/class/backlight/pwm-backlight/brightness
 
 # Udhcpc for 4G
 if [ -f /etc/udhcpc/default.script ]; then

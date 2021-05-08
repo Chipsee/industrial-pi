@@ -82,13 +82,14 @@ dtoverlay=uart3
 dtparam=act_led_trigger=heartbeat
 # SD1
 dtoverlay=sdio,poll_once=off
+#dtparam=ant2
 # USB
 dtoverlay=dwc2,dr_mode=host
 # Touch
 dtoverlay=gt9xx,interrupt=7,reset=8
 # HDMI
 gpio=13=op,dh
-#dtoverlay=pwm,pin=13,func=4
+dtoverlay=pwm-backlight,pin=13,func=4,pwm_1
 ## Follow Can fix some hardware issue
 hdmi_force_hotplug=1
 hdmi_group=2

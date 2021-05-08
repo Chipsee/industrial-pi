@@ -86,10 +86,12 @@ dtoverlay=pi3-act-led,activelow=off,gpio=36
 dtparam=act_led_trigger=heartbeat
 # SD1
 dtoverlay=sdio,poll_once=off
+#dtparam=ant2
 # Touch
 dtoverlay=gt9xx,interrupt=38,reset=37
 # HDMI
 gpio=41=op,dh
+dtoverlay=pwm-backlight,pin=41,func=4,pwm_1
 ## Follow Can fix some hardware issue
 hdmi_force_hotplug=1
 hdmi_group=2

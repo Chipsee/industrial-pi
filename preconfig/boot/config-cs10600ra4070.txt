@@ -83,6 +83,7 @@ dtoverlay=uart5
 dtparam=act_led_trigger=heartbeat
 # SD1
 dtoverlay=sdio,poll_once=off
+#dtparam=ant2
 # Touch
 dtoverlay=gt9xx,interrupt=20,reset=21
 # HDMI
@@ -90,6 +91,7 @@ dtoverlay=gt9xx,interrupt=20,reset=21
 #dtoverlay=pwm,pin=18,func=2
 ##GPIO
 gpio=18=op,dh
+dtoverlay=pwm-backlight,pin=18,func=2,pwm_0
 # Follow Can fix some hardware issue
 hdmi_force_hotplug=1
 hdmi_group=2
