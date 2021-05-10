@@ -274,6 +274,12 @@ fi
 
 # Backlight Control
 chmod a+w /sys/class/backlight/pwm-backlight/brightness
+if [ ! -f /home/pi/.config/systemd/user/default.target.wants/dpms-lcd.service ]; then
+	mkdir -p /home/pi/.config/systemd/user/default.target.wants
+	ln -s /usr/lib/systemd/user/dpms-lcd.service /home/pi/.config/systemd/user/default.target.wants/dpms-lcd.service
+	chown pi:pi /home/pi/.config -R
+	reboot
+fi
 
 # Udhcpc for 4G
 if [ -f /etc/udhcpc/default.script ]; then

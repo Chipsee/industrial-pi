@@ -1,5 +1,8 @@
 #!/bin/sh -e
 
+# sleep to wait xorg start
+sleep 60
+
 while [ 1 ]; do
 	DPMSSTATUS=`xset -display :0 q | grep 'DPMS is' | awk -F ' ' '{print $3}'`
 	MONITORSTATUS=`xset -display :0 q | grep Monitor | awk -F ' ' '{print $3}'`
