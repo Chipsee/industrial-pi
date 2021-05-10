@@ -250,7 +250,7 @@ elif [ "X$CMVER" = "X4" ]; then
 	# Check the WIFIBT
 	modprobe -a hci_uart btbcm bnep rfcomm bluetooth
 	#cat /proc/modules >> $LOGF
-	hciattach /dev/ttyS0 bcm43xx 460800 noflow
+	hciattach /dev/ttyAMA0 bcm43xx 460800 noflow
 	WIFIBT=`hciconfig -a | grep -c hci0`
 	if [ $WIFIBT -eq 1 ]; then
                sed /boot/config.txt -i -e "s/^dtoverlay=sdio/#dtoverlay=sdio/"
