@@ -1,0 +1,13 @@
+[Unit]
+Description=dpms lcd service
+ConditionFileIsExecutable=/opt/chipsee/dpms-lcd.sh
+ConditionUser=!root
+
+[Service]
+ExecStart=/opt/chipsee/dpms-lcd.sh start
+RemainAfterExit=yes
+RestartSec=5
+Restart=always
+
+[Install]
+WantedBy=default.target

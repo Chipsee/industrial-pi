@@ -7,11 +7,15 @@ while [ 1 ]; do
     isdet=`cat /sys/class/gpio/gpio$DETIO/value`
     if [ $isdet -eq 0 ] ; then
         echo 0 > /sys/class/gpio/gpio$SPKENIO/value
-        pactl set-sink-port 0 "analog-output-headphones"
+	if command -v pactl > /dev/null; then
+		pactl set-sink-port 0 "analog-output-headphones"
+	fi
 	#echo "Headphone"
     else
         echo 1 > /sys/class/gpio/gpio$SPKENIO/value
-        pactl set-sink-port 0 "analog-output-speaker"
+	if command -v pactl > /dev/null; then
+		pactl set-sink-port 0 "analog-output-speaker"
+	fi
 	#echo "Speaker"
     fi
     sleep 1

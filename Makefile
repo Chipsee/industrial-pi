@@ -6,6 +6,7 @@ QUECTEL_CM_DIR := ./quectel-CM
 RTL8723BU_DIR := ./rtl8723bu
 RTL8723DU_DIR := ./rtl8723du
 WM8960_DIR := ./wm8960
+PWMBL_DIR := ./pwmbl
 PRECONFIG_DIR := ./preconfig
 TOPDIR := $(shell pwd)
 KVER  := $(shell uname -r)
@@ -40,6 +41,8 @@ install:
 	@echo "Install rtl8723du success!!"
 	@make -C $(WM8960_DIR)
 	@echo "Install wm8960 success!!"
+	@make -C $(PWMBL_DIR)
+	@echo "Install pwmbl success!!"
 	@make -C $(PRECONFIG_DIR)
 	@echo "Install preconfig success!!"
 	@sync
@@ -59,6 +62,8 @@ uninstall:
 	@echo "Uninstall rtl8723du success!!"
 	@make clean -C $(WM8960_DIR)
 	@echo "Uninstall wm8960 success!!"
+	@make clean -C $(PWMBL_DIR)
+	@echo "Uninstall pwmbl success!!"
 	@make clean -C $(PRECONFIG_DIR)
 	@echo "Uninstall preconfig success!!"
 	@sync

@@ -230,17 +230,33 @@ elif [ "X$CMVER" = "X4" ]; then
 	#raspi-gpio set 45 a1
 	#echo "I2C0:" >> $LOGF
 	#i2cdetect -y 0 >> $LOGF
+	if ! command -v i2cdetect > /dev/null; then
+		cp /opt/chipsee/test/i2cdetect /usr/sbin/
+		cp /opt/chipsee/test/libi2c.so.0 /usr/lib/arm-linux-gnueabihf/libi2c.so.0.1.1
+		ln -sf /usr/lib/arm-linux-gnueabihf/libi2c.so.0.1.1 /usr/lib/arm-linux-gnueabihf/libi2c.so.0
+	fi
 	is_1a=$(i2cdetect -y  1 0x1a 0x1a | egrep "(1a|UU)" | awk '{print $2}')
 	echo "is_1a is $is_1a" >> $LOGF
 	if [ "X${is_1a}" = "X1a" ]; then
-		echo "Board is LRRA4-101" >> $LOGF
-        	cp -b /boot/config-lrra4-101.txt /boot/config.txt
-		echo "LRRA4-101" > /opt/chipsee/.board
+		echo "Board is CS12800RA4101" >> $LOGF
+        	cp -b /boot/config-cs12800ra4101.txt /boot/config.txt
+		echo "CS12800RA4101" > /opt/chipsee/.board
 	else
 		echo "Board is CS10600RA4070" >> $LOGF
         	cp -b /boot/config-cs10600ra4070.txt /boot/config.txt
 		echo "CS10600RA4070" > /opt/chipsee/.board
 	fi
+
+	# Check the WIFIBT
+	modprobe -a hci_uart btbcm bnep rfcomm bluetooth
+	#cat /proc/modules >> $LOGF
+	hciattach /dev/ttyAMA0 bcm43xx 460800 noflow
+	WIFIBT=`hciconfig -a | grep -c hci0`
+	if [ $WIFIBT -eq 1 ]; then
+               sed /boot/config.txt -i -e "s/^dtoverlay=sdio/#dtoverlay=sdio/"
+               sed /boot/config.txt -i -e "s/^#dtparam=ant2/dtparam=ant2/"
+	       echo "Enabled WIFIBT" >> $LOGF
+        fi
 fi
 sync
 mount / -o remount,ro
