@@ -1,5 +1,13 @@
 #!/bin/sh -e
 
+# we will stop dpms-lcd in lite version
+if ! command -v xset > /dev/null; then
+      echo "xset not found"
+      sleep 5
+      systemctl --user stop dpms-lcd
+      return 1
+fi
+
 # sleep to wait xorg start
 sleep 60
 
