@@ -2631,7 +2631,7 @@ static int goodix_ts_probe(struct i2c_client *client, const struct i2c_device_id
     }
 	
 	/* register suspend and resume fucntion*/
-	gtp_register_powermanger(ts);
+	//gtp_register_powermanger(ts);
     
 #if GTP_CREATE_WR_NODE
     init_wr_node(client);
