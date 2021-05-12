@@ -86,7 +86,7 @@ N.B.:
 	fragment@4 {
                 target = <&audio>;
                 __overlay__  {
-                        brcm,disable-headphones = <0>;
+                        brcm,disable-headphones = <1>;
                 };
         };
 
