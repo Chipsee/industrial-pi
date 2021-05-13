@@ -39,8 +39,20 @@ This repository only support follow Chipsee Industrial Board:
  - CS10600RA4070-V1.0
  - LRRA4-101-V1.0
 
-# Latest system image
- - Desktop with Full software [2020-12-02-raspios-buster-armhf-full-chipsee-v2.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20201202/2020-12-02-raspios-buster-armhf-full-chipsee-v2.img.xz)
- - Desktop with small software [2020-12-02-raspios-buster-armhf-chipsee-v2.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20201202/2020-12-02-raspios-buster-armhf-chipsee-v2.img.xz)
- - Lite [2020-12-02-raspios-buster-armhf-lite-chipsee-v2.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20201202/2020-12-02-raspios-buster-armhf-lite-chipsee-v2.img.xz)
+# Latest system images
+ - Desktop with Full software [2020-12-02-raspios-buster-armhf-full-chipsee-v3.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20201202/2020-12-02-raspios-buster-armhf-full-chipsee-v3.img.xz)
+ - Desktop with small software [2020-12-02-raspios-buster-armhf-chipsee-v3.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20201202/2020-12-02-raspios-buster-armhf-chipsee-v3.img.xz)
+ - Lite [2020-12-02-raspios-buster-armhf-lite-chipsee-v3.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20201202/2020-12-02-raspios-buster-armhf-lite-chipsee-v3.img.xz)
+
+# Release notes
+**2020-12-02 V3:**
+
+- Add PWM backlight support.
+- Add warning about updating system and disable updating system automatically on system fisrtboot.
+- Automatically load WiFi/Bt and disable SD slot as WiFi/Bt and SD slot can't be use at same time.
+
+# Older system images
+ - [2020-12-02-raspios-buster-armhf-full-chipsee-v2.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20201202/2020-12-02-raspios-buster-armhf-full-chipsee-v2.img.xz)
+ - [2020-12-02-raspios-buster-armhf-chipsee-v2.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20201202/2020-12-02-raspios-buster-armhf-chipsee-v2.img.xz)
+ - [2020-12-02-raspios-buster-armhf-lite-chipsee-v2.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20201202/2020-12-02-raspios-buster-armhf-lite-chipsee-v2.img.xz)
 
