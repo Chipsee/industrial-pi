@@ -258,6 +258,7 @@ elif [ "X$CMVER" = "X4" ]; then
 	       echo "Enabled WIFIBT" >> $LOGF
         fi
 fi
+[ -f /opt/chipsee/.cmdline.txt ] && rm /opt/chipsee/.cmdline.txt && echo "Delete .cmdline.txt" >> $LOGF
 sync
 mount / -o remount,ro
 echo "Appended Chipsee init *_*" >> $LOGF
