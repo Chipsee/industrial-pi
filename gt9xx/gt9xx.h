@@ -21,6 +21,7 @@
 #ifndef _GOODIX_GT9XX_H_
 #define _GOODIX_GT9XX_H_
 
+#include <linux/version.h>
 #include <linux/kernel.h>
 #include <linux/hrtimer.h>
 #include <linux/i2c.h>
