@@ -381,6 +381,15 @@ static void gtp_touch_down(struct goodix_ts_data* ts,s32 id,s32 x,s32 y,s32 w)
 #if GTP_CHANGE_X2Y
     GTP_SWAP(x, y);
 #endif
+    if(ts->swap_x_y)
+	GTP_SWAP(x, y);
+
+    if (ts->invert_x)
+	x = ts->abs_x_max - x;
+
+    if (ts->invert_y)
+	y = ts->abs_y_max - y;
+
 #if GTP_SINGLETOUCH
     input_report_abs(ts->input_dev, ABS_X, x);
     input_report_abs(ts->input_dev, ABS_Y, y);
@@ -489,6 +498,9 @@ static void gtp_pen_down(s32 x, s32 y, s32 w, s32 id)
 #if GTP_CHANGE_X2Y
     GTP_SWAP(x, y);
 #endif
+
+    if(ts->swap_x_y)
+        GTP_SWAP(x, y);
     
     input_report_key(ts->pen_dev, BTN_TOOL_PEN, 1);
 #if GTP_ICS_SLOT_REPORT
@@ -1910,6 +1922,9 @@ static s8 gtp_request_input_dev(struct goodix_ts_data *ts)
     GTP_SWAP(ts->abs_x_max, ts->abs_y_max);
 #endif
 
+    if(ts->swap_x_y)
+    	GTP_SWAP(ts->abs_x_max, ts->abs_y_max);
+
 #if GTP_SINGLETOUCH
     __set_bit(BTN_TOUCH,ts->input_dev->keybit);
     input_set_abs_params(ts->input_dev, ABS_X, 0, ts->abs_x_max, 0, 0);
@@ -2523,6 +2538,20 @@ static int goodix_ts_probe(struct i2c_client *client, const struct i2c_device_id
 	gtp_rst_gpio = GTP_RST_PORT;
 	gtp_int_gpio = GTP_INT_PORT;
     GTP_DEBUG("rst is %d, int is %d\n", gtp_rst_gpio,gtp_int_gpio);  
+#endif
+
+#ifdef GTP_CONFIG_OF
+    ts->invert_x =
+                device_property_read_bool(&client->dev, "touchscreen-inverted-x");
+    ts->invert_y =
+                device_property_read_bool(&client->dev, "touchscreen-inverted-y");
+    ts->swap_x_y =
+                device_property_read_bool(&client->dev, "touchscreen-swapped-x-y");
+    GTP_INFO("invert_x is %d, invert_y is %d, swap_x_y is %d\n", ts->invert_x,ts->invert_y,ts->swap_x_y);  
+#else
+    ts->invert_x = 0;
+    ts->invert_y = 0;
+    ts->swap_x_y = 0;
 #endif
 
     INIT_WORK(&ts->work, goodix_ts_work_func);

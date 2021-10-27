@@ -39,6 +39,7 @@
 #ifdef CONFIG_OF
 #include <linux/of_gpio.h>
 #include <linux/regulator/consumer.h>
+#include <linux/property.h>
 #endif
 #ifdef CONFIG_FB
 #include <linux/notifier.h>
@@ -130,7 +131,10 @@ struct goodix_ts_data {
     u8 rqst_processing;
     u8 is_950;
 #endif
-    
+
+    bool invert_x;
+    bool invert_y;
+    bool swap_x_y;
 };
 
 extern u16 show_len;
