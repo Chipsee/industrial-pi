@@ -42,5 +42,8 @@
 			<&gt9xx>,"goodix,irq-gpio:4";
 		reset = <&gt9xx_pins>,"brcm,pins:4",
 			<&gt9xx>,"goodix,rst-gpio:4";
+		inverted-x = <&gt9xx>,"touchscreen-inverted-x?";
+                inverted-y = <&gt9xx>,"touchscreen-inverted-y?";
+                swapped-x-y = <&gt9xx>,"touchscreen-swapped-x-y?";
 	};
 };
