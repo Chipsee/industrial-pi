@@ -84,14 +84,19 @@ if [ "X$CMVER" = "X3" ]; then
         fi
 elif [ "X$CMVER" = "X4" ]; then
         ## for Chipsee CM4 products enable I2C0(need to debug -_-)
-        #dtparam -d $OVERLAYS audio=off
-        #dtoverlay -d $OVERLAYS i2c0 pins_44_45=1
-        #raspi-gpio set 44 a1
-        #raspi-gpio set 45 a1
-        #echo "I2C0:" >> $LOGF
-        #i2cdetect -y 0 >> $LOGF
+        dtparam -d $OVERLAYS audio=off
+        dtoverlay -d $OVERLAYS i2c0 pins_44_45=1
+        raspi-gpio set 44 a1
+        raspi-gpio set 45 a1
+        echo "I2C0:" >> $LOGF
+        i2cdetect -y 0 >> $LOGF
+        is_1a="NULL"
+        is_32="NULL"
         is_1a=$(i2cdetect -y  1 0x1a 0x1a | egrep "(1a|UU)" | awk '{print $2}')
+        is_32=$(i2cdetect -y  0 0x32 0x32 | egrep "(32|UU)" | awk '{print $2}')
         echo "is_1a is $is_1a"
+        echo "is_32 is $is_32"
+        dtparam -d $OVERLAYS audio=on
         if [ "X${is_1a}" = "X1a" -o "X${is_1a}" = "XUU" ]; then
                 echo "Board should be CS12800RA4101"
 		if [ "x$BOARD" != "xCS12800RA4101" ]; then
@@ -106,6 +111,19 @@ elif [ "X$CMVER" = "X4" ]; then
 		#insmod /home/pi/cslcd/cs_lcd.ko
 		#echo cs_lcd 0x32 | tee /sys/bus/i2c/devices/i2c-0/new_device
 		#fbi -T 1 -noverbose -a /etc/logo.png
+	elif [ "X${is_32}" = "X32" -o "X${is_32}" = "XUU" ]; then
+                echo "Board should be CS12800RA4101BOX"
+		if [ "x$BOARD" != "xCS12800RA4101BOX" ]; then
+			echo "SOM changed, reboot."
+			cp /opt/chipsee/.cmdline.txt /boot/cmdline.txt
+			reboot
+		fi
+        	echo "Init GPIO for CS12800RA4101BOX"
+        	OUT="503 502 501 500" 
+        	IN="496 497 498 499"
+        	BUZZER=19
+       		# LVDS
+        	lt8619cinit 
         else
                 echo "Board is CS10600RA4070"
 		if [ "x$BOARD" != "xCS10600RA4070" ]; then
