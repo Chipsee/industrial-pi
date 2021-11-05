@@ -96,14 +96,9 @@ dtoverlay=pwm-backlight,pin=41,func=4,pwm_1
 hdmi_force_hotplug=1
 hdmi_group=2
 hdmi_drive=2
-## LT6911C need use follow for CS10600RA070
-#hdmi_mode=87
-#hdmi_timings=1024 0 160 10 160 600 0 12 1 23 0 0 0 60 0 52000000 6
-## LT6911UXC can use follow directly
-#hdmi_cvt=1024 600 60 6
-#hdmi_ignore_edid=0xa5000080
-## LT8619C use follow for CS12800RA101
-hdmi_mode=28
+#hdmi_mode=28
+hdmi_mode=87
+hdmi_cvt=1280 800 60 5
 # MCP23008
 dtoverlay=mcp23017,mcp23008,addr=0x20,noints
 # MCP2517

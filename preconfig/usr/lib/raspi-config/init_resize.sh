@@ -208,6 +208,10 @@ systemctl enable chipsee-init
 depmod -a $KVR
 
 ## Board config 
+# Backup origin config.txt file
+if [ ! -f /boot/config.txt~ ]; then
+	cp /boot/config.txt /boot/config.txt~
+fi
 CMVER=`cat /proc/device-tree/model | cut -d " " -f 5`
 echo "SOM is CM${CMVER}" >> $LOGF
 if [ "X$CMVER" = "X3" ]; then
@@ -215,19 +219,19 @@ if [ "X$CMVER" = "X3" ]; then
 	IS4232=`lsusb | grep -c 0403:6011`
 	if [ "$IS2514" = "1" ] || [ "$IS4232" = "1" ]; then
         	echo "Board is CS12800RA101" >> $LOGF
-        	cp -b /boot/config-cs12800ra101.txt /boot/config.txt
+        	cp /boot/config-cs12800ra101.txt /boot/config.txt
 		echo "CS12800RA101" > /opt/chipsee/.board
 	else
         	echo "Board is CS10600RA070" >> $LOGF
-        	cp -b /boot/config-cs10600ra070.txt /boot/config.txt
+        	cp /boot/config-cs10600ra070.txt /boot/config.txt
 		echo "CS10600RA070" > /opt/chipsee/.board
 	fi
 elif [ "X$CMVER" = "X4" ]; then
-	## for Chipsee CM4 products enable I2C0(need to debug -_-)
-	#dtparam -d /boot/overlays audio=off
-	#dtoverlay -d /boot/overlays i2c0 pins_44_45=1
-	#raspi-gpio set 44 a1
-	#raspi-gpio set 45 a1
+	## for Chipsee CM4 products enable I2C0
+	dtparam -d /boot/overlays audio=off
+	dtoverlay -d /boot/overlays i2c0 pins_44_45=1
+	raspi-gpio set 44 a1
+	raspi-gpio set 45 a1
 	#echo "I2C0:" >> $LOGF
 	#i2cdetect -y 0 >> $LOGF
 	if ! command -v i2cdetect > /dev/null; then
@@ -235,15 +239,23 @@ elif [ "X$CMVER" = "X4" ]; then
 		cp /opt/chipsee/test/libi2c.so.0 /usr/lib/arm-linux-gnueabihf/libi2c.so.0.1.1
 		ln -sf /usr/lib/arm-linux-gnueabihf/libi2c.so.0.1.1 /usr/lib/arm-linux-gnueabihf/libi2c.so.0
 	fi
+	is_1a="NULL"
+	is_32="NULL"
 	is_1a=$(i2cdetect -y  1 0x1a 0x1a | egrep "(1a|UU)" | awk '{print $2}')
+	is_32=$(i2cdetect -y  0 0x32 0x32 | egrep "(32|UU)" | awk '{print $2}')
 	echo "is_1a is $is_1a" >> $LOGF
+	echo "is_32 is $is_32" >> $LOGF
 	if [ "X${is_1a}" = "X1a" ]; then
 		echo "Board is CS12800RA4101" >> $LOGF
-        	cp -b /boot/config-cs12800ra4101.txt /boot/config.txt
+        	cp /boot/config-cs12800ra4101.txt /boot/config.txt
 		echo "CS12800RA4101" > /opt/chipsee/.board
+	elif [ "X${is_32}" = "X32" ]; then
+		echo "Board is CS12800RA4101BOX" >> $LOGF
+        	cp /boot/config-cs12800ra4101box.txt /boot/config.txt
+		echo "CS12800RA4101BOX" > /opt/chipsee/.board
 	else
 		echo "Board is CS10600RA4070" >> $LOGF
-        	cp -b /boot/config-cs10600ra4070.txt /boot/config.txt
+        	cp /boot/config-cs10600ra4070.txt /boot/config.txt
 		echo "CS10600RA4070" > /opt/chipsee/.board
 	fi
 
@@ -258,7 +270,6 @@ elif [ "X$CMVER" = "X4" ]; then
 	       echo "Enabled WIFIBT" >> $LOGF
         fi
 fi
-[ -f /opt/chipsee/.cmdline.txt ] && rm /opt/chipsee/.cmdline.txt && echo "Delete .cmdline.txt" >> $LOGF
 sync
 mount / -o remount,ro
 echo "Appended Chipsee init *_*" >> $LOGF
