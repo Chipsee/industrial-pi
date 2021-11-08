@@ -273,7 +273,7 @@ EOF
     [ ! -d /sys/class/gpio/gpio$SPKENIO ] && echo $SPKENIO > /sys/class/gpio/export
     echo in > /sys/class/gpio/gpio$DETIO/direction
     echo out > /sys/class/gpio/gpio$SPKENIO/direction
-    echo 1 > /sys/class/gpio/gpio$SPKENIO/value
+    echo 0 > /sys/class/gpio/gpio$SPKENIO/value
     chmod 777 /sys/class/gpio/gpio$SPKENIO/value
     chmod 777 /sys/class/gpio/gpio$DETIO/value
     # execute other contents in audioswitch.service

@@ -1,6 +1,9 @@
 #!/bin/sh -e
 # SPEAKER
 #CURRENT_PROFILE=$(pactl list sinks | grep "Active Port"| cut -d ' ' -f 3-)
+# wait to avoid noise
+sleep 30
+
 DETIO=6
 SPKENIO=11
 while [ 1 ]; do
