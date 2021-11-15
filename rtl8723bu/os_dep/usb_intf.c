@@ -131,6 +131,7 @@ static struct usb_device_id rtw_usb_id_tbl[] ={
 	//*=== Realtek demoboard ===*/
 	{USB_DEVICE_AND_INTERFACE_INFO(USB_VENDER_ID_REALTEK, 0xB720,0xff,0xff,0xff),.driver_info = RTL8723B}, /* 8723BU 1*1 */
 	{USB_DEVICE_AND_INTERFACE_INFO(0x7392, 0xa611, 0xff, 0xff, 0xff), .driver_info = RTL8723B}, /* 8723BU 1*1 */
+	{USB_DEVICE_AND_INTERFACE_INFO(0x20f4, 0x108a, 0xff, 0xff, 0xff), .driver_info = RTL8723B}, /* 8723BU 1*1 */
 	{}	/* Terminating entry */
 };
 
@@ -997,12 +998,6 @@ static _adapter *rtw_usb_if1_init(struct dvobj_priv *dvobj,
 	SET_NETDEV_DEV(pnetdev, dvobj_to_dev(dvobj));
 	padapter = rtw_netdev_priv(pnetdev);
 
-#ifdef CONFIG_IOCTL_CFG80211
-	if(rtw_wdev_alloc(padapter, dvobj_to_dev(dvobj)) != 0) {
-		goto handle_dualmac;
-	}
-#endif
-
 	//step 2. hook HalFunc, allocate HalData
 	//hal_set_hal_ops(padapter);
 	rtw_set_hal_ops(padapter);
@@ -1079,6 +1074,12 @@ static _adapter *rtw_usb_if1_init(struct dvobj_priv *dvobj,
 	#endif
 #ifdef	CONFIG_BT_COEXIST
 	dvobj_to_pwrctl(dvobj)->autopm_cnt=1;
+#endif
+
+#ifdef CONFIG_IOCTL_CFG80211
+	if(rtw_wdev_alloc(padapter, dvobj_to_dev(dvobj)) != 0) {
+		goto free_hal_data;
+	}
 #endif
 
 	// set mac addr

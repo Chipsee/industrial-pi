@@ -1,2 +1,2 @@
 # Introduction
-Release for kernel-5.4.79-v7l+, based on `2020-12-02-raspios-buster-armhf-xxx.img`
+Release for kernel-5.10.63-v7l+, based on `2021-10-30-raspios-bullseye-armhf-xxx.img`

@@ -297,14 +297,24 @@ static inline void lsm6ds3_flush_works(void)
 
 static inline int64_t lsm6ds3_get_time_ns(void)
 {
+#if (LINUX_VERSION_CODE > KERNEL_VERSION( 5,6,0 ))
+	struct timespec64 ts;
+#else
 	struct timespec ts;
+#endif
 #if (LINUX_VERSION_CODE <= KERNEL_VERSION( 4,19,169 ))
 	get_monotonic_boottime(&ts);
+#elif (LINUX_VERSION_CODE > KERNEL_VERSION( 5,6,0 ))
+	getboottime64(&ts);
 #else
 	getboottime(&ts);
 #endif
 
+#if (LINUX_VERSION_CODE > KERNEL_VERSION( 5,6,0 ))
+	return timespec64_to_ns(&ts);
+#else
 	return timespec_to_ns(&ts);
+#endif
 }
 
 static int lsm6ds3_write_data_with_mask(struct lsm6ds3_data *cdata,
