@@ -1,0 +1,31 @@
+How to connect 4g
+=================
+
+1. Confirm the ppp package is installed, you also can install it like follow,
+
+  $ sudo apt update
+  $ sudo apt install ppp
+
+2. connect 4g
+
+  $ cd linux-ppp-scripts/
+  $ sudo ./quectel-pppd.sh <Serial Port> <APN> <username> <password>
+
+  For example,
+  $ sudo ./quectel-pppd.sh /dev/ttyUSB3 3gnet test test
+
+  or no username and password
+  $ sudo ./quectel-pppd.sh /dev/ttyUSB3 3gnet
+
+3. disconnect 4g
+
+  $ cd linux-ppp-scripts/
+  $ ./quectel-ppp-kill
+
+WARRNING,
+    You should disconnect 4g every time before connect it.
+    "3gnet" is one APN in China, you should replace it with yours.
+
+
+
+

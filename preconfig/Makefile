@@ -57,6 +57,20 @@ install:
 	install -p -m 777 -D opt/chipsee/voicecard/asound_2mic.conf $(TP)/opt/chipsee/voicecard/asound_2mic.conf
 	install -p -m 777 -D opt/chipsee/voicecard/wm8960_asound.state /opt/chipsee/voicecard/wm8960_asound.state
 	install -p -m 777 -D opt/chipsee/voicecard/wm8960_asound.state $(TP)/opt/chipsee/voicecard/wm8960_asound.state
+	install -p -b -m 755 -D  opt/chipsee/test/linux-ppp-scripts/ip-up /opt/chipsee/test/linux-ppp-scripts/ip-up
+	install -p -m 755 -D  opt/chipsee/test/linux-ppp-scripts/ip-up $(TP)/opt/chipsee/test/linux-ppp-scripts/ip-up
+	install -p -b -m 755 -D  opt/chipsee/test/linux-ppp-scripts/quectel-chat-connect /opt/chipsee/test/linux-ppp-scripts/quectel-chat-connect
+	install -p -m 755 -D  opt/chipsee/test/linux-ppp-scripts/quectel-chat-connect $(TP)/opt/chipsee/test/linux-ppp-scripts/quectel-chat-connect
+	install -p -b -m 755 -D  opt/chipsee/test/linux-ppp-scripts/quectel-chat-disconnect /opt/chipsee/test/linux-ppp-scripts/quectel-chat-disconnect
+	install -p -m 755 -D  opt/chipsee/test/linux-ppp-scripts/quectel-chat-disconnect $(TP)/opt/chipsee/test/linux-ppp-scripts/quectel-chat-disconnect
+	install -p -b -m 755 -D  opt/chipsee/test/linux-ppp-scripts/quectel-ppp /opt/chipsee/test/linux-ppp-scripts/quectel-ppp
+	install -p -m 755 -D  opt/chipsee/test/linux-ppp-scripts/quectel-ppp $(TP)/opt/chipsee/test/linux-ppp-scripts/quectel-ppp
+	install -p -b -m 755 -D  opt/chipsee/test/linux-ppp-scripts/quectel-pppd.sh /opt/chipsee/test/linux-ppp-scripts/quectel-pppd.sh
+	install -p -m 755 -D  opt/chipsee/test/linux-ppp-scripts/quectel-pppd.sh $(TP)/opt/chipsee/test/linux-ppp-scripts/quectel-pppd.sh
+	install -p -b -m 755 -D  opt/chipsee/test/linux-ppp-scripts/quectel-ppp-kill /opt/chipsee/test/linux-ppp-scripts/quectel-ppp-kill
+	install -p -m 755 -D  opt/chipsee/test/linux-ppp-scripts/quectel-ppp-kill $(TP)/opt/chipsee/test/linux-ppp-scripts/quectel-ppp-kill
+	install -p -b -m 755 -D  opt/chipsee/test/linux-ppp-scripts/README /opt/chipsee/test/linux-ppp-scripts/README
+	install -p -m 755 -D  opt/chipsee/test/linux-ppp-scripts/README $(TP)/opt/chipsee/test/linux-ppp-scripts/README
 	install -p -b -m 755 -D usr/lib/raspi-config/init_resize.sh /usr/lib/raspi-config/init_resize.sh
 	install -p -m 755 -D usr/lib/raspi-config/init_resize.sh $(TP)/usr/lib/raspi-config/init_resize.sh
 	systemctl enable chipsee-init.service
