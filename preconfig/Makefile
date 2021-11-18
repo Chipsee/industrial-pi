@@ -73,6 +73,10 @@ install:
 	install -p -m 755 -D  opt/chipsee/test/linux-ppp-scripts/README $(TP)/opt/chipsee/test/linux-ppp-scripts/README
 	install -p -b -m 755 -D usr/lib/raspi-config/init_resize.sh /usr/lib/raspi-config/init_resize.sh
 	install -p -m 755 -D usr/lib/raspi-config/init_resize.sh $(TP)/usr/lib/raspi-config/init_resize.sh
+	install -p -b -m 755 -D etc/issue /etc/issue
+	install -p -m 755 -D etc/issue $(TP)/etc/issue
+	install -p -b -m 755 -D etc/X11/xorg.conf.d/10-blanking.conf /etc/X11/xorg.conf.d/10-blanking.conf
+	install -p -m 755 -D  etc/X11/xorg.conf.d/10-blanking.conf $(TP)/etc/X11/xorg.conf.d/10-blanking.conf
 	systemctl enable chipsee-init.service
 
 clean: install
