@@ -88,14 +88,14 @@ dtparam=i2c_vc=on
 # RTC
 dtoverlay=i2c-rtc,ds1307,addr=0x32
 # UART
-dtoverlay=pi3-disable-bt
+#dtoverlay=disable-bt
 dtoverlay=uart1,txd1_pin=32,rxd1_pin=33
-core_freq=250
-enable_uart=1
+#core_freq=250
+#enable_uart=1
 # Audio
 gpio=44=op,dh
 # LED
-dtoverlay=pi3-act-led,activelow=off,gpio=36
+dtoverlay=act-led,activelow=off,gpio=36
 dtparam=act_led_trigger=heartbeat
 # SD1
 dtoverlay=sdio,poll_once=off
