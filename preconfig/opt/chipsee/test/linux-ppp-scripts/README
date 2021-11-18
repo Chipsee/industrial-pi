@@ -8,6 +8,7 @@ How to connect 4g
 
 2. connect 4g
 
+  $ sudo ifconfig wwan0 down
   $ cd linux-ppp-scripts/
   $ sudo ./quectel-pppd.sh <Serial Port> <APN> <username> <password>
 
