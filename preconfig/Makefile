@@ -7,6 +7,8 @@ install:
 	install -p -m 755 -D boot/config-cs12800ra101.txt $(TP)/boot/config-cs12800ra101.txt
 	install -p -b -m 755 -D boot/config-cs12800ra4101.txt /boot/config-cs12800ra4101.txt
 	install -p -m 755 -D boot/config-cs12800ra4101.txt $(TP)/boot/config-cs12800ra4101.txt
+	install -p -b -m 755 -D boot/config-cs12800ra4101box.txt /boot/config-cs12800ra4101box.txt
+	install -p -m 755 -D boot/config-cs12800ra4101box.txt $(TP)/boot/config-cs12800ra4101box.txt
 	install -p -b -m 755 -D boot/config-cs10600ra4070.txt /boot/config-cs10600ra4070.txt
 	install -p -m 755 -D boot/config-cs10600ra4070.txt $(TP)/boot/config-cs10600ra4070.txt
 	install -p -b -m 755 -D boot/config.txt /boot/config.txt
