@@ -6,6 +6,7 @@ This repository only support follow [Raspberry Pi official system](https://www.r
  - 2019-04-08-raspbian-stretch (Not support CM4 products)
  - 2020-02-13-raspbian-buster
  - 2020-12-02-raspios-buster
+ - 2021-10-30-raspios-bullseye
 
 # How to use
 ## Prepare system
@@ -34,17 +35,29 @@ make help
 
 # Supported Chipsee Board
 This repository only support follow Chipsee Industrial Board:
- - CS10600RA070-V1.0
- - CS12800RA101-V1.0
- - CS10600RA4070-V1.0
- - LRRA4-101-V1.0
+ - CS10600RA070
+ - CS12800RA101
+ - CS10600RA4070
+ - CS12800RA4101
+ - AIO-CM4-101
 
 # Latest system images
- - Desktop with Full software [2020-12-02-raspios-buster-armhf-full-chipsee-v3.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20201202/2020-12-02-raspios-buster-armhf-full-chipsee-v3.img.xz)
- - Desktop with small software [2020-12-02-raspios-buster-armhf-chipsee-v3.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20201202/2020-12-02-raspios-buster-armhf-chipsee-v3.img.xz)
- - Lite [2020-12-02-raspios-buster-armhf-lite-chipsee-v3.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20201202/2020-12-02-raspios-buster-armhf-lite-chipsee-v3.img.xz)
+ - Desktop with Full software [2021-10-30-raspios-bullseye-armhf-full-chipsee-v1.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20211030/2021-10-30-raspios-bullseye-armhf-full-chipsee-v1.img.xz)
+ - Desktop with small software [2021-10-30-raspios-bullseye-armhf-chipsee-v1.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20211030/2021-10-30-raspios-bullseye-armhf-chipsee-v1.img.xz)
+ - Lite [2021-10-30-raspios-bullseye-armhf-lite-chipsee-v1.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20211030/2021-10-30-raspios-bullseye-armhf-lite-chipsee-v1.img.xz)
 
 # Release notes
+
+**2021-10-30 V1:**
+
+- First release for Debian 11(bullseye)
+
+**2020-12-02 V4:**
+
+- Disable Screen Blank Feature.
+- Add Chipsee Hardwaretest Applications.
+- Bug Fix: some 7" and 10.1" LCD display issue.
+
 **2020-12-02 V3:**
 
 - Add PWM backlight support.
@@ -52,6 +65,18 @@ This repository only support follow Chipsee Industrial Board:
 - Automatically load WiFi/Bt and disable SD slot as WiFi/Bt and SD slot can't be use at same time.
 
 # Older system images
+ 
+ **2020-12-02 V4:**
+ - [2020-12-02-raspios-buster-armhf-full-chipsee-v4.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20201202/2020-12-02-raspios-buster-armhf-full-chipsee-v4.img.xz)
+ - [2020-12-02-raspios-buster-armhf-chipsee-v4.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20201202/2020-12-02-raspios-buster-armhf-chipsee-v4.img.xz)
+ - [2020-12-02-raspios-buster-armhf-lite-chipsee-v4.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20201202/2020-12-02-raspios-buster-armhf-lite-chipsee-v4.img.xz)
+ 
+ **2020-12-02 V3:**
+ - [2020-12-02-raspios-buster-armhf-full-chipsee-v3.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20201202/2020-12-02-raspios-buster-armhf-full-chipsee-v3.img.xz)
+ - [2020-12-02-raspios-buster-armhf-chipsee-v3.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20201202/2020-12-02-raspios-buster-armhf-chipsee-v3.img.xz)
+ - [2020-12-02-raspios-buster-armhf-lite-chipsee-v3.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20201202/2020-12-02-raspios-buster-armhf-lite-chipsee-v3.img.xz)
+ 
+ **2020-12-02 V2:**
  - [2020-12-02-raspios-buster-armhf-full-chipsee-v2.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20201202/2020-12-02-raspios-buster-armhf-full-chipsee-v2.img.xz)
  - [2020-12-02-raspios-buster-armhf-chipsee-v2.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20201202/2020-12-02-raspios-buster-armhf-chipsee-v2.img.xz)
  - [2020-12-02-raspios-buster-armhf-lite-chipsee-v2.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20201202/2020-12-02-raspios-buster-armhf-lite-chipsee-v2.img.xz)
