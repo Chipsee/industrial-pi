@@ -51,6 +51,7 @@ This repository only support follow Chipsee Industrial Board:
 **2021-10-30 V1:**
 
 - First release for Debian 11(bullseye)
+- Known bugs: CAN bus will fail to bring up.
 
 **2020-12-02 V4:**
 
