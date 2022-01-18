@@ -97,8 +97,9 @@ hdmi_force_hotplug=1
 hdmi_group=2
 hdmi_drive=2
 hdmi_mode=87
-# LT6911C need use follow for BOE7
 hdmi_timings=1024 0 160 10 160 600 0 12 1 23 0 0 0 60 0 52000000 6
+hdmi_ignore_edid=0xa5000080
+hdmi_pixel_encoding=1
 # MCP23008
 dtoverlay=mcp23017,mcp23008,addr=0x20,noints
 # MCP2517
