@@ -1,4 +1,4 @@
 # Introduction
-Release for kernel-5.10.63-v7l+, based on `2021-10-30-raspios-bullseye-armhf-xxx.img`
+Release for kernel-5.10.92-v8+, based on `2021-10-30-raspios-bullseye-arm64.img`
 # WARRNING
 This released is on test status!!!!
