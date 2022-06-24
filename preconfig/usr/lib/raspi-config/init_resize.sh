@@ -241,10 +241,13 @@ elif [ "X$CMVER" = "X4" ]; then
 	fi
 	is_1a="NULL"
 	is_32="NULL"
+	is_20="NULL"
 	is_1a=$(i2cdetect -y  1 0x1a 0x1a | egrep "(1a|UU)" | awk '{print $2}')
 	is_32=$(i2cdetect -y  0 0x32 0x32 | egrep "(32|UU)" | awk '{print $2}')
+	is_20=$(i2cdetect -y  1 0x20 0x20 | egrep "(20|UU)" | awk '{print $2}')
 	echo "is_1a is $is_1a" >> $LOGF
 	echo "is_32 is $is_32" >> $LOGF
+	echo "is_20 is $is_20" >> $LOGF
 	if [ "X${is_1a}" = "X1a" ]; then
 		echo "Board is CS12800RA4101" >> $LOGF
         	cp /boot/config-cs12800ra4101.txt /boot/config.txt
@@ -253,10 +256,14 @@ elif [ "X$CMVER" = "X4" ]; then
 		echo "Board is CS12800RA4101BOX" >> $LOGF
         	cp /boot/config-cs12800ra4101box.txt /boot/config.txt
 		echo "CS12800RA4101BOX" > /opt/chipsee/.board
-	else
+	elif [ "X${is_20}" = "X20" ]; then
 		echo "Board is CS10600RA4070" >> $LOGF
         	cp /boot/config-cs10600ra4070.txt /boot/config.txt
 		echo "CS10600RA4070" > /opt/chipsee/.board
+	else
+		echo "Board is CS12720RA4050" >> $LOGF
+        	cp /boot/config-cs12720ra4050.txt /boot/config.txt
+		echo "CS12720RA4050" > /opt/chipsee/.board
 	fi
 
 	# Check the WIFIBT

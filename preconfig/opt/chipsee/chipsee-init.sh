@@ -36,6 +36,8 @@ CONFIG=/boot/config.txt
 
 ! grep -q quiet /boot/cmdline.txt && ! grep -q init_resize /opt/chipsee/.cmdline.txt && sed -i 's|rootwait|rootwait init=/usr/lib/raspi-config/init_resize\.sh|' /opt/chipsee/.cmdline.txt
 
+grep -q firstrun /opt/chipsee/.cmdline.txt && sed -i 's| systemd.run.*||g' /opt/chipsee/.cmdline.txt
+
 CMVER=`cat /proc/device-tree/model | cut -d " " -f 5`
 SCREEN_SIZE=`fbset | grep -v endmode | grep mode | awk -F '"' '{print $2}'`
 BOARD=`cat /opt/chipsee/.board`
@@ -92,10 +94,13 @@ elif [ "X$CMVER" = "X4" ]; then
         i2cdetect -y 0 >> $LOGF
         is_1a="NULL"
         is_32="NULL"
+        is_20="NULL"
         is_1a=$(i2cdetect -y  1 0x1a 0x1a | egrep "(1a|UU)" | awk '{print $2}')
         is_32=$(i2cdetect -y  0 0x32 0x32 | egrep "(32|UU)" | awk '{print $2}')
+        is_20=$(i2cdetect -y  1 0x20 0x20 | egrep "(20|UU)" | awk '{print $2}')
         echo "is_1a is $is_1a"
         echo "is_32 is $is_32"
+        echo "is_20 is $is_20"
         dtparam -d $OVERLAYS audio=on
         if [ "X${is_1a}" = "X1a" -o "X${is_1a}" = "XUU" ]; then
                 echo "Board should be CS12800RA4101"
@@ -124,7 +129,7 @@ elif [ "X$CMVER" = "X4" ]; then
         	BUZZER=19
        		# LVDS
         	lt8619cinit 
-        else
+	elif [ "X${is_20}" = "X20" -o "X${is_20}" = "XUU" ]; then
                 echo "Board is CS10600RA4070"
 		if [ "x$BOARD" != "xCS10600RA4070" ]; then
 			echo "SOM changed, reboot."
@@ -134,6 +139,15 @@ elif [ "X$CMVER" = "X4" ]; then
         	echo "Init GPIO for CS10600RA4070"
         	OUT="503 502 501 500" 
         	IN="496 497 498 499"
+        	BUZZER=19
+	else
+                echo "Board is CS12720RA4050"
+		if [ "x$BOARD" != "xCS12720RA4050" ]; then
+			echo "SOM changed, reboot."
+			cp /opt/chipsee/.cmdline.txt /boot/cmdline.txt
+			reboot
+		fi
+        	echo "Init GPIO for CS12720RA4050"
         	BUZZER=19
         fi
 fi

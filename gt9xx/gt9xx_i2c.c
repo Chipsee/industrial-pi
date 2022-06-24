@@ -1416,6 +1416,7 @@ static s32 gtp_init_panel(struct goodix_ts_data *ts)
 	GTP_DEBUG("Get config data from header file.");
     	u8 cfg_info_group0[] = CTP_CFG_GROUP0;
 	u8 cfg_10_info_group0[] = CTP_10_CFG_GROUP0;
+	u8 cfg_5_info_group0[] = CTP_5_CFG_GROUP0;
     	u8 cfg_info_group1[] = CTP_CFG_GROUP1;
     	u8 cfg_info_group2[] = CTP_CFG_GROUP2;
     	u8 cfg_info_group3[] = CTP_CFG_GROUP3;
@@ -1438,6 +1439,12 @@ static s32 gtp_init_panel(struct goodix_ts_data *ts)
 		cfg_info_len[0] = CFG_GROUP_LEN(cfg_10_info_group0);
 		send_cfg_buf[3] = cfg_10_info_group3;
 		cfg_info_len[3] = CFG_GROUP_LEN(cfg_10_info_group3);
+	}
+
+	if(ts->tp_size == 5)
+	{
+		send_cfg_buf[0] = cfg_5_info_group0;
+		cfg_info_len[0] = CFG_GROUP_LEN(cfg_5_info_group0);
 	}
 
     	GTP_DEBUG("Config Groups\' Lengths: %d, %d, %d, %d, %d, %d",
@@ -2510,6 +2517,8 @@ static int goodix_ts_probe(struct i2c_client *client, const struct i2c_device_id
     s32 ret = -1;
     struct goodix_ts_data *ts;
     u16 version_info;
+    struct device_node *np = client->dev.of_node;
+    u32 val;
     
     GTP_DEBUG_FUNC();
     
@@ -2554,7 +2563,11 @@ static int goodix_ts_probe(struct i2c_client *client, const struct i2c_device_id
                 device_property_read_bool(&client->dev, "touchscreen-inverted-y");
     ts->swap_x_y =
                 device_property_read_bool(&client->dev, "touchscreen-swapped-x-y");
-    GTP_INFO("invert_x is %d, invert_y is %d, swap_x_y is %d\n", ts->invert_x,ts->invert_y,ts->swap_x_y);  
+    // the default valu is 7 
+    if (of_property_read_u32(np, "tp-size", &ts->tp_size)) {
+        dev_err(&client->dev, "no tp-size defined\n");
+    }
+    GTP_INFO("tp_size is %d,invert_x is %d, invert_y is %d, swap_x_y is %d\n", ts->tp_size, ts->invert_x,ts->invert_y,ts->swap_x_y);  
 #else
     ts->invert_x = 0;
     ts->invert_y = 0;
