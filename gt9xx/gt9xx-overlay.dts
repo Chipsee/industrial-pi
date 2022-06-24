@@ -32,6 +32,7 @@
 				interrupts = <12 2>; // high-to-low edge triggered
 				goodix,irq-gpio = <&gpio 12 0>; // Pin12
 				goodix,rst-gpio = <&gpio 18 1>; // Pin18
+				tp-size = <0>;
 			};
 		};
 	};
@@ -45,5 +46,6 @@
 		inverted-x = <&gt9xx>,"touchscreen-inverted-x?";
                 inverted-y = <&gt9xx>,"touchscreen-inverted-y?";
                 swapped-x-y = <&gt9xx>,"touchscreen-swapped-x-y?";
+		size = <&gt9xx>,"tp-size:0";
 	};
 };
