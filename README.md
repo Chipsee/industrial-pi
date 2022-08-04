@@ -53,7 +53,7 @@ This repository only support follow Chipsee Industrial Board, you can order them
 
 # Release notes
 
-**2021-10-30 V1:**
+**2021-10-30 V2:**
 
 - Add CS12720RA4050 CS12800RA4101P CS19108RA4133P CS10768RA4150P CS19108RA4156P support.
 - Bug Fix: LCDTest of Hardwaretest application don't work.
@@ -82,6 +82,8 @@ This repository only support follow Chipsee Industrial Board, you can order them
  - Desktop with Full software [2021-10-30-raspios-bullseye-armhf-full-chipsee-v1.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20211030/2021-10-30-raspios-bullseye-armhf-full-chipsee-v1.img.xz)
  - Desktop with small software [2021-10-30-raspios-bullseye-armhf-chipsee-v1.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20211030/2021-10-30-raspios-bullseye-armhf-chipsee-v1.img.xz)
  - Lite [2021-10-30-raspios-bullseye-armhf-lite-chipsee-v1.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20211030/2021-10-30-raspios-bullseye-armhf-lite-chipsee-v1.img.xz)
+ 
+ > The follow older buster release use old firmware, it doesn't support latest CM4 Rev1.1, for detailt product change note, refer to [CM4 PCN](https://pip.raspberrypi.com/categories/645)
  
  **2020-12-02 V4:**
  - [2020-12-02-raspios-buster-armhf-full-chipsee-v4.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20201202/2020-12-02-raspios-buster-armhf-full-chipsee-v4.img.xz)
