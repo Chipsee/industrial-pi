@@ -34,19 +34,30 @@ make help
 ```
 
 # Supported Chipsee Board
-This repository only support follow Chipsee Industrial Board:
+This repository only support follow Chipsee Industrial Board, you can order them from the official Chipsee Web [chipsee web site](https://chipsee.com/product-category/ipc/arm-raspberry-pi/) or from your nearest distributor.
  - CS10600RA070
  - CS12800RA101
  - CS10600RA4070
  - CS12800RA4101
  - AIO-CM4-101
+ - CS12720RA4050 (New, Latest system image support it)
+ - CS12800RA4101P (New, Latest system image support it)
+ - CS19108RA4133P (New, Latest system image support it)
+ - CS10768RA4150P (New, Latest system image support it)
+ - CS19108RA4156P (New, Latest system image support it)
 
 # Latest system images
- - Desktop with Full software [2021-10-30-raspios-bullseye-armhf-full-chipsee-v1.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20211030/2021-10-30-raspios-bullseye-armhf-full-chipsee-v1.img.xz)
- - Desktop with small software [2021-10-30-raspios-bullseye-armhf-chipsee-v1.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20211030/2021-10-30-raspios-bullseye-armhf-chipsee-v1.img.xz)
- - Lite [2021-10-30-raspios-bullseye-armhf-lite-chipsee-v1.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20211030/2021-10-30-raspios-bullseye-armhf-lite-chipsee-v1.img.xz)
+ - Desktop with Full software [2021-10-30-raspios-bullseye-armhf-full-chipsee-v2.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20211030/2021-10-30-raspios-bullseye-armhf-full-chipsee-v2.img.xz)
+ - Desktop with small software [2021-10-30-raspios-bullseye-armhf-chipsee-v2.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20211030/2021-10-30-raspios-bullseye-armhf-chipsee-v2.img.xz)
+ - Lite [2021-10-30-raspios-bullseye-armhf-lite-chipsee-v2.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20211030/2021-10-30-raspios-bullseye-armhf-lite-chipsee-v2.img.xz)
 
 # Release notes
+
+**2021-10-30 V1:**
+
+- Add CS12720RA4050 CS12800RA4101P CS19108RA4133P CS10768RA4150P CS19108RA4156P support.
+- Bug Fix: LCDTest of Hardwaretest application don't work.
+- Known bugs: CAN bus will fail to bring up.
 
 **2021-10-30 V1:**
 
@@ -66,6 +77,11 @@ This repository only support follow Chipsee Industrial Board:
 - Automatically load WiFi/Bt and disable SD slot as WiFi/Bt and SD slot can't be use at same time.
 
 # Older system images
+ 
+ **2021-10-30 V1:**
+ - Desktop with Full software [2021-10-30-raspios-bullseye-armhf-full-chipsee-v1.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20211030/2021-10-30-raspios-bullseye-armhf-full-chipsee-v1.img.xz)
+ - Desktop with small software [2021-10-30-raspios-bullseye-armhf-chipsee-v1.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20211030/2021-10-30-raspios-bullseye-armhf-chipsee-v1.img.xz)
+ - Lite [2021-10-30-raspios-bullseye-armhf-lite-chipsee-v1.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20211030/2021-10-30-raspios-bullseye-armhf-lite-chipsee-v1.img.xz)
  
  **2020-12-02 V4:**
  - [2020-12-02-raspios-buster-armhf-full-chipsee-v4.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20201202/2020-12-02-raspios-buster-armhf-full-chipsee-v4.img.xz)
