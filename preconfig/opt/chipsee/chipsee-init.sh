@@ -68,7 +68,7 @@ if [ "X$CMVER" = "X3" ]; then
         	IN="496 497 498 499"
         	BUZZER=40
        		# LVDS
-        	lt8619cinit 
+        	lcdinit 
 		#insmod /home/pi/cslcd/cs_lcd.ko
 		#echo cs_lcd 0x32 | tee /sys/bus/i2c/devices/i2c-0/new_device
 		#fbi -T 1 -noverbose -a /etc/logo.png
@@ -112,7 +112,7 @@ elif [ "X$CMVER" = "X4" ]; then
         echo "Init GPIO for CS12800RA4101"
         BUZZER=12
        	# LVDS
-        lt8619cinit 
+        lcdinit 
 		#insmod /home/pi/cslcd/cs_lcd.ko
 		#echo cs_lcd 0x32 | tee /sys/bus/i2c/devices/i2c-0/new_device
 		#fbi -T 1 -noverbose -a /etc/logo.png
@@ -153,7 +153,7 @@ elif [ "X$CMVER" = "X4" ]; then
         IN="496 497 498 499"
         BUZZER=19
        	# LVDS
-        [ "x$BOARD" == "xCS12800RA4101BOX" ] && lt8619cinit 
+        [ "x$BOARD" == "xCS12800RA4101BOX" ] && lcdinit 
 	elif [ "X${is_20}" = "X20" -o "X${is_20}" = "XUU" ]; then
                 echo "Board is CS10600RA4070"
 		if [ "x$BOARD" != "xCS10600RA4070" ]; then
@@ -343,5 +343,14 @@ if [ -f /etc/udhcpc/default.script ]; then
         mkdir /usr/share/udhcpc -p
         ln -sf /etc/udhcpc/default.script /usr/share/udhcpc/default.script
 fi
+
+#
+# Hold raspberrypi firmware which will break system driver
+# if you know follow, and want to upgrade kernel,
+# run "apt-mark unhold raspberrypi-kernel raspberrypi-kernel-headers raspberrypi-sys-mods raspberrypi-ui-mods"
+# if you upgrade kernel, some driver may not work, for example touchscreen, lcd and so on
+# find driver from https://github.com/Chipsee/industrial-pi
+# 
+apt-mark hold raspberrypi-kernel raspberrypi-kernel-headers raspberrypi-sys-mods raspberrypi-ui-mods
 
 exit 0
