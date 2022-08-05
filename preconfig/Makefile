@@ -13,6 +13,14 @@ install:
 	install -p -m 755 -D boot/config-cs10600ra4070.txt $(TP)/boot/config-cs10600ra4070.txt
 	install -p -b -m 755 -D boot/config-cs12720ra4050.txt /boot/config-cs12720ra4050.txt
 	install -p -m 755 -D boot/config-cs12720ra4050.txt $(TP)/boot/config-cs12720ra4050.txt
+	install -p -b -m 755 -D boot/config-cs19108ra4133p.txt /boot/config-cs19108ra4133p.txt
+	install -p -m 755 -D boot/config-cs19108ra4133p.txt $(TP)/boot/config-cs19108ra4133p.txt
+	install -p -b -m 755 -D boot/config-cs10768ra4150p.txt /boot/config-cs10768ra4150p.txt
+	install -p -m 755 -D boot/config-cs10768ra4150p.txt $(TP)/boot/config-cs10768ra4150p.txt
+	install -p -b -m 755 -D boot/config-cs19108ra4156p.txt /boot/config-cs19108ra4156p.txt
+	install -p -m 755 -D boot/config-cs19108ra4156p.txt $(TP)/boot/config-cs19108ra4156p.txt
+	install -p -b -m 755 -D boot/config-cs19108ra4215p.txt /boot/config-cs19108ra4215p.txt
+	install -p -m 755 -D boot/config-cs19108ra4215p.txt $(TP)/boot/config-cs19108ra4215p.txt
 	install -p -b -m 755 -D boot/config.txt /boot/config.txt
 	install -p -m 755 -D boot/config.txt $(TP)/boot/config.txt
 	install -p -m 644 -D usr/lib/systemd/system/chipsee-init.service /usr/lib/systemd/system/chipsee-init.service

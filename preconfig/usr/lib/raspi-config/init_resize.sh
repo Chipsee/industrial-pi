@@ -250,19 +250,49 @@ elif [ "X$CMVER" = "X4" ]; then
 	echo "is_20 is $is_20" >> $LOGF
 	if [ "X${is_1a}" = "X1a" ]; then
 		echo "Board is CS12800RA4101" >> $LOGF
-        	cp /boot/config-cs12800ra4101.txt /boot/config.txt
+       		cp /boot/config-cs12800ra4101.txt /boot/config.txt
 		echo "CS12800RA4101" > /opt/chipsee/.board
 	elif [ "X${is_32}" = "X32" ]; then
-		echo "Board is CS12800RA4101BOX" >> $LOGF
-        	cp /boot/config-cs12800ra4101box.txt /boot/config.txt
-		echo "CS12800RA4101BOX" > /opt/chipsee/.board
+        	## for big size display
+        	RAWSIZE=`i2cget -y -a 0 0x51 0x0A`
+        	BASE16SIZE=${RAWSIZE#0x}
+        	BASE16SIZEUPPER=`echo ${BASE16SIZE} | tr '[:lower:]' '[:upper:]'`
+        	PANELSIZE=`echo "ibase=16;${BASE16SIZEUPPER}" | bc`
+        	echo Panel size is $PANELSIZE >> $LOGF
+        	case ${PANELSIZE} in
+        	133)
+			echo "Board is CS19108RA4133P" >> $LOGF
+       			cp /boot/config-cs19108ra4133p.txt /boot/config.txt
+			echo "CS19108RA4133P" > /opt/chipsee/.board
+        	;;
+        	150)
+			echo "Board is CS10768RA4150P" >> $LOGF
+       			cp /boot/config-cs10768ra4150p.txt /boot/config.txt
+			echo "CS10768RA4150P" > /opt/chipsee/.board
+        	;;
+        	156)
+			echo "Board is CS19108RA4156P" >> $LOGF
+       			cp /boot/config-cs19108ra4156p.txt /boot/config.txt
+			echo "CS19108RA4156P" > /opt/chipsee/.board
+        	;;
+        	215)
+			echo "Board is CS19108RA4215P" >> $LOGF
+       			cp /boot/config-cs19108ra4215p.txt /boot/config.txt
+			echo "CS19108RA4215P" > /opt/chipsee/.board
+        	;;
+        	*)
+			echo "Board is CS12800RA4101BOX" >> $LOGF
+       			cp /boot/config-cs12800ra4101box.txt /boot/config.txt
+			echo "CS12800RA4101BOX" > /opt/chipsee/.board
+        	;;
+        	esac
 	elif [ "X${is_20}" = "X20" ]; then
 		echo "Board is CS10600RA4070" >> $LOGF
-        	cp /boot/config-cs10600ra4070.txt /boot/config.txt
+       		cp /boot/config-cs10600ra4070.txt /boot/config.txt
 		echo "CS10600RA4070" > /opt/chipsee/.board
 	else
 		echo "Board is CS12720RA4050" >> $LOGF
-        	cp /boot/config-cs12720ra4050.txt /boot/config.txt
+       		cp /boot/config-cs12720ra4050.txt /boot/config.txt
 		echo "CS12720RA4050" > /opt/chipsee/.board
 	fi
 

@@ -80,6 +80,8 @@ arm_boost=1
 [all]
 
 #######################Chipsee Config#################################
+# Audio
+gpio=6=op,dh
 # I2C
 dtoverlay=i2c0,pins_44_45
 # RTC
@@ -93,4 +95,24 @@ dtoverlay=uart3
 dtoverlay=uart5
 # LED
 dtparam=act_led_trigger=heartbeat
+# SD1
+dtoverlay=sdio,poll_once=off
+#dtparam=ant2
+# USB
+dtoverlay=dwc2,dr_mode=host
+# Touch
+dtoverlay=gt9xx,interrupt=20,reset=21
+# HDMI
+gpio=7=op,dh
+gpio=18=op,dh
+dtoverlay=pwm-backlight,pin=18,func=2,pwm_0
+## Follow Can fix some hardware issue
+hdmi_force_hotplug=1
+hdmi_group=2
+hdmi_drive=2
+hdmi_mode=82
+# GPIO
+dtoverlay=mcp23017,mcp23008,addr=0x20,noints
+# CAN
+dtoverlay=mcp2515-can0,oscillator=8000000,interrupt=16
 #######################Chipsee Config#################################

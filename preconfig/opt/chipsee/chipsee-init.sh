@@ -109,26 +109,51 @@ elif [ "X$CMVER" = "X4" ]; then
 			cp /opt/chipsee/.cmdline.txt /boot/cmdline.txt
 			reboot
 		fi
-        	echo "Init GPIO for CS12800RA4101"
-        	BUZZER=12
-       		# LVDS
-        	lt8619cinit 
+        echo "Init GPIO for CS12800RA4101"
+        BUZZER=12
+       	# LVDS
+        lt8619cinit 
 		#insmod /home/pi/cslcd/cs_lcd.ko
 		#echo cs_lcd 0x32 | tee /sys/bus/i2c/devices/i2c-0/new_device
 		#fbi -T 1 -noverbose -a /etc/logo.png
 	elif [ "X${is_32}" = "X32" -o "X${is_32}" = "XUU" ]; then
+		## for big size display
+		ISSOMCHANGED=0
+		RAWSIZE=`i2cget -y -a 0 0x51 0x0A`
+		BASE16SIZE=${RAWSIZE#0x}
+		BASE16SIZEUPPER=`echo ${BASE16SIZE} | tr '[:lower:]' '[:upper:]'`
+		PANELSIZE=`echo "ibase=16;${BASE16SIZEUPPER}" | bc`
+		echo Panel size is $PANELSIZE
+		case ${PANELSIZE} in
+			133)
+                echo "Board should be CS19108RA4133P"
+				[ "x$BOARD" != "xCS19108RA4133P" ] && ISSOMCHANGED=1
+			;;
+			150)
+                echo "Board should be CS10768RA4150P"
+				[ "x$BOARD" != "xCS10768RA4150P" ] && ISSOMCHANGED=1
+			;;
+			156)
+                echo "Board should be CS19108RA4156P"
+				[ "x$BOARD" != "xCS19108RA4156P" ] && ISSOMCHANGED=1
+			;;
+			*)
                 echo "Board should be CS12800RA4101BOX"
-		if [ "x$BOARD" != "xCS12800RA4101BOX" ]; then
+				[ "x$BOARD" != "xCS12800RA4101BOX" ] && ISSOMCHANGED=1
+			;;
+		esac
+
+		if [ ${ISSOMCHANGED} -eq 1 ]; then
 			echo "SOM changed, reboot."
 			cp /opt/chipsee/.cmdline.txt /boot/cmdline.txt
 			reboot
 		fi
-        	echo "Init GPIO for CS12800RA4101BOX"
-        	OUT="503 502 501 500" 
-        	IN="496 497 498 499"
-        	BUZZER=19
-       		# LVDS
-        	lt8619cinit 
+        echo "Init GPIO for Big Size products"
+        OUT="503 502 501 500" 
+        IN="496 497 498 499"
+        BUZZER=19
+       	# LVDS
+        [ "x$BOARD" == "xCS12800RA4101BOX" ] && lt8619cinit 
 	elif [ "X${is_20}" = "X20" -o "X${is_20}" = "XUU" ]; then
                 echo "Board is CS10600RA4070"
 		if [ "x$BOARD" != "xCS10600RA4070" ]; then
@@ -136,20 +161,20 @@ elif [ "X$CMVER" = "X4" ]; then
 			cp /opt/chipsee/.cmdline.txt /boot/cmdline.txt
 			reboot
 		fi
-        	echo "Init GPIO for CS10600RA4070"
-        	OUT="503 502 501 500" 
-        	IN="496 497 498 499"
-        	BUZZER=19
+        echo "Init GPIO for CS10600RA4070"
+        OUT="503 502 501 500" 
+        IN="496 497 498 499"
+        BUZZER=19
 	else
-                echo "Board is CS12720RA4050"
+        echo "Board is CS12720RA4050"
 		if [ "x$BOARD" != "xCS12720RA4050" ]; then
 			echo "SOM changed, reboot."
 			cp /opt/chipsee/.cmdline.txt /boot/cmdline.txt
 			reboot
 		fi
-        	echo "Init GPIO for CS12720RA4050"
-        	BUZZER=19
-        fi
+       	echo "Init GPIO for CS12720RA4050"
+       	BUZZER=19
+    fi
 fi
 
 # Funcs
