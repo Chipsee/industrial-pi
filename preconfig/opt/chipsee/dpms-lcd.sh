@@ -30,12 +30,12 @@ while [ 1 ]; do
 	#echo monitor status is $MONITORSTATUS
 	#echo cur bri is $CURBRIGHTNESS
 
-	if [ $DPMSSTATUS = "Enabled" -a $MONITORSTATUS = "Off" -a $CURBRIGHTNESS -gt 0 ]; then
+	if [ "X$DPMSSTATUS" = "XEnabled" -a "X$MONITORSTATUS" = "XOff" -a $CURBRIGHTNESS -gt 0 ]; then
 		SAVEBRIGHTNESS=$CURBRIGHTNESS
 		echo $SAVEBRIGHTNESS > $SAVEDBRIPATH
 		echo 0 > $CURBRIGHTNESSPATH
 		echo "Close LCD Backlight"
-	elif [ $DPMSSTATUS = "Enabled" -a $MONITORSTATUS = "On" -a $CURBRIGHTNESS -eq 0 ]; then 
+	elif [ "X$DPMSSTATUS" = "XEnabled" -a "X$MONITORSTATUS" = "XOn" -a $CURBRIGHTNESS -eq 0 ]; then 
 		echo $SAVEBRIGHTNESS > $CURBRIGHTNESSPATH
 		echo "Open LCD Backlight"
 	fi	
