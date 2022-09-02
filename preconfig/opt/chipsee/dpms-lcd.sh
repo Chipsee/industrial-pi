@@ -8,25 +8,34 @@ if ! command -v xset > /dev/null; then
       return 1
 fi
 
+CURBRIGHTNESSPATH="/sys/class/backlight/pwm-backlight/brightness"
+SAVEDBRIPATH="/home/pi/.bri"
+# check if there is one saved brightness
+# or set default brightness
+if [ -f /home/pi/.bri ]; then
+	BRI=`cat /home/pi/.bri`	
+	echo $BRI > $CURBRIGHTNESSPATH
+else
+	echo 90 > $CURBRIGHTNESSPATH
+fi
 # sleep to wait xorg start
 sleep 60
 
 while [ 1 ]; do
 	DPMSSTATUS=`xset -display :0 q | grep 'DPMS is' | awk -F ' ' '{print $3}'`
 	MONITORSTATUS=`xset -display :0 q | grep Monitor | awk -F ' ' '{print $3}'`
-
-	CURBRIGHTNESSPATH="/sys/class/backlight/pwm-backlight/brightness"
 	CURBRIGHTNESS=`cat $CURBRIGHTNESSPATH`
 
-	#echo dpms status is $DPMSSTATUS
+	#echo dpms status is $DPMSSTATUS 
 	#echo monitor status is $MONITORSTATUS
 	#echo cur bri is $CURBRIGHTNESS
 
-	if [ $DPMSSTATUS = "Enabled" -a $MONITORSTATUS = "Off" -a $CURBRIGHTNESS -gt 0 ]; then
+	if [ "X$DPMSSTATUS" = "XEnabled" -a "X$MONITORSTATUS" = "XOff" -a $CURBRIGHTNESS -gt 0 ]; then
 		SAVEBRIGHTNESS=$CURBRIGHTNESS
+		echo $SAVEBRIGHTNESS > $SAVEDBRIPATH
 		echo 0 > $CURBRIGHTNESSPATH
 		echo "Close LCD Backlight"
-	elif [ $DPMSSTATUS = "Enabled" -a $MONITORSTATUS = "On" -a $CURBRIGHTNESS -eq 0 ]; then 
+	elif [ "X$DPMSSTATUS" = "XEnabled" -a "X$MONITORSTATUS" = "XOn" -a $CURBRIGHTNESS -eq 0 ]; then 
 		echo $SAVEBRIGHTNESS > $CURBRIGHTNESSPATH
 		echo "Open LCD Backlight"
 	fi	
