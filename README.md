@@ -11,10 +11,43 @@ This repository only support follow [Raspberry Pi official system](https://www.r
 # How to use
 ## Prepare system
 Install Raspberry Pi official system and boot, run follow commands in ssh or serial debug console. The Chipsee Industrial-Pi network and serial debug port is supported by Raspberry Pi official system default. 
+
 ## Download industrial-pi repository
+This repository only supports tested kernel version listed in branches. If the kernel version of your system is not in the branches lists, you should select one closer kernel version that you had.
+If your kernel version is listed in the branches,use follow commands,
 ```
 git clone --depth=1 --branch `uname -r` https://github.com/Chipsee/industrial-pi.git
 ```
+If your kernel version is not listed in the branches, checkout the branches closer to your kernel,
+check your kernel,
+```
+uname -r
+```
+select one closer branches, for example your kernel version is 5.10.17-v71+, you can select 5.10.63-v71+ branches
+```
+git clone --depth=1 --branch 5.10.63-v71+ https://github.com/Chipsee/industrial-pi.git
+```
+and do follow modification
+```
+1. modify Makefile
+diff --git a/Makefile b/Makefile
+index b98ad3c..98de440 100644
+--- a/Makefile
++++ b/Makefile
+@@ -28,7 +28,6 @@ help:
+ ##############################################################
+ install:
+        @apt-get update
+-       @dpkg -i $(TOPDIR)/tools/*.deb
+        @make -C $(GT9XX_DIR)
+        @echo "Install GT9XX success!!"
+        @make -C $(LSM6DS3_DIR)
+
+2. install raspberrypi-kernel-headers packages
+sudo apt update
+sudo apt install raspberrypi-kernel-headers
+```
+
 ## Compile and install
 ```
 cd industrial-pi
@@ -32,6 +65,8 @@ sudo make uninstall
 cd industrial-pi
 make help
 ```
+# FAQ
+
 
 # Supported Chipsee Board
 This repository only support follow Chipsee Industrial Board, you can order them from the official Chipsee Web [chipsee web site](https://chipsee.com/product-category/ipc/arm-raspberry-pi/) or from your nearest distributor.
