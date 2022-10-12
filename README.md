@@ -65,8 +65,6 @@ sudo make uninstall
 cd industrial-pi
 make help
 ```
-# FAQ
-
 
 # Supported Chipsee Board
 This repository only support follow Chipsee Industrial Board, you can order them from the official Chipsee Web [chipsee web site](https://chipsee.com/product-category/ipc/arm-raspberry-pi/) or from your nearest distributor.
