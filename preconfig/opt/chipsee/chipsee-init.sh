@@ -344,4 +344,14 @@ if [ -f /etc/udhcpc/default.script ]; then
         ln -sf /etc/udhcpc/default.script /usr/share/udhcpc/default.script
 fi
 
+#
+# Hold raspberrypi firmware which will break system driver
+# if you know follow, and want to upgrade kernel,
+# run "apt-mark unhold raspberrypi-kernel raspberrypi-kernel-headers raspberrypi-sys-mods raspberrypi-ui-mods"
+# if you upgrade kernel, some driver may not work, for example touchscreen, lcd and so on
+# find driver from https://github.com/Chipsee/industrial-pi
+# 
+apt-mark hold raspberrypi-kernel raspberrypi-kernel-headers raspberrypi-sys-mods raspberrypi-ui-mods
+
+
 exit 0
