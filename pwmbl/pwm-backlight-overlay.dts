@@ -31,6 +31,7 @@ N.B.:
 			pinctrl-names = "default";
 			pinctrl-0 = <&pwm_pins>;
 			assigned-clock-rates = <100000000>;
+			#pwm-cells = <3>;
 			status = "okay";
 		};
 	};
@@ -40,7 +41,7 @@ N.B.:
 		__dormant__ {
 			pwm-backlight {
                 		compatible = "pwm-backlight";
-                		pwms = <&pwm 0 5000000>; /*200Hz*/
+                		pwms = <&pwm 0 5000000 0>; /*200Hz*/
                 		brightness-levels = <
                         		0  1  2  3  4  5  6  7  8  9
                         		10 11 12 13 14 15 16 17 18 19
@@ -64,7 +65,7 @@ N.B.:
 		__dormant__ {
 			pwm-backlight {
                 		compatible = "pwm-backlight";
-                		pwms = <&pwm 1 5000000>; /*200Hz*/
+                		pwms = <&pwm 1 5000000 0>; /*200Hz*/
                 		brightness-levels = <
                         		0  1  2  3  4  5  6  7  8  9
                         		10 11 12 13 14 15 16 17 18 19
@@ -84,6 +85,54 @@ N.B.:
 	};
 
 	fragment@4 {
+		target-path="/";
+		__dormant__ {
+			pwm-backlight {
+                		compatible = "pwm-backlight";
+                		pwms = <&pwm 0 5000000 1>; /*200Hz*/
+                		brightness-levels = <
+                        		0  1  2  3  4  5  6  7  8  9
+                        		10 11 12 13 14 15 16 17 18 19
+                        		20 21 22 23 24 25 26 27 28 29
+                        		30 31 32 33 34 35 36 37 38 39
+                        		40 41 42 43 44 45 46 47 48 49
+                        		50 51 52 53 54 55 56 57 58 59
+                        		60 61 62 63 64 65 66 67 68 69
+                        		70 71 72 73 74 75 76 77 78 79
+                        		80 81 82 83 84 85 86 87 88 89
+                        		90 91 92 93 94 95 96 97 98 99
+                        		>;
+                		default-brightness-level = <90>;
+        		};
+		};
+
+	};
+
+	fragment@5 {
+		target-path="/";
+		__dormant__ {
+			pwm-backlight {
+                		compatible = "pwm-backlight";
+                		pwms = <&pwm 1 5000000 1>; /*200Hz*/
+                		brightness-levels = <
+                        		0  1  2  3  4  5  6  7  8  9
+                        		10 11 12 13 14 15 16 17 18 19
+                        		20 21 22 23 24 25 26 27 28 29
+                        		30 31 32 33 34 35 36 37 38 39
+                        		40 41 42 43 44 45 46 47 48 49
+                        		50 51 52 53 54 55 56 57 58 59
+                        		60 61 62 63 64 65 66 67 68 69
+                        		70 71 72 73 74 75 76 77 78 79
+                        		80 81 82 83 84 85 86 87 88 89
+                        		90 91 92 93 94 95 96 97 98 99
+                        		>;
+                		default-brightness-level = <90>;
+        		};
+		};
+
+	};
+
+	fragment@6 {
                 target = <&audio>;
                 __overlay__  {
                         brcm,disable-headphones = <1>;
@@ -96,5 +145,7 @@ N.B.:
 		clock = <&frag1>,"assigned-clock-rates:0";
 		pwm_0  = <0>,"+2";
 		pwm_1  = <0>,"+3";
+		pwm_0_r  = <0>,"+4";
+		pwm_1_r  = <0>,"+5";
 	};
 };

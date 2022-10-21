@@ -137,6 +137,10 @@ elif [ "X$CMVER" = "X4" ]; then
                 echo "Board should be CS19108RA4156P"
 				[ "x$BOARD" != "xCS19108RA4156P" ] && ISSOMCHANGED=1
 			;;
+			215)
+                echo "Board should be CS19108RA4215P"
+				[ "x$BOARD" != "xCS19108RA4215P" ] && ISSOMCHANGED=1
+			;;
 			*)
                 echo "Board should be CS12800RA4101BOX"
 				[ "x$BOARD" != "xCS12800RA4101BOX" ] && ISSOMCHANGED=1
