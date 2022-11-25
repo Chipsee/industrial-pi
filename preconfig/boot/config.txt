@@ -78,4 +78,6 @@ dtoverlay=uart3
 dtoverlay=uart5
 # LED
 dtparam=act_led_trigger=heartbeat
+# Disable buzzer for CS12800RA4101A
+gpio=12=op,dl
 #####################################Chipsee Config#########################################
