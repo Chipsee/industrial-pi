@@ -9,11 +9,11 @@ if ! command -v xset > /dev/null; then
 fi
 
 CURBRIGHTNESSPATH="/sys/class/backlight/pwm-backlight/brightness"
-SAVEDBRIPATH="/home/pi/.bri"
+SAVEDBRIPATH="$HOME/.bri"
 # check if there is one saved brightness
 # or set default brightness
-if [ -f /home/pi/.bri ]; then
-	BRI=`cat /home/pi/.bri`	
+if [ -f $SAVEDBRIPATH ]; then
+	BRI=`cat $SAVEDBRIPATH`
 	echo $BRI > $CURBRIGHTNESSPATH
 else
 	echo 90 > $CURBRIGHTNESSPATH
