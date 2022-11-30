@@ -31,6 +31,7 @@ all: install
 
 compile:
 	make -C $(KSRC) M=`pwd` modules
+	dtc -@ -I dts -O dtb -o seeed-2mic-voicecard.dtbo seeed-2mic-voicecard-overlay.dts
 
 install: compile
 	mkdir -p $(TP)/boot/overlays
