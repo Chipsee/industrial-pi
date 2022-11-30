@@ -29,14 +29,8 @@ install:
 	install -p -m 644 -D usr/lib/systemd/user/audioswitch.service $(TP)/usr/lib/systemd/user/audioswitch.service
 	install -p -m 644 -D usr/lib/systemd/user/dpms-lcd.service /usr/lib/systemd/user/dpms-lcd.service
 	install -p -m 644 -D usr/lib/systemd/user/dpms-lcd.service $(TP)/usr/lib/systemd/user/dpms-lcd.service
-	install -p -m 755 -D usr/bin/lt8619cinit /usr/bin/lt8619cinit
-	install -p -m 755 -D usr/bin/lt8619cinit $(TP)/usr/bin/lt8619cinit
-	install -p -b -m 755 -D usr/bin/piwiz /usr/bin/piwiz
-	install -p -m 755 -D usr/bin/piwiz $(TP)/usr/bin/piwiz
-	install -p -b -m 755 -D usr/bin/piwizhs /usr/bin/piwizhs
-	install -p -m 755 -D usr/bin/piwizhs $(TP)/usr/bin/piwizhs
-	install -p -b -m 755 -D usr/share/piwiz/piwiz.ui /usr/share/piwiz/piwiz.ui
-	install -p -m 755 -D usr/share/piwiz/piwiz.ui $(TP)/usr/share/piwiz/piwiz.ui
+	install -p -m 755 -D usr/bin/lcdinit_$(LARCH) /usr/bin/lcdinit
+	install -p -m 755 -D usr/bin/lcdinit_$(LARCH) $(TP)/usr/bin/lcdinit
 	install -p -m 777 -D opt/chipsee/chipsee-init.sh /opt/chipsee/chipsee-init.sh
 	install -p -m 777 -D opt/chipsee/chipsee-init.sh $(TP)/opt/chipsee/chipsee-init.sh
 	install -p -m 777 -D opt/chipsee/audioswitch.sh /opt/chipsee/audioswitch.sh
@@ -94,10 +88,7 @@ install:
 clean: install
 	systemctl disable chipsee-init.service
 	rm /opt/chipsee -rf
-	rm /usr/bin/lt8619cinit
-	mv /usr/bin/piwiz~ /usr/bin/piwiz
-	mv /usr/bin/piwizhs~ /usr/bin/piwizhs
-	mv /usr/share/piwiz/piwiz.ui~ /usr/share/piwiz/piwiz.ui
+	rm /usr/bin/lcdinit
 	rm /boot/config-*.txt
 	mv /usr/lib/raspi-config/init_resize.sh~ /usr/lib/raspi-config/init_resize.sh
 	mv /boot/config.txt~ /boot/config.txt

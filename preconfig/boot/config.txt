@@ -62,6 +62,9 @@ display_auto_detect=1
 dtoverlay=vc4-fkms-v3d
 max_framebuffers=2
 
+# Run in 64-bit mode
+arm_64bit=1
+
 # Disable compensation for displays with overscan
 disable_overscan=1
 
@@ -93,4 +96,6 @@ dtoverlay=uart3
 dtoverlay=uart5
 # LED
 dtparam=act_led_trigger=heartbeat
+# Disable buzzer for CS12800RA4101A
+gpio=12=op,dl
 #######################Chipsee Config#################################

@@ -11,8 +11,10 @@ PRECONFIG_DIR := ./preconfig
 TOPDIR := $(shell pwd)
 KVER  := $(shell uname -r)
 TP=$(TOPDIR)/_tp
+LARCH := $(shell uname -m)
 VERSION :=$(shell echo $$(/bin/bash $(TOPDIR)/tools/setlocalversion --save-scmversion))
 export TP
+export LARCH
 
 help:
 	@echo 'Cleaning targets'
@@ -35,10 +37,6 @@ install:
 	@echo "Install lsm6ds3 success!!"
 	@make -C $(QUECTEL_CM_DIR)
 	@echo "Install quectel-cm success!!"
-	@make -C $(RTL8723BU_DIR)
-	@echo "Install rtl8723bu success!!"
-	@make -C $(RTL8723DU_DIR)
-	@echo "Install rtl8723du success!!"
 	@make -C $(WM8960_DIR)
 	@echo "Install wm8960 success!!"
 	@make -C $(PWMBL_DIR)
@@ -56,10 +54,6 @@ uninstall:
 	@echo "Uninstall lsm6ds3 success!!"
 	@make clean -C $(QUECTEL_CM_DIR)
 	@echo "Uninstall quectel-cm success!!"
-	@make clean -C $(RTL8723BU_DIR)
-	@echo "Uninstall rtl8723bu success!!"
-	@make clean -C $(RTL8723DU_DIR)
-	@echo "Uninstall rtl8723du success!!"
 	@make clean -C $(WM8960_DIR)
 	@echo "Uninstall wm8960 success!!"
 	@make clean -C $(PWMBL_DIR)
