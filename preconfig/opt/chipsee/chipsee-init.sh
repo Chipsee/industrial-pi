@@ -32,10 +32,20 @@ OVERLAYS=/boot/overlays
 CONFIG=/boot/config.txt
 [ -f /boot/firmware/usercfg.txt ] && CONFIG=/boot/firmware/usercfg.txt
 
-[ ! -f /opt/chipsee/.cmdline.txt ] && cp /boot/cmdline.txt /opt/chipsee/.cmdline.txt && sed -i 's|quiet|quiet init=/usr/lib/raspi-config/init_resize\.sh|' /opt/chipsee/.cmdline.txt
+# Backup log file
+[ -f /boot/chipseeinit_resize.log ] && cp /boot/chipseeinit_resize.log /var/log/ && sync
+[ -f /boot/chipseeinit_firstrun.log ] && cp /boot/chipseeinit_firstrun.log /var/log/ && sync
 
-! grep -q quiet /boot/cmdline.txt && ! grep -q init_resize /opt/chipsee/.cmdline.txt && sed -i 's|rootwait|rootwait init=/usr/lib/raspi-config/init_resize\.sh|' /opt/chipsee/.cmdline.txt
+# Backup cmdline file
+## Old image
+[ ! -f /usr/lib/raspberrypi-sys-mods/firstboot ] && [ ! -f /opt/chipsee/.cmdline.txt ] && cp /boot/cmdline.txt /opt/chipsee/.cmdline.txt && sed -i 's|quiet|quiet init=/usr/lib/raspi-config/init_resize\.sh|' /opt/chipsee/.cmdline.txt
+[ ! -f /usr/lib/raspberrypi-sys-mods/firstboot ] && ! grep -q quiet /boot/cmdline.txt && ! grep -q init_resize /opt/chipsee/.cmdline.txt && sed -i 's|rootwait|rootwait init=/usr/lib/raspi-config/init_resize\.sh|' /opt/chipsee/.cmdline.txt
 
+## New image
+[ -f /usr/lib/raspberrypi-sys-mods/firstboot ] && [ ! -f /opt/chipsee/.cmdline.txt ] && cp /boot/cmdline.txt /opt/chipsee/.cmdline.txt && sed -i 's|quiet|quiet init=/usr/lib/raspberrypi-sys-mods/firstboot|' /opt/chipsee/.cmdline.txt
+[ -f /usr/lib/raspberrypi-sys-mods/firstboot ] && ! grep -q quiet /boot/cmdline.txt && ! grep -q init_resize /opt/chipsee/.cmdline.txt && sed -i 's|rootwait|rootwait init=/usr/lib/raspberrypi-sys-mods/firstboot|' /opt/chipsee/.cmdline.txt
+
+# fix First run
 grep -q firstrun /opt/chipsee/.cmdline.txt && sed -i 's| systemd.run.*||g' /opt/chipsee/.cmdline.txt
 
 CMVER=`cat /proc/device-tree/model | cut -d " " -f 5`

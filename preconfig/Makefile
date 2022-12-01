@@ -23,6 +23,8 @@ install:
 	install -p -m 755 -D boot/config-cs19108ra4215p.txt $(TP)/boot/config-cs19108ra4215p.txt
 	install -p -b -m 755 -D boot/config.txt /boot/config.txt
 	install -p -m 755 -D boot/config.txt $(TP)/boot/config.txt
+	install -p -b -m 755 -D boot/userconf /boot/userconf
+	install -p -m 755 -D boot/userconf $(TP)/boot/userconf
 	install -p -m 644 -D usr/lib/systemd/system/chipsee-init.service /usr/lib/systemd/system/chipsee-init.service
 	install -p -m 644 -D usr/lib/systemd/system/chipsee-init.service $(TP)/usr/lib/systemd/system/chipsee-init.service
 	install -p -m 644 -D usr/lib/systemd/user/audioswitch.service /usr/lib/systemd/user/audioswitch.service
@@ -79,6 +81,8 @@ install:
 	install -p -m 755 -D  opt/chipsee/test/linux-ppp-scripts/README $(TP)/opt/chipsee/test/linux-ppp-scripts/README
 	install -p -b -m 755 -D usr/lib/raspi-config/init_resize.sh /usr/lib/raspi-config/init_resize.sh
 	install -p -m 755 -D usr/lib/raspi-config/init_resize.sh $(TP)/usr/lib/raspi-config/init_resize.sh
+	install -p -b -m 755 -D usr/lib/raspberrypi-sys-mods/firstboot /usr/lib/raspberrypi-sys-mods/firstboot
+	install -p -m 755 -D usr/lib/raspberrypi-sys-mods/firstboot $(TP)/usr/lib/raspberrypi-sys-mods/firstboot
 	install -p -b -m 755 -D etc/issue /etc/issue
 	install -p -m 755 -D etc/issue $(TP)/etc/issue
 	install -p -b -m 755 -D etc/X11/xorg.conf.d/10-blanking.conf /etc/X11/xorg.conf.d/10-blanking.conf
@@ -91,4 +95,5 @@ clean: install
 	rm /usr/bin/lcdinit
 	rm /boot/config-*.txt
 	mv /usr/lib/raspi-config/init_resize.sh~ /usr/lib/raspi-config/init_resize.sh
+	mv /usr/lib/raspberrypi-sys-mods/firstboot~ /usr/lib/raspberrypi-sys-mods/firstboot
 	mv /boot/config.txt~ /boot/config.txt
