@@ -30,7 +30,7 @@ help:
 ##############################################################
 install:
 	@apt-get update
-	@dpkg -i $(TOPDIR)/tools/*.deb
+	@dpkg -i $(TOPDIR)/tools/*$(LARCH).deb
 	@make -C $(GT9XX_DIR)
 	@echo "Install GT9XX success!!"
 	@make -C $(LSM6DS3_DIR)
