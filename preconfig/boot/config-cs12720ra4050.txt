@@ -82,8 +82,8 @@ dtoverlay=uart5
 # LED
 dtparam=act_led_trigger=heartbeat
 # SD1
-#dtoverlay=sdio,poll_once=off
-dtparam=ant2
+dtoverlay=sdio,poll_once=off
+#dtparam=ant2
 # Touch
 dtoverlay=gt9xx,interrupt=20,reset=21,swapped-x-y=1,inverted-x=1,size=5
 # HDMI
