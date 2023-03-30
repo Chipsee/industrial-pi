@@ -93,7 +93,7 @@ enable_uart=1
 core_freq=250
 dtoverlay=uart2
 dtoverlay=uart3
-dtoverlay=uart5
+#dtoverlay=uart5
 # LED
 dtparam=act_led_trigger=heartbeat
 # Disable buzzer for CS12800RA4101A

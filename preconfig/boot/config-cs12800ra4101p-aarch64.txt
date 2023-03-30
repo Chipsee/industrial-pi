@@ -62,6 +62,8 @@ display_auto_detect=1
 dtoverlay=vc4-fkms-v3d
 max_framebuffers=2
 
+# Run in 64-bit mode
+arm_64bit=1
 
 # Disable compensation for displays with overscan
 disable_overscan=1
@@ -106,14 +108,16 @@ dtoverlay=gt9xx,interrupt=20,reset=21
 # HDMI
 gpio=7=op,dh
 gpio=18=op,dh
-dtoverlay=pwm-backlight,pin=18,func=2,pwm_0_r
+dtoverlay=pwm-backlight,pin=18,func=2,pwm_0
 ## Follow Can fix some hardware issue
 hdmi_force_hotplug=1
 hdmi_group=2
 hdmi_drive=2
-hdmi_mode=82
-# GPIO
+#hdmi_mode=28
+hdmi_mode=87
+hdmi_timings=1280 1 72 20 68 800 1 15 2 21 0 0 0 60 0 72400000 5
+# MCP23008
 dtoverlay=mcp23017,mcp23008,addr=0x20,noints
-# CAN
+# MCP2517
 dtoverlay=mcp2515-can0,oscillator=8000000,interrupt=16
 #######################Chipsee Config#################################

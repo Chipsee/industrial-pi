@@ -81,10 +81,11 @@ arm_boost=1
 [all]
 
 #######################Chipsee Config#################################
-# Audio
-gpio=6=op,dh
 # I2C
+dtparam=audio=off
 dtoverlay=i2c0,pins_44_45
+gpio=44=a1
+gpio=45=a1
 # RTC
 dtoverlay=i2c-rtc,ds1307,addr=0x32
 # UART
@@ -93,7 +94,6 @@ enable_uart=1
 core_freq=250
 dtoverlay=uart2
 dtoverlay=uart3
-dtoverlay=uart5
 # LED
 dtparam=act_led_trigger=heartbeat
 # SD1
@@ -102,18 +102,22 @@ dtoverlay=sdio,poll_once=off
 # USB
 dtoverlay=dwc2,dr_mode=host
 # Touch
-dtoverlay=gt9xx,interrupt=20,reset=21
+dtoverlay=gt9xx,interrupt=7,reset=8
 # HDMI
-gpio=7=op,dh
-gpio=18=op,dh
-dtoverlay=pwm-backlight,pin=18,func=2,pwm_0_r
+gpio=13=op,dh
+dtoverlay=pwm-backlight,pin=13,func=4,pwm_1
 ## Follow Can fix some hardware issue
 hdmi_force_hotplug=1
 hdmi_group=2
-hdmi_drive=2
-hdmi_mode=82
-# GPIO
-dtoverlay=mcp23017,mcp23008,addr=0x20,noints
-# CAN
-dtoverlay=mcp2515-can0,oscillator=8000000,interrupt=16
+hdmi_drive=1
+#hdmi_mode=28
+hdmi_mode=87
+hdmi_cvt=1280 800 60 5
+# KEY
+dtoverlay=gpio-key,gpio=9,label=KEY_VOLUMEUP,keycode=115
+dtoverlay=gpio-key,gpio=10,label=KEY_VOLUMEDOWN,keycode=114
+# Audio
+dtoverlay=i2s-mmap
+dtparam=i2s=on
+dtoverlay=seeed-2mic-voicecard
 #######################Chipsee Config#################################

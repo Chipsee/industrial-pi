@@ -301,9 +301,9 @@ elif [ "X$CMVER" = "X4" ]; then
         echo "is_32 is $is_32" >> $LOGF
         echo "is_20 is $is_20" >> $LOGF
         if [ "X${is_1a}" = "X1a" ]; then
-                echo "Board is CS12800RA4101" >> $LOGF
-                cp /boot/config-cs12800ra4101.txt /boot/config.txt
-                echo "CS12800RA4101" > /opt/chipsee/.board
+                echo "Board is CS12800RA4101A" >> $LOGF
+                cp /boot/config-cs12800ra4101a.txt /boot/config.txt
+                echo "CS12800RA4101A" > /opt/chipsee/.board
         elif [ "X${is_32}" = "X32" ]; then
                 ## for big size display
                 RAWSIZE=`i2cget -y -a 0 0x51 0x0A`
@@ -312,6 +312,16 @@ elif [ "X$CMVER" = "X4" ]; then
                 PANELSIZE=`echo "ibase=16;${BASE16SIZEUPPER}" | bc`
                 echo Panel size is $PANELSIZE >> $LOGF
                 case ${PANELSIZE} in
+                101)
+                        echo "Board is CS12800RA4101P" >> $LOGF
+                        cp /boot/config-cs12800ra4101p.txt /boot/config.txt
+                        echo "CS12800RA4101P" > /opt/chipsee/.board
+                ;;
+                121)
+                        echo "Board is CS10768RA4121P" >> $LOGF
+                        cp /boot/config-cs10768ra4121p.txt /boot/config.txt
+                        echo "CS10768RA4121P" > /opt/chipsee/.board
+                ;;
                 133)
                         echo "Board is CS19108RA4133P" >> $LOGF
                         cp /boot/config-cs19108ra4133p.txt /boot/config.txt
@@ -331,6 +341,11 @@ elif [ "X$CMVER" = "X4" ]; then
                         echo "Board is CS19108RA4215P" >> $LOGF
                         cp /boot/config-cs19108ra4215p.txt /boot/config.txt
                         echo "CS19108RA4215P" > /opt/chipsee/.board
+                ;;
+                236)
+                        echo "Board is CS19108RA4236P" >> $LOGF
+                        cp /boot/config-cs19108ra4236p.txt /boot/config.txt
+                        echo "CS19108RA4236P" > /opt/chipsee/.board
                 ;;
                 *)
                         echo "Board is CS12800RA4101BOX" >> $LOGF

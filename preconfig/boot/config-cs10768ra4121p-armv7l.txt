@@ -106,12 +106,12 @@ dtoverlay=gt9xx,interrupt=20,reset=21
 # HDMI
 gpio=7=op,dh
 gpio=18=op,dh
-dtoverlay=pwm-backlight,pin=18,func=2,pwm_0_r
+dtoverlay=pwm-backlight,pin=18,func=2,pwm_0
 ## Follow Can fix some hardware issue
 hdmi_force_hotplug=1
 hdmi_group=2
 hdmi_drive=2
-hdmi_mode=82
+hdmi_mode=16
 # GPIO
 dtoverlay=mcp23017,mcp23008,addr=0x20,noints
 # CAN
