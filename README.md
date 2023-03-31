@@ -7,6 +7,7 @@ This repository only support follow [Raspberry Pi official system](https://www.r
  - 2020-02-13-raspbian-buster
  - 2020-12-02-raspios-buster
  - 2021-10-30-raspios-bullseye
+ - 2022-9-22-raspios-bullseye
 
 # How to use
 ## Prepare system
@@ -72,19 +73,34 @@ This repository only support follow Chipsee Industrial Board, you can order them
  - CS12800RA101
  - CS10600RA4070
  - CS12800RA4101
- - AIO-CM4-101
- - CS12720RA4050 (New, Latest system image support it)
- - CS12800RA4101P (New, Latest system image support it)
- - CS19108RA4133P (New, Latest system image support it)
- - CS10768RA4150P (New, Latest system image support it)
- - CS19108RA4156P (New, Latest system image support it)
+ - AIO-CM4-101(CS12800RA4101A)
+ - CS12720RA4050 (New, Latest 64bit system image support it)
+ - CS12800RA4101P (New, Latest 64bit system image support it)
+ - CS10768RA4121P (New, Latest 64bit system image support it)
+ - CS19108RA4133P (New, Latest 64bit system image support it)
+ - CS10768RA4150P (New, Latest 64bit system image support it)
+ - CS19108RA4156P (New, Latest 64bit system image support it)
+ - CS19108RA4215P (New, Latest 64bit system image support it)
+ - CS19108RA4236P (New, Latest 64bit system image support it)
+
 
 # Latest system images
+ **2022-09-22 V2 64bit**
+ - Desktop with small software [2022-09-22-raspios-bullseye-arm64-chipsee-v2.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20220922/bullseye-arm64/2022-09-22-raspios-bullseye-arm64-chipsee-v2.img.xz)
+ - Lite [2022-09-22-raspios-bullseye-arm64-lite-chipsee-v2.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20220922/bullseye-arm64/2022-09-22-raspios-bullseye-arm64-lite-chipsee-v2.img.xz)
+
+**2021-10-30 V2 32bit**
  - Desktop with Full software [2021-10-30-raspios-bullseye-armhf-full-chipsee-v2.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20211030/2021-10-30-raspios-bullseye-armhf-full-chipsee-v2.img.xz)
  - Desktop with small software [2021-10-30-raspios-bullseye-armhf-chipsee-v2.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20211030/2021-10-30-raspios-bullseye-armhf-chipsee-v2.img.xz)
  - Lite [2021-10-30-raspios-bullseye-armhf-lite-chipsee-v2.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20211030/2021-10-30-raspios-bullseye-armhf-lite-chipsee-v2.img.xz)
 
 # Release notes
+
+**2022-9-22 V2:**
+
+- First released 64bit system
+- 32bit system will be released later.
+- Hold the kernel package, you can upgrade other software by using "apt-get upgrade" commands.
 
 **2021-10-30 V2:**
 
