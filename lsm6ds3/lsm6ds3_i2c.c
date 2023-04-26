@@ -103,14 +103,14 @@ free_data:
 	return err;
 }
 
-static int lsm6ds3_i2c_remove(struct i2c_client *client)
+static void lsm6ds3_i2c_remove(struct i2c_client *client)
 {
 	struct lsm6ds3_data *cdata = i2c_get_clientdata(client);
 
 	lsm6ds3_common_remove(cdata, client->irq);
 	dev_info(cdata->dev, "%s: removed\n", LSM6DS3_ACC_GYR_DEV_NAME);
 	kfree(cdata);
-	return 0;
+	//return 0;
 }
 
 #ifdef CONFIG_PM

@@ -85,7 +85,9 @@ typedef struct
     struct file *file; 
     struct file *cfg_file;
     st_fw_head  ic_fw_msg;
+#if (LINUX_VERSION_CODE < KERNEL_VERSION(5,17,16))
     mm_segment_t old_fs;
+#endif
     u32 fw_total_len;
     u32 fw_burned_len;
 }st_update_msg;
@@ -951,11 +953,11 @@ static u8 gup_check_update_file(struct i2c_client *client, st_fw_head* fw_head, 
 #endif
     }
     
-#if (LINUX_VERSION_CODE < KERNEL_VERSION(5,15,61))
+#if (LINUX_VERSION_CODE < KERNEL_VERSION(5,17,16))
     update_msg.old_fs = get_fs();
     set_fs(KERNEL_DS);
-#else
-    update_msg.old_fs = force_uaccess_begin();
+//#else
+//    update_msg.old_fs = force_uaccess_begin();
 #endif
 
     update_msg.file->f_op->llseek(update_msg.file, 0, SEEK_SET);
@@ -2464,13 +2466,13 @@ update_fail:
 file_fail:
 	if (update_msg.file && !IS_ERR(update_msg.file))
 	{
-#if (LINUX_VERSION_CODE < KERNEL_VERSION(5,15,61))
+#if (LINUX_VERSION_CODE < KERNEL_VERSION(5,17,16))
         if (update_msg.old_fs != NULL)
         {
             set_fs(update_msg.old_fs);
 	}
-#else
-	    force_uaccess_end(update_msg.old_fs);
+//#else
+//	    force_uaccess_end(update_msg.old_fs);
 #endif
 		filp_close(update_msg.file, NULL);
 	}
@@ -3431,11 +3433,11 @@ static s32 gup_prepare_fl_fw(char *path, st_fw_head *fw_head)
         return FAIL;
     }
     
-#if (LINUX_VERSION_CODE < KERNEL_VERSION(5,15,61))
+#if (LINUX_VERSION_CODE < KERNEL_VERSION(5,17,16))
     update_msg.old_fs = get_fs();
     set_fs(KERNEL_DS);
-#else
-    update_msg.old_fs = force_uaccess_begin();
+//#else
+//   update_msg.old_fs = force_uaccess_begin();
 #endif
     
     update_msg.file->f_op->llseek(update_msg.file, 0, SEEK_SET);
@@ -3445,10 +3447,10 @@ static s32 gup_prepare_fl_fw(char *path, st_fw_head *fw_head)
     if (update_msg.fw_total_len != sizeof(gtp_default_FW_fl))
     {
         GTP_ERROR("Inconsistent fw size. default size: %d(%dK), file size: %d(%dK)", sizeof(gtp_default_FW_fl), sizeof(gtp_default_FW_fl)/1024, update_msg.fw_total_len, update_msg.fw_total_len/1024);
-#if (LINUX_VERSION_CODE < KERNEL_VERSION(5,15,61))
+#if (LINUX_VERSION_CODE < KERNEL_VERSION(5,17,16))
         set_fs(update_msg.old_fs);
-#else
-	force_uaccess_end(update_msg.old_fs);
+//#else
+//	force_uaccess_end(update_msg.old_fs);
 #endif
         _CLOSE_FILE(update_msg.file);
         return FAIL;
@@ -3462,10 +3464,10 @@ static s32 gup_prepare_fl_fw(char *path, st_fw_head *fw_head)
                              update_msg.fw_total_len + FW_HEAD_LENGTH,
                                 &update_msg.file->f_pos);
 	update_msg.fw_total_len  += FW_HEAD_LENGTH;
-#if (LINUX_VERSION_CODE < KERNEL_VERSION(5,15,61))
+#if (LINUX_VERSION_CODE < KERNEL_VERSION(5,17,16))
         set_fs(update_msg.old_fs);
-#else
-	force_uaccess_end(update_msg.old_fs);
+//#else
+//	force_uaccess_end(update_msg.old_fs);
 #endif
     _CLOSE_FILE(update_msg.file);
     
