@@ -110,6 +110,7 @@ elif [ "X$CMVER" = "X4" ]; then
         is_1a=$(i2cdetect -y  1 0x1a 0x1a | egrep "(1a|UU)" | awk '{print $2}')
         is_32=$(i2cdetect -y  0 0x32 0x32 | egrep "(32|UU)" | awk '{print $2}')
         is_20=$(i2cdetect -y  1 0x20 0x20 | egrep "(20|UU)" | awk '{print $2}')
+        ISVL805=`lspci | grep -c VL805`
         echo "is_1a is $is_1a"
         echo "is_32 is $is_32"
         echo "is_20 is $is_20"
@@ -175,6 +176,17 @@ elif [ "X$CMVER" = "X4" ]; then
        		# LVDS
         	[ "x$BOARD" == "xCS12800RA4101BOX" ] && lcdinit 
         	[ "x$BOARD" == "xCS12800RA4101P" ] && lcdinit 
+	elif [ ${ISVL805} ]; then
+                echo "Board is CS10600RA4070D"
+                if [ "x$BOARD" != "xCS10600RA4070D" ]; then
+                        echo "SOM changed, reboot."
+                        ISSOMCHANGED=1
+                        cp /boot/config-cs10600ra4070d.txt /boot/config.txt
+                fi
+                echo "Init GPIO for CS10600RA4070D"
+                OUT="503 502 501 500"
+                IN="496 497 498 499"
+                BUZZER=19
 	elif [ "X${is_20}" = "X20" -o "X${is_20}" = "XUU" ]; then
                	echo "Board is CS10600RA4070"
 		if [ "x$BOARD" != "xCS10600RA4070" ]; then
