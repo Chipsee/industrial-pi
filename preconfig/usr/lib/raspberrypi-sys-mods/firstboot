@@ -355,7 +355,7 @@ elif [ "X$CMVER" = "X4" ]; then
                         echo "CS12800RA4101BOX" > /opt/chipsee/.board
                 ;;
                 esac
-        elif [ ${ISVL805} ]; then
+        elif [ "X${ISVL805}" = "X1" ]; then
                 echo "Board is CS10600RA4070D" >> $LOGF
                 cp /boot/config-cs10600ra4070d.txt /boot/config.txt
                 echo "CS10600RA4070D" > /opt/chipsee/.board
