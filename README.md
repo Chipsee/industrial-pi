@@ -74,20 +74,21 @@ This repository only support follow Chipsee Industrial Board, you can order them
  - CS10600RA4070
  - CS12800RA4101
  - AIO-CM4-101(CS12800RA4101A)
- - CS12720RA4050 (New, Latest 64bit system image support it)
- - CS12800RA4101P (New, Latest 64bit system image support it)
- - CS10768RA4121P (New, Latest 64bit system image support it)
- - CS19108RA4133P (New, Latest 64bit system image support it)
- - CS10768RA4150P (New, Latest 64bit system image support it)
- - CS19108RA4156P (New, Latest 64bit system image support it)
- - CS19108RA4215P (New, Latest 64bit system image support it)
- - CS19108RA4236P (New, Latest 64bit system image support it)
+ - CS12720RA4050 (from 2021-10-30 V2 image)
+ - CS12800RA4101P (from 2021-10-30 V2 image)
+ - CS10768RA4121P (from 2021-10-30 V2 image)
+ - CS19108RA4133P (from 2021-10-30 V2 image)
+ - CS10768RA4150P (from 2021-10-30 V2 image)
+ - CS19108RA4156P (from 2021-10-30 V2 image)
+ - CS19108RA4215P (from 2021-10-30 V2 image)
+ - CS19108RA4236P (from 2021-10-30 V2 image)
+ - CS10600RA4070D (from 2022-09-22 V3 image)
 
 
 # Latest system images
- **2022-09-22 V2 64bit**
- - Desktop with small software [2022-09-22-raspios-bullseye-arm64-chipsee-v2.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20220922/bullseye-arm64/2022-09-22-raspios-bullseye-arm64-chipsee-v2.img.xz)
- - Lite [2022-09-22-raspios-bullseye-arm64-lite-chipsee-v2.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20220922/bullseye-arm64/2022-09-22-raspios-bullseye-arm64-lite-chipsee-v2.img.xz)
+ **2022-09-22 V3 64bit**
+ - Desktop with small software [2022-09-22-raspios-bullseye-arm64-chipsee-v3.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20220922/bullseye-arm64/2022-09-22-raspios-bullseye-arm64-chipsee-v3.img.xz)
+ - Lite [2022-09-22-raspios-bullseye-arm64-lite-chipsee-v3.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20220922/bullseye-arm64/2022-09-22-raspios-bullseye-arm64-lite-chipsee-v3.img.xz)
 
 **2021-10-30 V2 32bit**
  - Desktop with Full software [2021-10-30-raspios-bullseye-armhf-full-chipsee-v2.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20211030/2021-10-30-raspios-bullseye-armhf-full-chipsee-v2.img.xz)
@@ -126,6 +127,9 @@ This repository only support follow Chipsee Industrial Board, you can order them
 - Automatically load WiFi/Bt and disable SD slot as WiFi/Bt and SD slot can't be use at same time.
 
 # Older system images
+ **2022-09-22 V2 64bit:**
+ - Desktop with small software [2022-09-22-raspios-bullseye-arm64-chipsee-v2.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20220922/bullseye-arm64/2022-09-22-raspios-bullseye-arm64-chipsee-v2.img.xz)
+ - Lite [2022-09-22-raspios-bullseye-arm64-lite-chipsee-v2.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20220922/bullseye-arm64/2022-09-22-raspios-bullseye-arm64-lite-chipsee-v2.img.xz)
  
  **2021-10-30 V1:**
  - Desktop with Full software [2021-10-30-raspios-bullseye-armhf-full-chipsee-v1.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20211030/2021-10-30-raspios-bullseye-armhf-full-chipsee-v1.img.xz)
