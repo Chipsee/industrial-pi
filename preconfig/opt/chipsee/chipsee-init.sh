@@ -176,7 +176,7 @@ elif [ "X$CMVER" = "X4" ]; then
        		# LVDS
         	[ "x$BOARD" == "xCS12800RA4101BOX" ] && lcdinit 
         	[ "x$BOARD" == "xCS12800RA4101P" ] && lcdinit 
-	elif [ ${ISVL805} ]; then
+	elif [ "X${ISVL805}" = "X1" ]; then
                 echo "Board is CS10600RA4070D"
                 if [ "x$BOARD" != "xCS10600RA4070D" ]; then
                         echo "SOM changed, reboot."
