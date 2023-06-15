@@ -107,12 +107,12 @@ This repository only support follow Chipsee Industrial Board, you can order them
 
 - Add CS12720RA4050 CS12800RA4101P CS19108RA4133P CS10768RA4150P CS19108RA4156P support.
 - Bug Fix: LCDTest of Hardwaretest application don't work.
-- Known bugs: CAN bus will fail to bring up.
+- Known bugs: CAN bus will fail to bring up if you don't add 120R resistor between CAN_H and CAN_L.
 
 **2021-10-30 V1:**
 
 - First release for Debian 11(bullseye)
-- Known bugs: CAN bus will fail to bring up.
+- Known bugs: CAN bus will fail to bring up if you don't add 120R resistor between CAN_H and CAN_L.
 
 **2020-12-02 V4:**
 
