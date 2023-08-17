@@ -158,7 +158,7 @@ This repository only support follow Chipsee Industrial Board, you can order them
  - [2020-12-02-raspios-buster-armhf-chipsee-v2.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20201202/2020-12-02-raspios-buster-armhf-chipsee-v2.img.xz)
  - [2020-12-02-raspios-buster-armhf-lite-chipsee-v2.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20201202/2020-12-02-raspios-buster-armhf-lite-chipsee-v2.img.xz)
 
-# F & Q
+# Q & A
 ## 1. System is upgraded, the touchscreen driver is broken, how to fix it?
 ### Solution One(recommend):
 Use the upstream goodix touchscreen driver.
