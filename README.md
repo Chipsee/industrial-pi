@@ -1,7 +1,8 @@
 # Introduction
 We will use this repo to contain the source code and config for Chipsee Raspberry Computer Module Hardware.
 
-# Supported Raspberry Official System
+# How to use this repo to add drivers and configrations on Supported Raspberry Official OS?
+## Supported Raspberry Official OS
 This repository only support follow [Raspberry Pi official system](https://www.raspberrypi.org/software/operating-systems/) now:
  - 2019-04-08-raspbian-stretch (Not support CM4 products)
  - 2020-02-13-raspbian-buster
@@ -9,7 +10,8 @@ This repository only support follow [Raspberry Pi official system](https://www.r
  - 2021-10-30-raspios-bullseye
  - 2022-9-22-raspios-bullseye
 
-# How to use
+If the system you are downloading not list in the above supported list, you also can try, use latest kernel branch to compile, maybe need to do some modification.
+
 ## 1. Prepare system
 Install Raspberry Pi official system and boot, run follow commands in ssh or serial debug console. The Chipsee Industrial-Pi network and serial debug port is supported by Raspberry Pi official system default. 
 
@@ -156,3 +158,46 @@ This repository only support follow Chipsee Industrial Board, you can order them
  - [2020-12-02-raspios-buster-armhf-chipsee-v2.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20201202/2020-12-02-raspios-buster-armhf-chipsee-v2.img.xz)
  - [2020-12-02-raspios-buster-armhf-lite-chipsee-v2.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20201202/2020-12-02-raspios-buster-armhf-lite-chipsee-v2.img.xz)
 
+# F & Q
+## 1. System is upgraded, the touchscreen driver is broken, how to fix it?
+### Solution One(recommend):
+Use the upstream goodix touchscreen driver.
+1. comment the gt9xx line in /opt/chipsee/chipsee-init.sh
+```
+$ sudo sed -i "s/^modprobe gt9xx/# modprobe gt9xx/g" /opt/chipsee/chipsee-init.sh
+```
+The diffrence,
+```
+255c255
+< modprobe gt9xx
+---
+> # modprobe gt9xx
+```
+2. Replace gt9xx dtoverlay by using goodix in /boot/config.txt
+```
+$ sudo sed -i "s/^dtoverlay=gt9xx/dtoverlay=goodix/g" /boot/config.txt
+```
+The diffrence,
+```
+103c103
+< dtoverlay=gt9xx,interrupt=20,reset=21
+---
+> dtoverlay=goodix,interrupt=20,reset=21
+```
+3. reboot to check
+```
+$ sudo reboot
+```
+### Solution two:
+Rrecompile the Chipsee touchscreen driver.
+```
+$ git clone --depth=1 --branch 6.1.21 https://github.com/Chipsee/industrial-pi.git
+$ sudo apt update
+$ sudo apt install raspberrypi-kernel-headers
+```
+if your kernel is updated to 64bit from 32bit, the above commands will install armhf version raspberrypi-kernel-headers. as the filesystem is 32bit, you should add "arm_64bit=0" to /boot/config.txt to switch the kernel to 32bit first. then reboot to compile touchscreen driver. you can use "uname -ra" to check the current kernel.
+```
+$ cd industrial-pi/gt9xx/
+$ sudo make
+$ sudo reboot
+```
