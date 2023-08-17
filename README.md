@@ -21,7 +21,7 @@ git clone --depth=1 --branch `uname -r` https://github.com/Chipsee/industrial-pi
 ```
 If there is some error about branch, check if the kernel you are using is listed in the branchs, if not, check the following section, or ignore it.
 
-## The kernel version you are using is not listed in the branches?
+## ISSUE: The kernel version you are using is not listed in the branches?
 If your kernel version is not listed in the branches, checkout the branches closer to your kernel,
 check your kernel,
 ```
