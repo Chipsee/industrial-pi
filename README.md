@@ -10,15 +10,18 @@ This repository only support follow [Raspberry Pi official system](https://www.r
  - 2022-9-22-raspios-bullseye
 
 # How to use
-## Prepare system
+## 1. Prepare system
 Install Raspberry Pi official system and boot, run follow commands in ssh or serial debug console. The Chipsee Industrial-Pi network and serial debug port is supported by Raspberry Pi official system default. 
 
-## Download industrial-pi repository
+## 2. Download industrial-pi repository
 This repository only supports tested kernel version listed in branches. If the kernel version of your system is not in the branches lists, you should select one closer kernel version that you had.
 If your kernel version is listed in the branches,use follow commands,
 ```
 git clone --depth=1 --branch `uname -r` https://github.com/Chipsee/industrial-pi.git
 ```
+If there is some error about branch, check if the kernel you are using is listed in the branchs, if not, check the following section, or ignore it.
+
+## The kernel version you are using is not listed in the branches?
 If your kernel version is not listed in the branches, checkout the branches closer to your kernel,
 check your kernel,
 ```
@@ -28,7 +31,7 @@ select one closer branches, for example your kernel version is 5.10.17-v71+, you
 ```
 git clone --depth=1 --branch 5.10.63-v71+ https://github.com/Chipsee/industrial-pi.git
 ```
-and do follow modification
+and do the following modification
 ```
 1. modify Makefile
 diff --git a/Makefile b/Makefile
@@ -49,19 +52,19 @@ sudo apt update
 sudo apt install raspberrypi-kernel-headers
 ```
 
-## Compile and install
+## 3. Compile and install
 ```
 cd industrial-pi
 sudo make install
 ```
 If there is no error, reboot your board.
 
-## Uninstall
+## 4. Uninstall
 ```
 cd industrial-pi
 sudo make uninstall
 ```
-## More commands
+## 5. More commands
 ```
 cd industrial-pi
 make help
