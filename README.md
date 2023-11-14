@@ -93,7 +93,7 @@ This repository only support follow Chipsee Industrial Board, you can order them
 # Latest system images
  **2022-09-22 V3 64bit**
  - Desktop with small software [2022-09-22-raspios-bullseye-arm64-chipsee-v3.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20220922/bullseye-arm64/2022-09-22-raspios-bullseye-arm64-chipsee-v3.img.xz)
- - Lite [2022-09-22-raspios-bullseye-arm64-lite-chipsee-v3.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20220922/bullseye-arm64/2022-09-22-raspios-bullseye-arm64-lite-chipsee-v3.img.xz)
+ - Lite [2022-09-22-raspios-bullseye-arm64-lite-chipsee-v4.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20220922/bullseye-arm64/2022-09-22-raspios-bullseye-arm64-lite-chipsee-v4.img.xz)
 
 **2021-10-30 V2 32bit**
  - Desktop with Full software [2021-10-30-raspios-bullseye-armhf-full-chipsee-v2.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20211030/2021-10-30-raspios-bullseye-armhf-full-chipsee-v2.img.xz)
