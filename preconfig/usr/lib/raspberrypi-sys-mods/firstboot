@@ -338,6 +338,21 @@ elif [ "X$CMVER" = "X4" ]; then
                         cp /boot/config-cs19108ra4156p.txt /boot/config.txt
                         echo "CS19108RA4156P" > /opt/chipsee/.board
                 ;;
+                170)
+                        echo "Board is CS12102RA4170P" >> $LOGF
+                        cp /boot/config-cs12102ra4170p.txt /boot/config.txt
+                        echo "CS12102RA4170P" > /opt/chipsee/.board
+                ;;
+                185)
+                        echo "Board is CS19108RA4185P" >> $LOGF
+                        cp /boot/config-cs19108ra4185p.txt /boot/config.txt
+                        echo "CS19108RA4185P" > /opt/chipsee/.board
+                ;;
+                190)
+                        echo "Board is CS12102RA4190P" >> $LOGF
+                        cp /boot/config-cs12102ra4190p.txt /boot/config.txt
+                        echo "CS12102RA4190P" > /opt/chipsee/.board
+                ;;
                 215)
                         echo "Board is CS19108RA4215P" >> $LOGF
                         cp /boot/config-cs19108ra4215p.txt /boot/config.txt
