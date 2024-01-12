@@ -74,20 +74,22 @@ make help
 
 # Supported Chipsee Board
 This repository only support follow Chipsee Industrial Board, you can order them from the official Chipsee Web [chipsee web site](https://chipsee.com/product-category/ipc/arm-raspberry-pi/) or from your nearest distributor.
- - CS10600RA070
- - CS12800RA101
- - CS10600RA4070
- - CS12800RA4101
- - AIO-CM4-101(CS12800RA4101A)
- - CS12720RA4050 (from 2021-10-30 V2 image)
- - CS12800RA4101P (from 2021-10-30 V2 image)
- - CS10768RA4121P (from 2021-10-30 V2 image)
- - CS19108RA4133P (from 2021-10-30 V2 image)
- - CS10768RA4150P (from 2021-10-30 V2 image)
- - CS19108RA4156P (from 2021-10-30 V2 image)
- - CS19108RA4215P (from 2021-10-30 V2 image)
- - CS19108RA4236P (from 2021-10-30 V2 image)
- - CS10600RA4070D (from 2022-09-22 V3 image)
+ 
+ - EPC/PPC-CM3-070 / CS10600RA070
+ - EPC/PPC-CM3-101 /CS12800RA101
+ - AIO-CM4-101 / CS12800RA4101A
+ - EPC/PPC-CM4-050 / CS12720RA4050 (from 2021-10-30 V2 image)
+ - EPC/PPC-CM4-070 / CS10600RA4070
+ - EPC/PPC-CM4-101 / CS12800RA4101
+ - PPC-CM4-101 / CS12800RA4101P (from 2021-10-30 V2 image)
+ - PPC-CM4-121 / CS10768RA4121P (from 2021-10-30 V2 image)
+ - PPC-CM4-133 / CS19108RA4133P (from 2021-10-30 V2 image)
+ - PPC-CM4-150 / CS10768RA4150P (from 2021-10-30 V2 image)
+ - PPC-CM4-156 / CS19108RA4156P (from 2021-10-30 V2 image)
+ - PPC-CM4-215 / CS19108RA4215P (from 2021-10-30 V2 image)
+ - PPC-CM4-236 / CS19108RA4236P (from 2021-10-30 V2 image)
+ - PPC-CM4-070-D / CS10600RA4070D (from 2022-09-22 V3 image)
+ - CS-CM4-BOX / CSRA4BOX (from 2022-09-22 V3 image)
 
 
 # Latest system images
