@@ -155,6 +155,18 @@ elif [ "X$CMVER" = "X4" ]; then
                 		echo "Board should be CS19108RA4156P"
 				[ "x$BOARD" != "xCS19108RA4156P" ] && ISSOMCHANGED=1 && cp /boot/config-cs19108ra4156p.txt /boot/config.txt
 				;;
+			170)
+                		echo "Board should be CS12102RA4170P"
+				[ "x$BOARD" != "xCS12102RA4170P" ] && ISSOMCHANGED=1 && cp /boot/config-cs12102ra4170p.txt /boot/config.txt
+				;;
+			185)
+                		echo "Board should be CS19108RA4185P"
+				[ "x$BOARD" != "xCS19108RA4185P" ] && ISSOMCHANGED=1 && cp /boot/config-cs19108ra4185p.txt /boot/config.txt
+				;;
+			190)
+                		echo "Board should be CS12102RA4190P"
+				[ "x$BOARD" != "xCS12102RA4190P" ] && ISSOMCHANGED=1 && cp /boot/config-cs12102ra4190p.txt /boot/config.txt
+				;;
 			215)
                 		echo "Board should be CS19108RA4215P"
 				[ "x$BOARD" != "xCS19108RA4215P" ] && ISSOMCHANGED=1 && cp /boot/config-cs19108ra4215p.txt /boot/config.txt

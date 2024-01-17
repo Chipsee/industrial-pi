@@ -27,6 +27,12 @@ install:
 	install -p -m 755 -D boot/config-cs10768ra4150p-$(LARCH).txt $(TP)/boot/config-cs10768ra4150p.txt
 	install -p -b -m 755 -D boot/config-cs19108ra4156p-$(LARCH).txt /boot/config-cs19108ra4156p.txt
 	install -p -m 755 -D boot/config-cs19108ra4156p-$(LARCH).txt $(TP)/boot/config-cs19108ra4156p.txt
+	install -p -b -m 755 -D boot/config-cs12102ra4170p-$(LARCH).txt /boot/config-cs12102ra4170p.txt
+	install -p -m 755 -D boot/config-cs12102ra4170p-$(LARCH).txt $(TP)/boot/config-cs12102ra4170p.txt
+	install -p -b -m 755 -D boot/config-cs19108ra4185p-$(LARCH).txt /boot/config-cs19108ra4185p.txt
+	install -p -m 755 -D boot/config-cs19108ra4185p-$(LARCH).txt $(TP)/boot/config-cs19108ra4185p.txt
+	install -p -b -m 755 -D boot/config-cs12102ra4190p-$(LARCH).txt /boot/config-cs12102ra4190p.txt
+	install -p -m 755 -D boot/config-cs12102ra4190p-$(LARCH).txt $(TP)/boot/config-cs12102ra4190p.txt
 	install -p -b -m 755 -D boot/config-cs19108ra4215p-$(LARCH).txt /boot/config-cs19108ra4215p.txt
 	install -p -m 755 -D boot/config-cs19108ra4215p-$(LARCH).txt $(TP)/boot/config-cs19108ra4215p.txt
 	install -p -b -m 755 -D boot/config-cs19108ra4236p-$(LARCH).txt /boot/config-cs19108ra4236p.txt
