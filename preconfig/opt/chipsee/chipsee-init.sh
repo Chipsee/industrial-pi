@@ -33,20 +33,8 @@ CONFIG=/boot/config.txt
 [ -f /boot/firmware/usercfg.txt ] && CONFIG=/boot/firmware/usercfg.txt
 
 # Backup log file
-[ -f /boot/chipseeinit_resize.log ] && cp /boot/chipseeinit_resize.log /var/log/ && sync
-[ -f /boot/chipseeinit_firstrun.log ] && cp /boot/chipseeinit_firstrun.log /var/log/ && sync
-
-# Backup cmdline file
-## Old image
-#[ ! -f /usr/lib/raspberrypi-sys-mods/firstboot ] && [ ! -f /opt/chipsee/.cmdline.txt ] && cp /boot/cmdline.txt /opt/chipsee/.cmdline.txt && sed -i 's|quiet|quiet init=/usr/lib/raspi-config/init_resize\.sh|' /opt/chipsee/.cmdline.txt
-#[ ! -f /usr/lib/raspberrypi-sys-mods/firstboot ] && ! grep -q quiet /boot/cmdline.txt && ! grep -q init_resize /opt/chipsee/.cmdline.txt && sed -i 's|rootwait|rootwait init=/usr/lib/raspi-config/init_resize\.sh|' /opt/chipsee/.cmdline.txt
-
-## New image
-#[ -f /usr/lib/raspberrypi-sys-mods/firstboot ] && [ ! -f /opt/chipsee/.cmdline.txt ] && cp /boot/cmdline.txt /opt/chipsee/.cmdline.txt && sed -i 's|quiet|quiet init=/usr/lib/raspberrypi-sys-mods/firstboot|' /opt/chipsee/.cmdline.txt
-#[ -f /usr/lib/raspberrypi-sys-mods/firstboot ] && ! grep -q quiet /boot/cmdline.txt && ! grep -q init_resize /opt/chipsee/.cmdline.txt && sed -i 's|rootwait|rootwait init=/usr/lib/raspberrypi-sys-mods/firstboot|' /opt/chipsee/.cmdline.txt
-
-# fix First run
-#grep -q firstrun /opt/chipsee/.cmdline.txt && sed -i 's| systemd.run.*||g' /opt/chipsee/.cmdline.txt
+[ -f /boot/firmware/chipseeinit_resize.log ] && cp /boot/firmware/chipseeinit_resize.log /var/log/ && sync
+[ -f /boot/firmware/chipseeinit_firstrun.log ] && cp /boot/firmware/chipseeinit_firstrun.log /var/log/ && sync
 
 CMVER=`cat /proc/device-tree/model | cut -d " " -f 5`
 SCREEN_SIZE=`fbset | grep -v endmode | grep mode | awk -F '"' '{print $2}'`
@@ -73,7 +61,7 @@ if [ "X$CMVER" = "X3" ]; then
 		if [ "x$BOARD" != "xCS12800RA101" ]; then
 			echo "SOM changed, reboot."
 			ISSOMCHANGED=1
-			cp /boot/config-cs12800ra101.txt /boot/config.txt
+			cp /boot/firmware/config-cs12800ra101.txt /boot/firmware/config.txt
 		fi
         	echo "Init GPIO for CS12800RA101"
         	OUT="503 502 501 500" 
@@ -81,15 +69,12 @@ if [ "X$CMVER" = "X3" ]; then
         	BUZZER=40
        		# LVDS
         	lcdinit 
-		#insmod /home/pi/cslcd/cs_lcd.ko
-		#echo cs_lcd 0x32 | tee /sys/bus/i2c/devices/i2c-0/new_device
-		#fbi -T 1 -noverbose -a /etc/logo.png
         else
                 echo "Board should be CS10600RA070"
 		if [ "x$BOARD" != "xCS10600RA070" ]; then
 			echo "SOM changed, reboot."
 			ISSOMCHANGED=1
-			cp /boot/config-cs10600ra070.txt /boot/config.txt
+			cp /boot/firmware/config-cs10600ra070.txt /boot/firmware/config.txt
 		fi
         	echo "Init GPIO for CS10600RA070"
         	OUT="4 5 6 7"
@@ -121,7 +106,7 @@ elif [ "X$CMVER" = "X4" ]; then
 		if [ "x$BOARD" != "xCS12800RA4101A" ]; then
 			echo "SOM changed, reboot."
 			ISSOMCHANGED=1
-			cp /boot/config-cs12800ra4101a.txt /boot/config.txt
+			cp /boot/firmware/config-cs12800ra4101a.txt /boot/firmware/config.txt
 		fi
         	echo "Init GPIO for CS12800RA4101A"
         	BUZZER=12
@@ -137,47 +122,47 @@ elif [ "X$CMVER" = "X4" ]; then
 		case ${PANELSIZE} in
 			101)
                 		echo "Board should be CS12800RA4101P"
-				[ "x$BOARD" != "xCS12800RA4101P" ] && ISSOMCHANGED=1 && cp /boot/config-cs12800ra4101p.txt /boot/config.txt
+				[ "x$BOARD" != "xCS12800RA4101P" ] && ISSOMCHANGED=1 && cp /boot/firmware/config-cs12800ra4101p.txt /boot/firmware/config.txt
 				;;
 			121)
                 		echo "Board should be CS10768RA4121P"
-				[ "x$BOARD" != "xCS10768RA4121P" ] && ISSOMCHANGED=1 && cp /boot/config-cs10768ra4121p.txt /boot/config.txt
+				[ "x$BOARD" != "xCS10768RA4121P" ] && ISSOMCHANGED=1 && cp /boot/firmware/config-cs10768ra4121p.txt /boot/firmware/config.txt
 				;;
 			133)
                 		echo "Board should be CS19108RA4133P"
-				[ "x$BOARD" != "xCS19108RA4133P" ] && ISSOMCHANGED=1 && cp /boot/config-cs19108ra4133p.txt /boot/config.txt
+				[ "x$BOARD" != "xCS19108RA4133P" ] && ISSOMCHANGED=1 && cp /boot/firmware/config-cs19108ra4133p.txt /boot/firmware/config.txt
 				;;
 			150)
                 		echo "Board should be CS10768RA4150P"
-				[ "x$BOARD" != "xCS10768RA4150P" ] && ISSOMCHANGED=1 && cp /boot/config-cs10768ra4150p.txt /boot/config.txt
+				[ "x$BOARD" != "xCS10768RA4150P" ] && ISSOMCHANGED=1 && cp /boot/firmware/config-cs10768ra4150p.txt /boot/firmware/config.txt
 				;;
 			156)
                 		echo "Board should be CS19108RA4156P"
-				[ "x$BOARD" != "xCS19108RA4156P" ] && ISSOMCHANGED=1 && cp /boot/config-cs19108ra4156p.txt /boot/config.txt
+				[ "x$BOARD" != "xCS19108RA4156P" ] && ISSOMCHANGED=1 && cp /boot/firmware/config-cs19108ra4156p.txt /boot/firmware/config.txt
 				;;
 			170)
                 		echo "Board should be CS12102RA4170P"
-				[ "x$BOARD" != "xCS12102RA4170P" ] && ISSOMCHANGED=1 && cp /boot/config-cs12102ra4170p.txt /boot/config.txt
+				[ "x$BOARD" != "xCS12102RA4170P" ] && ISSOMCHANGED=1 && cp /boot/firmware/config-cs12102ra4170p.txt /boot/firmware/config.txt
 				;;
 			185)
                 		echo "Board should be CS19108RA4185P"
-				[ "x$BOARD" != "xCS19108RA4185P" ] && ISSOMCHANGED=1 && cp /boot/config-cs19108ra4185p.txt /boot/config.txt
+				[ "x$BOARD" != "xCS19108RA4185P" ] && ISSOMCHANGED=1 && cp /boot/firmware/config-cs19108ra4185p.txt /boot/firmware/config.txt
 				;;
 			190)
                 		echo "Board should be CS12102RA4190P"
-				[ "x$BOARD" != "xCS12102RA4190P" ] && ISSOMCHANGED=1 && cp /boot/config-cs12102ra4190p.txt /boot/config.txt
+				[ "x$BOARD" != "xCS12102RA4190P" ] && ISSOMCHANGED=1 && cp /boot/firmware/config-cs12102ra4190p.txt /boot/firmware/config.txt
 				;;
 			215)
                 		echo "Board should be CS19108RA4215P"
-				[ "x$BOARD" != "xCS19108RA4215P" ] && ISSOMCHANGED=1 && cp /boot/config-cs19108ra4215p.txt /boot/config.txt
+				[ "x$BOARD" != "xCS19108RA4215P" ] && ISSOMCHANGED=1 && cp /boot/firmware/config-cs19108ra4215p.txt /boot/firmware/config.txt
 				;;
 			236)
                 		echo "Board should be CS19108RA4236P"
-				[ "x$BOARD" != "xCS19108RA4236P" ] && ISSOMCHANGED=1 && cp /boot/config-cs19108ra4236p.txt /boot/config.txt
+				[ "x$BOARD" != "xCS19108RA4236P" ] && ISSOMCHANGED=1 && cp /boot/firmware/config-cs19108ra4236p.txt /boot/firmware/config.txt
 				;;
 			*)
-                		echo "Board should be CS12800RA4101BOX"
-				[ "x$BOARD" != "xCS12800RA4101BOX" ] && ISSOMCHANGED=1 && cp /boot/config-cs12800ra4101box.txt /boot/config.txt
+                		echo "Board should be CS12800RA4101P"
+				[ "x$BOARD" != "xCS12800RA4101P" ] && ISSOMCHANGED=1 && cp /boot/firmware/config-cs12800ra4101p.txt /boot/firmware/config.txt
 				;;
 		esac
 
@@ -186,14 +171,13 @@ elif [ "X$CMVER" = "X4" ]; then
         	IN="496 497 498 499"
         	BUZZER=19
        		# LVDS
-        	[ "x$BOARD" == "xCS12800RA4101BOX" ] && lcdinit 
         	[ "x$BOARD" == "xCS12800RA4101P" ] && lcdinit 
 	elif [ "X${ISVL805}" = "X1" ]; then
                 echo "Board is CS10600RA4070D"
                 if [ "x$BOARD" != "xCS10600RA4070D" ]; then
                         echo "SOM changed, reboot."
                         ISSOMCHANGED=1
-                        cp /boot/config-cs10600ra4070d.txt /boot/config.txt
+                        cp /boot/firmware/config-cs10600ra4070d.txt /firmware/boot/config.txt
                 fi
                 echo "Init GPIO for CS10600RA4070D"
                 OUT="503 502 501 500"
@@ -204,7 +188,7 @@ elif [ "X$CMVER" = "X4" ]; then
 		if [ "x$BOARD" != "xCS10600RA4070" ]; then
 			echo "SOM changed, reboot."
 			ISSOMCHANGED=1
-			cp /boot/config-cs10600ra4070.txt /boot/config.txt
+			cp /boot/firmware/config-cs10600ra4070.txt /boot/firmware/config.txt
 		fi
         	echo "Init GPIO for CS10600RA4070"
         	OUT="503 502 501 500" 
@@ -215,7 +199,7 @@ elif [ "X$CMVER" = "X4" ]; then
 		if [ "x$BOARD" != "xCS12720RA4050" ]; then
 			echo "SOM changed, reboot."
 			ISSOMCHANGED=1
-			cp /boot/config-cs12720ra4050.txt /boot/config.txt
+			cp /boot/firmware/config-cs12720ra4050.txt /boot/firmware/config.txt
 		fi
        		echo "Init GPIO for CS12720RA4050"
        		BUZZER=19
@@ -224,15 +208,13 @@ fi
 
 if [ ${ISSOMCHANGED} -eq 1 ]; then
 	echo "SOM changed, reboot."
-	#cp /opt/chipsee/.cmdline.txt /boot/cmdline.txt
-	#rm /opt/chipsee/.cmdline.txt
 	## Old image
-	[ ! -f /usr/lib/raspberrypi-sys-mods/firstboot ] && ! grep -q quiet /boot/cmdline.txt && sed -i 's|rootwait|rootwait init=/usr/lib/raspi-config/init_resize\.sh|' /boot/cmdline.txt
-	[ ! -f /usr/lib/raspberrypi-sys-mods/firstboot ] && grep -q quiet /boot/cmdline.txt && sed -i 's|quiet|quiet init=/usr/lib/raspi-config/init_resize\.sh|' /boot/cmdline.txt
+	[ ! -f /usr/lib/raspberrypi-sys-mods/firstboot ] && ! grep -q quiet /boot/firmware/cmdline.txt && sed -i 's|rootwait|rootwait init=/usr/lib/raspi-config/init_resize\.sh|' /boot/firmware/cmdline.txt
+	[ ! -f /usr/lib/raspberrypi-sys-mods/firstboot ] && grep -q quiet /boot/firmware/cmdline.txt && sed -i 's|quiet|quiet init=/usr/lib/raspi-config/init_resize\.sh|' /boot/firmware/cmdline.txt
 
 	## New image
-	[ -f /usr/lib/raspberrypi-sys-mods/firstboot ] && ! grep -q quiet /boot/cmdline.txt && sed -i 's|rootwait|rootwait init=/usr/lib/raspberrypi-sys-mods/firstboot|' /boot/cmdline.txt
-	[ -f /usr/lib/raspberrypi-sys-mods/firstboot ] && grep -q quiet /boot/cmdline.txt && sed -i 's|quiet|quiet init=/usr/lib/raspberrypi-sys-mods/firstboot|' /boot/cmdline.txt
+	[ -f /usr/lib/raspberrypi-sys-mods/firstboot ] && ! grep -q quiet /boot/firmware/cmdline.txt && sed -i 's|rootwait|rootwait init=/usr/lib/raspberrypi-sys-mods/firstboot|' /boot/firmware/cmdline.txt
+	[ -f /usr/lib/raspberrypi-sys-mods/firstboot ] && grep -q quiet /boot/firmware/cmdline.txt && sed -i 's|quiet|quiet init=/usr/lib/raspberrypi-sys-mods/firstboot|' /boot/firmware/cmdline.txt
 	reboot
 fi
 
@@ -311,8 +293,6 @@ ln -sf /sys/class/gpio/gpio$BUZZER/value /dev/buzzer
 echo "GPIO Init done!!"
 
 # Kernel Modules
-modprobe gt9xx
-#echo Goodix-TS 0x5d | tee /sys/bus/i2c/devices/i2c-1/new_device
 modprobe lsm6ds3
 echo lsm6ds3 0x6a | tee /sys/bus/i2c/devices/i2c-1/new_device
 echo "Kernel modules load success!!"

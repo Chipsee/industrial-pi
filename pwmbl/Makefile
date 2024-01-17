@@ -18,16 +18,16 @@ compile:
 	dtc -@ -I dts -O dtb -o pwm-backlight.dtbo pwm-backlight-overlay.dts
 
 install: compile
-	mkdir -p $(TP)/boot/overlays
+	mkdir -p $(TP)/boot/firmware/overlays
 	install -p -m 644 -D $(MODULE_NAME).ko $(MODDESTDIR)$(MODULE_NAME).ko
 	install -p -m 644 -D $(MODULE_NAME).ko $(TP)$(MODDESTDIR)$(MODULE_NAME).ko
-	install -p -m 644 -D pwm-backlight.dtbo /boot/overlays/
-	install -p -m 644 -D pwm-backlight.dtbo $(TP)/boot/overlays/
+	install -p -m 644 -D pwm-backlight.dtbo /boot/firmware/overlays/
+	install -p -m 644 -D pwm-backlight.dtbo $(TP)/boot/firmware/overlays/
 	$(DEPMOD) -a ${KVER}
 
 clean:
 	make -C $(KSRC) M=`pwd` clean
 	rm $(MODDESTDIR)$(MODULE_NAME).ko
-	rm /boot/overlays/pwm-backlight.dtbo
+	rm /boot/firmware/overlays/pwm-backlight.dtbo
 	rm pwm-backlight.dtbo
 	$(DEPMOD) -a ${KVER}

@@ -1,46 +1,42 @@
 all: install
 
 install:
-	install -p -b -m 755 -D boot/config-cs10600ra070-$(LARCH).txt /boot/config-cs10600ra070.txt
-	install -p -m 755 -D boot/config-cs10600ra070-$(LARCH).txt $(TP)/boot/config-cs10600ra070.txt
-	install -p -b -m 755 -D boot/config-cs12800ra101-$(LARCH).txt /boot/config-cs12800ra101.txt
-	install -p -m 755 -D boot/config-cs12800ra101-$(LARCH).txt $(TP)/boot/config-cs12800ra101.txt
-	install -p -b -m 755 -D boot/config-cs12800ra4101-$(LARCH).txt /boot/config-cs12800ra4101.txt
-	install -p -m 755 -D boot/config-cs12800ra4101-$(LARCH).txt $(TP)/boot/config-cs12800ra4101.txt
-	install -p -b -m 755 -D boot/config-cs12800ra4101box-$(LARCH).txt /boot/config-cs12800ra4101box.txt
-	install -p -m 755 -D boot/config-cs12800ra4101box-$(LARCH).txt $(TP)/boot/config-cs12800ra4101box.txt
-	install -p -b -m 755 -D boot/config-cs12800ra4101a-$(LARCH).txt /boot/config-cs12800ra4101a.txt
-	install -p -m 755 -D boot/config-cs12800ra4101a-$(LARCH).txt $(TP)/boot/config-cs12800ra4101a.txt
-	install -p -b -m 755 -D boot/config-cs12800ra4101p-$(LARCH).txt /boot/config-cs12800ra4101p.txt
-	install -p -m 755 -D boot/config-cs12800ra4101p-$(LARCH).txt $(TP)/boot/config-cs12800ra4101p.txt
-	install -p -b -m 755 -D boot/config-cs10600ra4070-$(LARCH).txt /boot/config-cs10600ra4070.txt
-	install -p -m 755 -D boot/config-cs10600ra4070-$(LARCH).txt $(TP)/boot/config-cs10600ra4070.txt
-	install -p -b -m 755 -D boot/config-cs10600ra4070d-$(LARCH).txt /boot/config-cs10600ra4070d.txt
-	install -p -m 755 -D boot/config-cs10600ra4070d-$(LARCH).txt $(TP)/boot/config-cs10600ra4070d.txt
-	install -p -b -m 755 -D boot/config-cs12720ra4050-$(LARCH).txt /boot/config-cs12720ra4050.txt
-	install -p -m 755 -D boot/config-cs12720ra4050-$(LARCH).txt $(TP)/boot/config-cs12720ra4050.txt
-	install -p -b -m 755 -D boot/config-cs10768ra4121p-$(LARCH).txt /boot/config-cs10768ra4121p.txt
-	install -p -m 755 -D boot/config-cs10768ra4121p-$(LARCH).txt $(TP)/boot/config-cs10768ra4121p.txt
-	install -p -b -m 755 -D boot/config-cs19108ra4133p-$(LARCH).txt /boot/config-cs19108ra4133p.txt
-	install -p -m 755 -D boot/config-cs19108ra4133p-$(LARCH).txt $(TP)/boot/config-cs19108ra4133p.txt
-	install -p -b -m 755 -D boot/config-cs10768ra4150p-$(LARCH).txt /boot/config-cs10768ra4150p.txt
-	install -p -m 755 -D boot/config-cs10768ra4150p-$(LARCH).txt $(TP)/boot/config-cs10768ra4150p.txt
-	install -p -b -m 755 -D boot/config-cs19108ra4156p-$(LARCH).txt /boot/config-cs19108ra4156p.txt
-	install -p -m 755 -D boot/config-cs19108ra4156p-$(LARCH).txt $(TP)/boot/config-cs19108ra4156p.txt
-	install -p -b -m 755 -D boot/config-cs12102ra4170p-$(LARCH).txt /boot/config-cs12102ra4170p.txt
-	install -p -m 755 -D boot/config-cs12102ra4170p-$(LARCH).txt $(TP)/boot/config-cs12102ra4170p.txt
-	install -p -b -m 755 -D boot/config-cs19108ra4185p-$(LARCH).txt /boot/config-cs19108ra4185p.txt
-	install -p -m 755 -D boot/config-cs19108ra4185p-$(LARCH).txt $(TP)/boot/config-cs19108ra4185p.txt
-	install -p -b -m 755 -D boot/config-cs12102ra4190p-$(LARCH).txt /boot/config-cs12102ra4190p.txt
-	install -p -m 755 -D boot/config-cs12102ra4190p-$(LARCH).txt $(TP)/boot/config-cs12102ra4190p.txt
-	install -p -b -m 755 -D boot/config-cs19108ra4215p-$(LARCH).txt /boot/config-cs19108ra4215p.txt
-	install -p -m 755 -D boot/config-cs19108ra4215p-$(LARCH).txt $(TP)/boot/config-cs19108ra4215p.txt
-	install -p -b -m 755 -D boot/config-cs19108ra4236p-$(LARCH).txt /boot/config-cs19108ra4236p.txt
-	install -p -m 755 -D boot/config-cs19108ra4236p-$(LARCH).txt $(TP)/boot/config-cs19108ra4236p.txt
-	install -p -b -m 755 -D boot/config-$(LARCH).txt /boot/config.txt
-	install -p -m 755 -D boot/config-$(LARCH).txt $(TP)/boot/config.txt
-	install -p -b -m 755 -D boot/userconf /boot/userconf
-	install -p -m 755 -D boot/userconf $(TP)/boot/userconf
+	install -p -b -m 755 -D boot/firmware/config-cs10600ra070-$(LARCH).txt /boot/firmware/config-cs10600ra070.txt
+	install -p -m 755 -D boot/firmware/config-cs10600ra070-$(LARCH).txt $(TP)/boot/firmware/config-cs10600ra070.txt
+	install -p -b -m 755 -D boot/firmware/config-cs12800ra101-$(LARCH).txt /boot/firmware/config-cs12800ra101.txt
+	install -p -m 755 -D boot/firmware/config-cs12800ra101-$(LARCH).txt $(TP)/boot/firmware/config-cs12800ra101.txt
+	install -p -b -m 755 -D boot/firmware/config-cs12800ra4101a-$(LARCH).txt /boot/firmware/config-cs12800ra4101a.txt
+	install -p -m 755 -D boot/firmware/config-cs12800ra4101a-$(LARCH).txt $(TP)/boot/firmware/config-cs12800ra4101a.txt
+	install -p -b -m 755 -D boot/firmware/config-cs12800ra4101p-$(LARCH).txt /boot/firmware/config-cs12800ra4101p.txt
+	install -p -m 755 -D boot/firmware/config-cs12800ra4101p-$(LARCH).txt $(TP)/boot/firmware/config-cs12800ra4101p.txt
+	install -p -b -m 755 -D boot/firmware/config-cs10600ra4070-$(LARCH).txt /boot/firmware/config-cs10600ra4070.txt
+	install -p -m 755 -D boot/firmware/config-cs10600ra4070-$(LARCH).txt $(TP)/boot/firmware/config-cs10600ra4070.txt
+	install -p -b -m 755 -D boot/firmware/config-cs10600ra4070d-$(LARCH).txt /boot/firmware/config-cs10600ra4070d.txt
+	install -p -m 755 -D boot/firmware/config-cs10600ra4070d-$(LARCH).txt $(TP)/boot/firmware/config-cs10600ra4070d.txt
+	install -p -b -m 755 -D boot/firmware/config-cs12720ra4050-$(LARCH).txt /boot/firmware/config-cs12720ra4050.txt
+	install -p -m 755 -D boot/firmware/config-cs12720ra4050-$(LARCH).txt $(TP)/boot/firmware/config-cs12720ra4050.txt
+	install -p -b -m 755 -D boot/firmware/config-cs10768ra4121p-$(LARCH).txt /boot/firmware/config-cs10768ra4121p.txt
+	install -p -m 755 -D boot/firmware/config-cs10768ra4121p-$(LARCH).txt $(TP)/boot/firmware/config-cs10768ra4121p.txt
+	install -p -b -m 755 -D boot/firmware/config-cs19108ra4133p-$(LARCH).txt /boot/firmware/config-cs19108ra4133p.txt
+	install -p -m 755 -D boot/firmware/config-cs19108ra4133p-$(LARCH).txt $(TP)/boot/firmware/config-cs19108ra4133p.txt
+	install -p -b -m 755 -D boot/firmware/config-cs10768ra4150p-$(LARCH).txt /boot/firmware/config-cs10768ra4150p.txt
+	install -p -m 755 -D boot/firmware/config-cs10768ra4150p-$(LARCH).txt $(TP)/boot/firmware/config-cs10768ra4150p.txt
+	install -p -b -m 755 -D boot/firmware/config-cs19108ra4156p-$(LARCH).txt /boot/firmware/config-cs19108ra4156p.txt
+	install -p -m 755 -D boot/firmware/config-cs19108ra4156p-$(LARCH).txt $(TP)/boot/firmware/config-cs19108ra4156p.txt
+	install -p -b -m 755 -D boot/firmware/config-cs12102ra4170p-$(LARCH).txt /boot/firmware/config-cs12102ra4170p.txt
+	install -p -m 755 -D boot/firmware/config-cs12102ra4170p-$(LARCH).txt $(TP)/boot/firmware/config-cs12102ra4170p.txt
+	install -p -b -m 755 -D boot/firmware/config-cs19108ra4185p-$(LARCH).txt /boot/firmware/config-cs19108ra4185p.txt
+	install -p -m 755 -D boot/firmware/config-cs19108ra4185p-$(LARCH).txt $(TP)/boot/firmware/config-cs19108ra4185p.txt
+	install -p -b -m 755 -D boot/firmware/config-cs12102ra4190p-$(LARCH).txt /boot/firmware/config-cs12102ra4190p.txt
+	install -p -m 755 -D boot/firmware/config-cs12102ra4190p-$(LARCH).txt $(TP)/boot/firmware/config-cs12102ra4190p.txt
+	install -p -b -m 755 -D boot/firmware/config-cs19108ra4215p-$(LARCH).txt /boot/firmware/config-cs19108ra4215p.txt
+	install -p -m 755 -D boot/firmware/config-cs19108ra4215p-$(LARCH).txt $(TP)/boot/firmware/config-cs19108ra4215p.txt
+	install -p -b -m 755 -D boot/firmware/config-cs19108ra4236p-$(LARCH).txt /boot/firmware/config-cs19108ra4236p.txt
+	install -p -m 755 -D boot/firmware/config-cs19108ra4236p-$(LARCH).txt $(TP)/boot/firmware/config-cs19108ra4236p.txt
+	install -p -b -m 755 -D boot/firmware/config-$(LARCH).txt /boot/firmware/config.txt
+	install -p -m 755 -D boot/firmware/config-$(LARCH).txt $(TP)/boot/firmware/config.txt
+	install -p -b -m 755 -D boot/firmware/userconf /boot/firmware/userconf
+	install -p -m 755 -D boot/firmware/userconf $(TP)/boot/firmware/userconf
 	install -p -m 644 -D usr/lib/systemd/system/chipsee-init.service /usr/lib/systemd/system/chipsee-init.service
 	install -p -m 644 -D usr/lib/systemd/system/chipsee-init.service $(TP)/usr/lib/systemd/system/chipsee-init.service
 	install -p -m 644 -D usr/lib/systemd/user/audioswitch.service /usr/lib/systemd/user/audioswitch.service
@@ -59,10 +55,14 @@ install:
 	install -p -m 777 -D opt/chipsee/test/gpiotest.sh $(TP)/opt/chipsee/test/gpiotest.sh
 	install -p -m 777 -D opt/chipsee/test/uarttest.txt /opt/chipsee/test/uarttest.txt
 	install -p -m 777 -D opt/chipsee/test/uarttest.txt $(TP)/opt/chipsee/test/uarttest.txt
-	install -p -m 777 -D opt/chipsee/test/i2cdetect /opt/chipsee/test/i2cdetect
-	install -p -m 777 -D opt/chipsee/test/i2cdetect $(TP)/opt/chipsee/test/i2cdetect
-	install -p -m 777 -D opt/chipsee/test/libi2c.so.0 /opt/chipsee/test/libi2c.so.0
-	install -p -m 777 -D opt/chipsee/test/libi2c.so.0 $(TP)/opt/chipsee/test/libi2c.so.0
+	install -p -m 777 -D opt/chipsee/test/i2cdetect_arm32 /opt/chipsee/test/i2cdetect_arm32
+	install -p -m 777 -D opt/chipsee/test/i2cdetect_arm32 $(TP)/opt/chipsee/test/i2cdetect_arm32
+	install -p -m 777 -D opt/chipsee/test/i2cdetect_arm64 /opt/chipsee/test/i2cdetect_arm64
+	install -p -m 777 -D opt/chipsee/test/i2cdetect_arm64 $(TP)/opt/chipsee/test/i2cdetect_arm64
+	install -p -m 777 -D opt/chipsee/test/libi2c_arm32.so.0 /opt/chipsee/test/libi2c_arm32.so.0
+	install -p -m 777 -D opt/chipsee/test/libi2c_arm32.so.0 $(TP)/opt/chipsee/test/libi2c_arm32.so.0
+	install -p -m 777 -D opt/chipsee/test/libi2c_arm64.so.0 /opt/chipsee/test/libi2c_arm64.so.0
+	install -p -m 777 -D opt/chipsee/test/libi2c_arm64.so.0 $(TP)/opt/chipsee/test/libi2c_arm64.so.0
 	install -p -m 777 -D opt/chipsee/test/cantest/canconfig /opt/chipsee/test/cantest/canconfig
 	install -p -m 777 -D opt/chipsee/test/cantest/canconfig $(TP)/opt/chipsee/test/cantest/canconfig
 	install -p -m 777 -D opt/chipsee/test/cantest/candump /opt/chipsee/test/cantest/candump
@@ -95,8 +95,6 @@ install:
 	install -p -m 755 -D  opt/chipsee/test/linux-ppp-scripts/quectel-ppp-kill $(TP)/opt/chipsee/test/linux-ppp-scripts/quectel-ppp-kill
 	install -p -b -m 755 -D  opt/chipsee/test/linux-ppp-scripts/README /opt/chipsee/test/linux-ppp-scripts/README
 	install -p -m 755 -D  opt/chipsee/test/linux-ppp-scripts/README $(TP)/opt/chipsee/test/linux-ppp-scripts/README
-	install -p -b -m 755 -D usr/lib/raspi-config/init_resize.sh /usr/lib/raspi-config/init_resize.sh
-	install -p -m 755 -D usr/lib/raspi-config/init_resize.sh $(TP)/usr/lib/raspi-config/init_resize.sh
 	install -p -b -m 755 -D usr/lib/raspberrypi-sys-mods/firstboot /usr/lib/raspberrypi-sys-mods/firstboot
 	install -p -m 755 -D usr/lib/raspberrypi-sys-mods/firstboot $(TP)/usr/lib/raspberrypi-sys-mods/firstboot
 	install -p -b -m 755 -D etc/issue /etc/issue
@@ -109,7 +107,6 @@ clean: install
 	systemctl disable chipsee-init.service
 	rm /opt/chipsee -rf
 	rm /usr/bin/lcdinit
-	rm /boot/config-*.txt
-	mv /usr/lib/raspi-config/init_resize.sh~ /usr/lib/raspi-config/init_resize.sh
+	rm /boot/firmware/config-*.txt
 	mv /usr/lib/raspberrypi-sys-mods/firstboot~ /usr/lib/raspberrypi-sys-mods/firstboot
-	mv /boot/config.txt~ /boot/config.txt
+	mv /boot/firmware/config.txt~ /boot/firmware/config.txt

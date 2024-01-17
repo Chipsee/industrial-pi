@@ -34,17 +34,17 @@ compile:
 	dtc -@ -I dts -O dtb -o seeed-2mic-voicecard.dtbo seeed-2mic-voicecard-overlay.dts
 
 install: compile
-	mkdir -p $(TP)/boot/overlays
+	mkdir -p $(TP)/boot/firmware/overlays
 	install -p -m 644 -D $(MODULE_NAME).ko $(MODDESTDIR)$(MODULE_NAME).ko
 	install -p -m 644 -D $(MODULE_NAME).ko $(TP)$(MODDESTDIR)$(MODULE_NAME).ko
-	install -p -m 644 -D seeed-2mic-voicecard.dtbo /boot/overlays/seeed-2mic-voicecard.dtbo
-	install -p -m 644 -D seeed-2mic-voicecard.dtbo $(TP)/boot/overlays/seeed-2mic-voicecard.dtbo
+	install -p -m 644 -D seeed-2mic-voicecard.dtbo /boot/firmware/overlays/seeed-2mic-voicecard.dtbo
+	install -p -m 644 -D seeed-2mic-voicecard.dtbo $(TP)/boot/firmware/overlays/seeed-2mic-voicecard.dtbo
 	$(DEPMOD) -a ${KVER}
 
 clean:
 	make -C $(KSRC) M=`pwd` clean
 	rm $(MODDESTDIR)$(MODULE_NAME).ko
-	rm /boot/overlays/seeed-2mic-voicecard.dtbo
+	rm /boot/firmware/overlays/seeed-2mic-voicecard.dtbo
 	$(DEPMOD) -a ${KVER}
 
 #endif

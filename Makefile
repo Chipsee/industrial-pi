@@ -1,10 +1,7 @@
 ##############################################################
 
-GT9XX_DIR := ./gt9xx
 LSM6DS3_DIR := ./lsm6ds3
 QUECTEL_CM_DIR := ./quectel-CM
-RTL8723BU_DIR := ./rtl8723bu
-RTL8723DU_DIR := ./rtl8723du
 WM8960_DIR := ./wm8960
 PWMBL_DIR := ./pwmbl
 PRECONFIG_DIR := ./preconfig
@@ -31,8 +28,6 @@ help:
 install:
 	@apt-get update
 	@dpkg -i $(TOPDIR)/tools/*$(LARCH).deb
-	@make -C $(GT9XX_DIR)
-	@echo "Install GT9XX success!!"
 	@make -C $(LSM6DS3_DIR)
 	@echo "Install lsm6ds3 success!!"
 	@make -C $(QUECTEL_CM_DIR)
@@ -48,8 +43,6 @@ install:
 	@echo "######Install industrial-pi drivers success!!######"
 ##############################################################
 uninstall:
-	@make clean -C $(GT9XX_DIR)
-	@echo "Uninstall GT9XX success!!"
 	@make clean -C $(LSM6DS3_DIR)
 	@echo "Uninstall lsm6ds3 success!!"
 	@make clean -C $(QUECTEL_CM_DIR)
