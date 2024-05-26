@@ -2512,7 +2512,11 @@ Output:
     Executive outcomes. 
         0: succeed.
 *******************************************************/
+#if (LINUX_VERSION_CODE > KERNEL_VERSION(6,2,0))
+static int goodix_ts_probe(struct i2c_client *client)
+#else
 static int goodix_ts_probe(struct i2c_client *client, const struct i2c_device_id *id)
+#endif
 {
     s32 ret = -1;
     struct goodix_ts_data *ts;
@@ -3200,19 +3204,19 @@ static const struct i2c_device_id goodix_ts_id[] = {
 };
 
 static struct i2c_driver goodix_ts_driver = {
-    .probe      = goodix_ts_probe,
-    .remove     = goodix_ts_remove,
-    .id_table   = goodix_ts_id,
-    .driver = {
-        .name     = GTP_I2C_NAME,
-        .owner    = THIS_MODULE,
+	.probe      = goodix_ts_probe,
+	.remove     = goodix_ts_remove,
+	.id_table   = goodix_ts_id,
+	.driver = {
+        	.name     = GTP_I2C_NAME,
+        	.owner    = THIS_MODULE,
 #ifdef GTP_CONFIG_OF
-        .of_match_table = goodix_match_table,
+        	.of_match_table = goodix_match_table,
 #endif
 #if !defined(CONFIG_FB) && defined(CONFIG_PM)
 		.pm		  = &gtp_pm_ops,
 #endif
-    },
+    	},
 };
 
 /*******************************************************    

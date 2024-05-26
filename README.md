@@ -1,4 +1,4 @@
 # Introduction
-Release for 6.1.21-v8+, based on `2023-02-21-raspios-bullseye-arm64-xxx.img`
+Release for 6.6.20+rpt-rpi-v8, based on `2024-03-15-raspios-bookworm-arm64-lite.img.xz`
 # WARRNING
-This released is on test status!!!!
+This released is under test!!!!

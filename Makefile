@@ -1,12 +1,10 @@
 ##############################################################
 
 GT9XX_DIR := ./gt9xx
-LSM6DS3_DIR := ./lsm6ds3
 QUECTEL_CM_DIR := ./quectel-CM
-RTL8723BU_DIR := ./rtl8723bu
-RTL8723DU_DIR := ./rtl8723du
 WM8960_DIR := ./wm8960
 PWMBL_DIR := ./pwmbl
+MCP23008_DIR := ./mcp23008
 PRECONFIG_DIR := ./preconfig
 TOPDIR := $(shell pwd)
 KVER  := $(shell uname -r)
@@ -29,18 +27,16 @@ help:
 
 ##############################################################
 install:
-	@apt-get update
-	@dpkg -i $(TOPDIR)/tools/*$(LARCH).deb
 	@make -C $(GT9XX_DIR)
 	@echo "Install GT9XX success!!"
-	@make -C $(LSM6DS3_DIR)
-	@echo "Install lsm6ds3 success!!"
 	@make -C $(QUECTEL_CM_DIR)
 	@echo "Install quectel-cm success!!"
 	@make -C $(WM8960_DIR)
 	@echo "Install wm8960 success!!"
 	@make -C $(PWMBL_DIR)
 	@echo "Install pwmbl success!!"
+	@make -C $(MCP23008_DIR)
+	@echo "Install mcp230008 success!!"
 	@make -C $(PRECONFIG_DIR)
 	@echo "Install preconfig success!!"
 	@sync
@@ -50,14 +46,14 @@ install:
 uninstall:
 	@make clean -C $(GT9XX_DIR)
 	@echo "Uninstall GT9XX success!!"
-	@make clean -C $(LSM6DS3_DIR)
-	@echo "Uninstall lsm6ds3 success!!"
 	@make clean -C $(QUECTEL_CM_DIR)
 	@echo "Uninstall quectel-cm success!!"
 	@make clean -C $(WM8960_DIR)
 	@echo "Uninstall wm8960 success!!"
 	@make clean -C $(PWMBL_DIR)
 	@echo "Uninstall pwmbl success!!"
+	@make clean -C $(MCP23008_DIR)
+	@echo "Uninstall mcp23008 success!!"
 	@make clean -C $(PRECONFIG_DIR)
 	@echo "Uninstall preconfig success!!"
 	@sync

@@ -1,0 +1,35 @@
+#####################################Chipsee Config#####################################
+# I2C
+##alias for i2c0
+dtparam=i2c_arm=on
+##alias for i2c1
+dtparam=i2c_vc=on
+# RTC
+dtoverlay=i2c-rtc,ds1307,addr=0x32
+# UART
+#dtoverlay=disable-bt
+dtoverlay=uart1,txd1_pin=32,rxd1_pin=33
+#core_freq=250
+#enable_uart=1
+# Audio
+gpio=42=op,dh
+# LED
+dtoverlay=act-led,activelow=off,gpio=20
+dtparam=act_led_trigger=heartbeat
+# SD1
+dtoverlay=sdio,poll_once=off
+#dtparam=ant2
+# Touch
+dtoverlay=goodix,interrupt=12,reset=18
+# HDMI
+gpio=41=op,dh
+dtoverlay=pwm-backlight,pin=41,func=4,pwm_1
+# Follow Can fix some hardware issue
+hdmi_force_hotplug=1
+hdmi_group=2
+hdmi_drive=2
+hdmi_mode=87
+hdmi_timings=1024 0 160 10 160 600 0 12 1 23 0 0 0 60 0 52000000 6
+hdmi_ignore_edid=0xa5000080
+hdmi_pixel_encoding=1
+#####################################Chipsee Config#####################################

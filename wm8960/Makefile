@@ -1,6 +1,6 @@
 DEPMOD  = /sbin/depmod
-ARCH := arm
 CROSS_COMPILE ?=
+FWLOC:= $(shell /usr/lib/raspberrypi-sys-mods/get_fw_loc)
 KVER  := $(shell uname -r)
 KSRC := /lib/modules/$(KVER)/build
 MODDESTDIR := $(INSTALL_MOD_PATH)/usr/lib/modules/$(KVER)/kernel/sound/soc/codecs/
@@ -34,17 +34,17 @@ compile:
 	dtc -@ -I dts -O dtb -o seeed-2mic-voicecard.dtbo seeed-2mic-voicecard-overlay.dts
 
 install: compile
-	mkdir -p $(TP)/boot/overlays
+	mkdir -p $(TP)$(FWLOC)/overlays
 	install -p -m 644 -D $(MODULE_NAME).ko $(MODDESTDIR)$(MODULE_NAME).ko
 	install -p -m 644 -D $(MODULE_NAME).ko $(TP)$(MODDESTDIR)$(MODULE_NAME).ko
-	install -p -m 644 -D seeed-2mic-voicecard.dtbo /boot/overlays/seeed-2mic-voicecard.dtbo
-	install -p -m 644 -D seeed-2mic-voicecard.dtbo $(TP)/boot/overlays/seeed-2mic-voicecard.dtbo
+	install -p -m 644 -D seeed-2mic-voicecard.dtbo $(FWLOC)/overlays/seeed-2mic-voicecard.dtbo
+	install -p -m 644 -D seeed-2mic-voicecard.dtbo $(TP)$(FWLOC)/overlays/seeed-2mic-voicecard.dtbo
 	$(DEPMOD) -a ${KVER}
 
 clean:
 	make -C $(KSRC) M=`pwd` clean
 	rm $(MODDESTDIR)$(MODULE_NAME).ko
-	rm /boot/overlays/seeed-2mic-voicecard.dtbo
+	rm $(FWLOC)/overlays/seeed-2mic-voicecard.dtbo
 	$(DEPMOD) -a ${KVER}
 
 #endif

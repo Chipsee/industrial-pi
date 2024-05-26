@@ -27,23 +27,18 @@ exec 1> >(tee $LOGF)
 exec 2>&1
 
 export PATH=$PATH:/opt/vc/bin
+
+FWLOC=$(/usr/lib/raspberrypi-sys-mods/get_fw_loc)
+
 OVERLAYS=/boot/overlays
 [ -d /boot/firmware/overlays ] && OVERLAYS=/boot/firmware/overlays
 CONFIG=/boot/config.txt
 [ -f /boot/firmware/usercfg.txt ] && CONFIG=/boot/firmware/usercfg.txt
+[ -f /boot/firmware/config.txt ] && CONFIG=/boot/firmware/config.txt
 
 # Backup log file
-[ -f /boot/chipseeinit_resize.log ] && cp /boot/chipseeinit_resize.log /var/log/ && sync
 [ -f /boot/chipseeinit_firstrun.log ] && cp /boot/chipseeinit_firstrun.log /var/log/ && sync
-
-# Backup cmdline file
-## Old image
-#[ ! -f /usr/lib/raspberrypi-sys-mods/firstboot ] && [ ! -f /opt/chipsee/.cmdline.txt ] && cp /boot/cmdline.txt /opt/chipsee/.cmdline.txt && sed -i 's|quiet|quiet init=/usr/lib/raspi-config/init_resize\.sh|' /opt/chipsee/.cmdline.txt
-#[ ! -f /usr/lib/raspberrypi-sys-mods/firstboot ] && ! grep -q quiet /boot/cmdline.txt && ! grep -q init_resize /opt/chipsee/.cmdline.txt && sed -i 's|rootwait|rootwait init=/usr/lib/raspi-config/init_resize\.sh|' /opt/chipsee/.cmdline.txt
-
-## New image
-#[ -f /usr/lib/raspberrypi-sys-mods/firstboot ] && [ ! -f /opt/chipsee/.cmdline.txt ] && cp /boot/cmdline.txt /opt/chipsee/.cmdline.txt && sed -i 's|quiet|quiet init=/usr/lib/raspberrypi-sys-mods/firstboot|' /opt/chipsee/.cmdline.txt
-#[ -f /usr/lib/raspberrypi-sys-mods/firstboot ] && ! grep -q quiet /boot/cmdline.txt && ! grep -q init_resize /opt/chipsee/.cmdline.txt && sed -i 's|rootwait|rootwait init=/usr/lib/raspberrypi-sys-mods/firstboot|' /opt/chipsee/.cmdline.txt
+[ -f /boot/firmware/chipseeinit_firstrun.log ] && cp /boot/firmware/chipseeinit_firstrun.log /var/log/ && sync
 
 # fix First run
 #grep -q firstrun /opt/chipsee/.cmdline.txt && sed -i 's| systemd.run.*||g' /opt/chipsee/.cmdline.txt
@@ -65,6 +60,7 @@ modprobe i2c-dev
 modprobe i2c_bcm2835
 
 ISSOMCHANGED=0
+IS133PISO=0
 if [ "X$CMVER" = "X3" ]; then
         IS2514=`lsusb | grep -c 0424:2514`
         IS4232=`lsusb | grep -c 0403:6011`
@@ -73,7 +69,7 @@ if [ "X$CMVER" = "X3" ]; then
 		if [ "x$BOARD" != "xCS12800RA101" ]; then
 			echo "SOM changed, reboot."
 			ISSOMCHANGED=1
-			cp /boot/config-cs12800ra101.txt /boot/config.txt
+			cp ${FWLOC}/config-cs12800ra101.txt ${FWLOC}/config.txt
 		fi
         	echo "Init GPIO for CS12800RA101"
         	OUT="503 502 501 500" 
@@ -89,7 +85,7 @@ if [ "X$CMVER" = "X3" ]; then
 		if [ "x$BOARD" != "xCS10600RA070" ]; then
 			echo "SOM changed, reboot."
 			ISSOMCHANGED=1
-			cp /boot/config-cs10600ra070.txt /boot/config.txt
+			cp ${FWLOC}/config-cs10600ra070.txt ${FWLOC}/config.txt
 		fi
         	echo "Init GPIO for CS10600RA070"
         	OUT="4 5 6 7"
@@ -121,7 +117,7 @@ elif [ "X$CMVER" = "X4" ]; then
 		if [ "x$BOARD" != "xCS12800RA4101A" ]; then
 			echo "SOM changed, reboot."
 			ISSOMCHANGED=1
-			cp /boot/config-cs12800ra4101a.txt /boot/config.txt
+			cp ${FWLOC}/config-cs12800ra4101a.txt ${FWLOC}/config.txt
 		fi
         	echo "Init GPIO for CS12800RA4101A"
         	BUZZER=12
@@ -137,53 +133,63 @@ elif [ "X$CMVER" = "X4" ]; then
 		case ${PANELSIZE} in
 			101)
                 		echo "Board should be CS12800RA4101P"
-				[ "x$BOARD" != "xCS12800RA4101P" ] && ISSOMCHANGED=1 && cp /boot/config-cs12800ra4101p.txt /boot/config.txt
+				[ "x$BOARD" != "xCS12800RA4101P" ] && ISSOMCHANGED=1 && cp ${FWLOC}/config-cs12800ra4101p.txt ${FWLOC}/config.txt
 				;;
 			121)
                 		echo "Board should be CS10768RA4121P"
-				[ "x$BOARD" != "xCS10768RA4121P" ] && ISSOMCHANGED=1 && cp /boot/config-cs10768ra4121p.txt /boot/config.txt
+				[ "x$BOARD" != "xCS10768RA4121P" ] && ISSOMCHANGED=1 && cp ${FWLOC}/config-cs10768ra4121p.txt ${FWLOC}/config.txt
 				;;
 			133)
                 		echo "Board should be CS19108RA4133P"
-				[ "x$BOARD" != "xCS19108RA4133P" ] && ISSOMCHANGED=1 && cp /boot/config-cs19108ra4133p.txt /boot/config.txt
+				[ "x$BOARD" != "xCS19108RA4133P" ] && ISSOMCHANGED=1 && cp ${FWLOC}/config-cs19108ra4133p.txt ${FWLOC}/config.txt
+				;;
+			134)
+                		echo "Board should be CS19108RA4133PISO"
+				[ "x$BOARD" != "xCS19108RA4133PISO" ] && ISSOMCHANGED=1 && cp ${FWLOC}/config-cs19108ra4133piso.txt ${FWLOC}/config.txt
+				IS133PISO=1;
 				;;
 			150)
                 		echo "Board should be CS10768RA4150P"
-				[ "x$BOARD" != "xCS10768RA4150P" ] && ISSOMCHANGED=1 && cp /boot/config-cs10768ra4150p.txt /boot/config.txt
+				[ "x$BOARD" != "xCS10768RA4150P" ] && ISSOMCHANGED=1 && cp ${FWLOC}/config-cs10768ra4150p.txt ${FWLOC}/config.txt
 				;;
 			156)
                 		echo "Board should be CS19108RA4156P"
-				[ "x$BOARD" != "xCS19108RA4156P" ] && ISSOMCHANGED=1 && cp /boot/config-cs19108ra4156p.txt /boot/config.txt
+				[ "x$BOARD" != "xCS19108RA4156P" ] && ISSOMCHANGED=1 && cp ${FWLOC}/config-cs19108ra4156p.txt ${FWLOC}/config.txt
 				;;
 			170)
                 		echo "Board should be CS12102RA4170P"
-				[ "x$BOARD" != "xCS12102RA4170P" ] && ISSOMCHANGED=1 && cp /boot/config-cs12102ra4170p.txt /boot/config.txt
+				[ "x$BOARD" != "xCS12102RA4170P" ] && ISSOMCHANGED=1 && cp ${FWLOC}/config-cs12102ra4170p.txt ${FWLOC}/config.txt
 				;;
 			185)
                 		echo "Board should be CS19108RA4185P"
-				[ "x$BOARD" != "xCS19108RA4185P" ] && ISSOMCHANGED=1 && cp /boot/config-cs19108ra4185p.txt /boot/config.txt
+				[ "x$BOARD" != "xCS19108RA4185P" ] && ISSOMCHANGED=1 && cp ${FWLOC}/config-cs19108ra4185p.txt ${FWLOC}/config.txt
 				;;
 			190)
                 		echo "Board should be CS12102RA4190P"
-				[ "x$BOARD" != "xCS12102RA4190P" ] && ISSOMCHANGED=1 && cp /boot/config-cs12102ra4190p.txt /boot/config.txt
+				[ "x$BOARD" != "xCS12102RA4190P" ] && ISSOMCHANGED=1 && cp ${FWLOC}/config-cs12102ra4190p.txt ${FWLOC}/config.txt
 				;;
 			215)
                 		echo "Board should be CS19108RA4215P"
-				[ "x$BOARD" != "xCS19108RA4215P" ] && ISSOMCHANGED=1 && cp /boot/config-cs19108ra4215p.txt /boot/config.txt
+				[ "x$BOARD" != "xCS19108RA4215P" ] && ISSOMCHANGED=1 && cp ${FWLOC}/config-cs19108ra4215p.txt ${FWLOC}/config.txt
 				;;
 			236)
                 		echo "Board should be CS19108RA4236P"
-				[ "x$BOARD" != "xCS19108RA4236P" ] && ISSOMCHANGED=1 && cp /boot/config-cs19108ra4236p.txt /boot/config.txt
+				[ "x$BOARD" != "xCS19108RA4236P" ] && ISSOMCHANGED=1 && cp ${FWLOC}/config-cs19108ra4236p.txt ${FWLOC}/config.txt
 				;;
 			*)
                 		echo "Board should be CS12800RA4101BOX"
-				[ "x$BOARD" != "xCS12800RA4101BOX" ] && ISSOMCHANGED=1 && cp /boot/config-cs12800ra4101box.txt /boot/config.txt
+				[ "x$BOARD" != "xCS12800RA4101BOX" ] && ISSOMCHANGED=1 && cp ${FWLOC}/config-cs12800ra4101box.txt ${FWLOC}/config.txt
 				;;
 		esac
 
         	echo "Init GPIO for Big Size products"
-        	OUT="503 502 501 500" 
-        	IN="496 497 498 499"
+		if [ ${IS133PISO} -eq 1 ]; then
+        		OUT="12 13" 
+        		IN="496 497 498 499 500 501 502 503"
+		else
+        		OUT="503 502 501 500" 
+        		IN="496 497 498 499"
+		fi
         	BUZZER=19
        		# LVDS
         	[ "x$BOARD" == "xCS12800RA4101BOX" ] && lcdinit 
@@ -193,7 +199,7 @@ elif [ "X$CMVER" = "X4" ]; then
                 if [ "x$BOARD" != "xCS10600RA4070D" ]; then
                         echo "SOM changed, reboot."
                         ISSOMCHANGED=1
-                        cp /boot/config-cs10600ra4070d.txt /boot/config.txt
+			cp ${FWLOC}/config-cs10600ra4070d.txt ${FWLOC}/config.txt
                 fi
                 echo "Init GPIO for CS10600RA4070D"
                 OUT="503 502 501 500"
@@ -204,7 +210,7 @@ elif [ "X$CMVER" = "X4" ]; then
 		if [ "x$BOARD" != "xCS10600RA4070" ]; then
 			echo "SOM changed, reboot."
 			ISSOMCHANGED=1
-			cp /boot/config-cs10600ra4070.txt /boot/config.txt
+			cp ${FWLOC}/config-cs10600ra4070.txt ${FWLOC}/config.txt
 		fi
         	echo "Init GPIO for CS10600RA4070"
         	OUT="503 502 501 500" 
@@ -215,7 +221,7 @@ elif [ "X$CMVER" = "X4" ]; then
 		if [ "x$BOARD" != "xCS12720RA4050" ]; then
 			echo "SOM changed, reboot."
 			ISSOMCHANGED=1
-			cp /boot/config-cs12720ra4050.txt /boot/config.txt
+			cp ${FWLOC}/config-cs12720ra4050.txt ${FWLOC}/config.txt
 		fi
        		echo "Init GPIO for CS12720RA4050"
        		BUZZER=19
@@ -224,15 +230,13 @@ fi
 
 if [ ${ISSOMCHANGED} -eq 1 ]; then
 	echo "SOM changed, reboot."
-	#cp /opt/chipsee/.cmdline.txt /boot/cmdline.txt
-	#rm /opt/chipsee/.cmdline.txt
 	## Old image
-	[ ! -f /usr/lib/raspberrypi-sys-mods/firstboot ] && ! grep -q quiet /boot/cmdline.txt && sed -i 's|rootwait|rootwait init=/usr/lib/raspi-config/init_resize\.sh|' /boot/cmdline.txt
-	[ ! -f /usr/lib/raspberrypi-sys-mods/firstboot ] && grep -q quiet /boot/cmdline.txt && sed -i 's|quiet|quiet init=/usr/lib/raspi-config/init_resize\.sh|' /boot/cmdline.txt
+	[ ! -f /usr/lib/raspberrypi-sys-mods/firstboot ] && ! grep -q quiet ${FWLOC}/cmdline.txt && sed -i 's|rootwait|rootwait init=/usr/lib/raspi-config/init_resize\.sh|' ${FWLOC}/cmdline.txt
+	[ ! -f /usr/lib/raspberrypi-sys-mods/firstboot ] && grep -q quiet ${FWLOC}/cmdline.txt && sed -i 's|quiet|quiet init=/usr/lib/raspi-config/init_resize\.sh|' ${FWLOC}/cmdline.txt
 
 	## New image
-	[ -f /usr/lib/raspberrypi-sys-mods/firstboot ] && ! grep -q quiet /boot/cmdline.txt && sed -i 's|rootwait|rootwait init=/usr/lib/raspberrypi-sys-mods/firstboot|' /boot/cmdline.txt
-	[ -f /usr/lib/raspberrypi-sys-mods/firstboot ] && grep -q quiet /boot/cmdline.txt && sed -i 's|quiet|quiet init=/usr/lib/raspberrypi-sys-mods/firstboot|' /boot/cmdline.txt
+	[ -f /usr/lib/raspberrypi-sys-mods/firstboot ] && ! grep -q quiet ${FWLOC}/cmdline.txt && sed -i 's|rootwait|rootwait init=/usr/lib/raspberrypi-sys-mods/firstboot|' ${FWLOC}/cmdline.txt
+	[ -f /usr/lib/raspberrypi-sys-mods/firstboot ] && grep -q quiet ${FWLOC}/cmdline.txt && sed -i 's|quiet|quiet init=/usr/lib/raspberrypi-sys-mods/firstboot|' ${FWLOC}/cmdline.txt
 	reboot
 fi
 
@@ -278,7 +282,7 @@ function get_kernel_version() {
 
     _VER_RUN=""
     [ -z "$_VER_RUN" ] && {
-        ZIMAGE=/boot/kernel.img
+	ZIMAGE=${FWLOC}/kernel.img
         IMG_OFFSET=$(LC_ALL=C grep -abo $'\x1f\x8b\x08\x00' $ZIMAGE | head -n 1 | cut -d ':' -f 1)
         _VER_RUN=$(dd if=$ZIMAGE obs=64K ibs=4 skip=$(( IMG_OFFSET / 4)) | zcat | grep -a -m1 "Linux version" | strings | awk '{ print $3; }')
     }
@@ -288,20 +292,26 @@ function get_kernel_version() {
 
 # GPIO
 num=1
+nnum=1
 for i in $OUT; do
 [ ! -d /sys/class/gpio/gpio$i ] && echo $i > /sys/class/gpio/export
 echo out > /sys/class/gpio/gpio$i/direction
 chmod a+w /sys/class/gpio/gpio$i/value
 ln -sf /sys/class/gpio/gpio$i/value /dev/chipsee-gpio$num
+ln -sf /sys/class/gpio/gpio$i/value /dev/gpio-out$nnum
 num=`expr $num + 1`
+nnum=`expr $nnum + 1`
 done            
 sleep 1         
+nnum=1
 for i in $IN; do
 [ ! -d /sys/class/gpio/gpio$i ] && echo $i > /sys/class/gpio/export
 echo in > /sys/class/gpio/gpio$i/direction
 chmod a+r /sys/class/gpio/gpio$i/value
 ln -sf /sys/class/gpio/gpio$i/value /dev/chipsee-gpio$num
+ln -sf /sys/class/gpio/gpio$i/value /dev/gpio-in$nnum
 num=`expr $num + 1`
+nnum=`expr $nnum + 1`
 done
 # Buzzer
 [ ! -d /sys/class/gpio/gpio$BUZZER ] && echo $BUZZER > /sys/class/gpio/export
@@ -313,8 +323,8 @@ echo "GPIO Init done!!"
 # Kernel Modules
 modprobe gt9xx
 #echo Goodix-TS 0x5d | tee /sys/bus/i2c/devices/i2c-1/new_device
-modprobe lsm6ds3
-echo lsm6ds3 0x6a | tee /sys/bus/i2c/devices/i2c-1/new_device
+#modprobe lsm6ds3
+#echo lsm6ds3 0x6a | tee /sys/bus/i2c/devices/i2c-1/new_device
 echo "Kernel modules load success!!"
 
 # Audio
@@ -410,7 +420,7 @@ fi
 # if you upgrade kernel, some driver may not work, for example touchscreen, lcd and so on
 # find driver from https://github.com/Chipsee/industrial-pi
 # 
-apt-mark hold raspberrypi-kernel raspberrypi-kernel-headers raspberrypi-sys-mods raspberrypi-ui-mods
+#apt-mark hold raspberrypi-kernel raspberrypi-kernel-headers raspberrypi-sys-mods raspberrypi-ui-mods linux-headers
 
 
 exit 0

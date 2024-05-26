@@ -1,3 +1,6 @@
+EXTRA_CFLAGS +=-Wno-format-overflow
+EXTRA_CFLAGS +=-Wno-unused-const-variable
+
 ifneq ($(CROSS_COMPILE),)
 CROSS-COMPILE:=$(CROSS_COMPILE)
 endif

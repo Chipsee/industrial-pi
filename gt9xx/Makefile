@@ -1,7 +1,11 @@
 EXTRA_CFLAGS +=-Wno-error=date-time
 EXTRA_CFLAGS +=-Wno-date-time
+EXTRA_CFLAGS +=-Wno-format
+EXTRA_CFLAGS +=-Wno-unused-variable
+EXTRA_CFLAGS +=-Wno-unused-function
+
 DEPMOD  = /sbin/depmod
-ARCH := arm
+FWLOC:= $(shell /usr/lib/raspberrypi-sys-mods/get_fw_loc)
 CROSS_COMPILE ?=
 KVER  := $(shell uname -r)
 KSRC := /lib/modules/$(KVER)/build
@@ -22,17 +26,17 @@ compile:
 	dtc -@ -I dts -O dtb -o gt9xx.dtbo gt9xx-overlay.dts
 
 install: compile
-	mkdir -p $(TP)/boot/overlays
+	mkdir -p $(TP)$(FWLOC)/overlays
 	install -p -m 644 -D $(MODULE_NAME).ko $(MODDESTDIR)$(MODULE_NAME).ko
 	install -p -m 644 -D $(MODULE_NAME).ko $(TP)$(MODDESTDIR)$(MODULE_NAME).ko
-	install -p -m 644 -D gt9xx.dtbo /boot/overlays/
-	install -p -m 644 -D gt9xx.dtbo $(TP)/boot/overlays/
+	install -p -m 644 -D gt9xx.dtbo $(FWLOC)/overlays/
+	install -p -m 644 -D gt9xx.dtbo $(TP)$(FWLOC)/overlays/
 	
 	$(DEPMOD) -a ${KVER}
 
 clean:
 	make -C $(KSRC) M=`pwd` clean
 	rm $(MODDESTDIR)$(MODULE_NAME).ko
-	rm /boot/overlays/gt9xx.dtbo
-	rm gt9xx.dtbo
+	rm $(FWLOC)/overlays/gt9xx.dtbo
+	#rm gt9xx.dtbo
 	$(DEPMOD) -a ${KVER}

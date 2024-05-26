@@ -1321,8 +1321,12 @@ static void wm8960_set_pdata_from_of(struct i2c_client *i2c,
 		pdata->shared_lrclk = true;
 }
 
+#if (LINUX_VERSION_CODE > KERNEL_VERSION(6,2,0))
+static int wm8960_i2c_probe(struct i2c_client *i2c)
+#else
 static int wm8960_i2c_probe(struct i2c_client *i2c,
 			    const struct i2c_device_id *id)
+#endif
 {
 	struct wm8960_data *pdata = dev_get_platdata(&i2c->dev);
 	struct wm8960_priv *wm8960;
