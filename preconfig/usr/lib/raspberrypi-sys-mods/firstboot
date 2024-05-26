@@ -197,11 +197,11 @@ elif [ "X$CMVER" = "X4" ]; then
         echo "is_1a is $is_1a" >> $LOGF
         echo "is_32 is $is_32" >> $LOGF
         echo "is_20 is $is_20" >> $LOGF
-        if [ "X${is_1a}" = "X1a" ]; then
+        if [ "X${is_1a}" = "X1a" -o "X${is_1a}" = "XUU" ]; then
                 echo "Board is CS12800RA4101A" >> $LOGF
                 cp $FWLOC/config-cs12800ra4101a.txt $FWLOC/config.txt
                 echo "CS12800RA4101A" > /opt/chipsee/.board
-        elif [ "X${is_32}" = "X32" ]; then
+        elif [ "X${is_32}" = "X32" -o "X${is_32}" = "XUU" ]; then
                 ## for big size display
                 RAWSIZE=`i2cget -y -a 0 0x51 0x0A`
                 BASE16SIZE=${RAWSIZE#0x}
@@ -274,7 +274,7 @@ elif [ "X$CMVER" = "X4" ]; then
                 echo "Board is CS10600RA4070D" >> $LOGF
                 cp $FWLOC/config-cs10600ra4070d.txt $FWLOC/config.txt
                 echo "CS10600RA4070D" > /opt/chipsee/.board
-        elif [ "X${is_20}" = "X20" ]; then
+        elif [ "X${is_20}" = "X20" -o "X${is_20}" = "XUU" ]; then
                 echo "Board is CS10600RA4070" >> $LOGF
                 cp $FWLOC/config-cs10600ra4070.txt $FWLOC/config.txt
                 echo "CS10600RA4070" > /opt/chipsee/.board
