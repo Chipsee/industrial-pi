@@ -28,6 +28,9 @@ exec 2>&1
 
 export PATH=$PATH:/opt/vc/bin
 
+# settings the user variable
+USER=$(head -1 /boot/userconf | cut -d':' -f1)
+
 FWLOC=$(/usr/lib/raspberrypi-sys-mods/get_fw_loc)
 
 OVERLAYS=/boot/overlays
@@ -388,11 +391,11 @@ EOF
     # systemctl --user start audioswitch.service
     # systemctl --user enable audioswitch.service
     # or use this shell to enable audioswitch.service
-    if [ ! -f /home/pi/.config/systemd/user/default.target.wants/audioswitch.service ]; then
-    	mkdir -p /home/pi/.config/systemd/user/default.target.wants
-    	ln -s /usr/lib/systemd/user/audioswitch.service /home/pi/.config/systemd/user/default.target.wants/audioswitch.service
-	ln -s /usr/lib/systemd/user/dpms-lcd.service /home/pi/.config/systemd/user/default.target.wants/dpms-lcd.service
-        chown pi:pi /home/pi/.config -R
+    if [ ! -f /home/$USER/.config/systemd/user/default.target.wants/audioswitch.service ]; then
+    	mkdir -p /home/$USER/.config/systemd/user/default.target.wants
+    	ln -s /usr/lib/systemd/user/audioswitch.service /home/$USER/.config/systemd/user/default.target.wants/audioswitch.service
+	ln -s /usr/lib/systemd/user/dpms-lcd.service /home/$USER/.config/systemd/user/default.target.wants/dpms-lcd.service
+        chown $USER:$USER /home/$USER/.config -R
     	reboot
     fi
 
@@ -400,10 +403,10 @@ fi
 
 # Backlight Control
 chmod a+w /sys/class/backlight/pwm-backlight/brightness
-if [ ! -f /home/pi/.config/systemd/user/default.target.wants/dpms-lcd.service ]; then
-	mkdir -p /home/pi/.config/systemd/user/default.target.wants
-	ln -s /usr/lib/systemd/user/dpms-lcd.service /home/pi/.config/systemd/user/default.target.wants/dpms-lcd.service
-	chown pi:pi /home/pi/.config -R
+if [ ! -f /home/$USER/.config/systemd/user/default.target.wants/dpms-lcd.service ]; then
+	mkdir -p /home/$USER/.config/systemd/user/default.target.wants
+	ln -s /usr/lib/systemd/user/dpms-lcd.service /home/$USER/.config/systemd/user/default.target.wants/dpms-lcd.service
+	chown $USER:$USER /home/$USER/.config -R
 	reboot
 fi
 
