@@ -29,7 +29,7 @@ exec 2>&1
 export PATH=$PATH:/opt/vc/bin
 
 # settings the user variable
-USER=pi
+USER=$(head -1 /boot/userconf | cut -d':' -f1)
 
 FWLOC=$(/usr/lib/raspberrypi-sys-mods/get_fw_loc)
 
