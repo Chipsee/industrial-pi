@@ -298,13 +298,19 @@ elif [ "X$CMVER" = "X4" ]; then
         is_1a=$(i2cdetect -y  1 0x1a 0x1a | egrep "(1a|UU)" | awk '{print $2}')
         is_32=$(i2cdetect -y  0 0x32 0x32 | egrep "(32|UU)" | awk '{print $2}')
         is_20=$(i2cdetect -y  1 0x20 0x20 | egrep "(20|UU)" | awk '{print $2}')
+        is_11=$(i2cdetect -y  1 0x11 0x11 | egrep "(11|UU)" | awk '{print $2}')
         echo "is_1a is $is_1a" >> $LOGF
         echo "is_32 is $is_32" >> $LOGF
         echo "is_20 is $is_20" >> $LOGF
+        echo "is_11 is $is_11" >> $LOGF
         if [ "X${is_1a}" = "X1a" ]; then
                 echo "Board is CS12800RA4101A" >> $LOGF
                 cp /boot/config-cs12800ra4101a.txt /boot/config.txt
                 echo "CS12800RA4101A" > /opt/chipsee/.board
+        elif [ "X${is_11}" = "X11" ]; then
+                echo "Board is CS12800RA4101AV4" >> $LOGF
+                cp /boot/config-cs12800ra4101av4.txt /boot/config.txt
+                echo "CS12800RA4101AV4" > /opt/chipsee/.board
         elif [ "X${is_32}" = "X32" ]; then
                 ## for big size display
                 RAWSIZE=`i2cget -y -a 0 0x51 0x0A`

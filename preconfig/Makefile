@@ -11,6 +11,8 @@ install:
 	install -p -m 755 -D boot/config-cs12800ra4101box-$(LARCH).txt $(TP)/boot/config-cs12800ra4101box.txt
 	install -p -b -m 755 -D boot/config-cs12800ra4101a-$(LARCH).txt /boot/config-cs12800ra4101a.txt
 	install -p -m 755 -D boot/config-cs12800ra4101a-$(LARCH).txt $(TP)/boot/config-cs12800ra4101a.txt
+	install -p -b -m 755 -D boot/config-cs12800ra4101av4-$(LARCH).txt /boot/config-cs12800ra4101av4.txt
+	install -p -m 755 -D boot/config-cs12800ra4101av4-$(LARCH).txt $(TP)/boot/config-cs12800ra4101av4.txt
 	install -p -b -m 755 -D boot/config-cs12800ra4101p-$(LARCH).txt /boot/config-cs12800ra4101p.txt
 	install -p -m 755 -D boot/config-cs12800ra4101p-$(LARCH).txt $(TP)/boot/config-cs12800ra4101p.txt
 	install -p -b -m 755 -D boot/config-cs10600ra4070-$(LARCH).txt /boot/config-cs10600ra4070.txt

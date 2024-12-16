@@ -6,6 +6,8 @@ QUECTEL_CM_DIR := ./quectel-CM
 RTL8723BU_DIR := ./rtl8723bu
 RTL8723DU_DIR := ./rtl8723du
 WM8960_DIR := ./wm8960
+ES8388_DIR := ./es8388
+AV4HELPER_DIR := ./av4helper
 PWMBL_DIR := ./pwmbl
 PRECONFIG_DIR := ./preconfig
 TOPDIR := $(shell pwd)
@@ -39,6 +41,10 @@ install:
 	@echo "Install quectel-cm success!!"
 	@make -C $(WM8960_DIR)
 	@echo "Install wm8960 success!!"
+	@make -C $(ES8388_DIR)
+	@echo "Install es8388 success!!"
+	@make -C $(AV4HELPER_DIR)
+	@echo "Install av4helper success!!"
 	@make -C $(PWMBL_DIR)
 	@echo "Install pwmbl success!!"
 	@make -C $(PRECONFIG_DIR)
@@ -56,6 +62,10 @@ uninstall:
 	@echo "Uninstall quectel-cm success!!"
 	@make clean -C $(WM8960_DIR)
 	@echo "Uninstall wm8960 success!!"
+	@make clean -C $(ES8388_DIR)
+	@echo "Uninstall es8388 success!!"
+	@make clean -C $(AV4HELPER_DIR)
+	@echo "Uninstall av4helper success!!"
 	@make clean -C $(PWMBL_DIR)
 	@echo "Uninstall pwmbl success!!"
 	@make clean -C $(PRECONFIG_DIR)
