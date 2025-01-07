@@ -1,0 +1,67 @@
+/dts-v1/;
+/plugin/;
+
+/ {
+    compatible = "brcm,bcm2708";
+
+    fragment@0 {
+        target = <&i2s>;
+        __overlay__ {
+            status = "okay";
+        };
+    };
+    fragment@1 {
+		target-path="/";
+		__overlay__ {
+                        es8388_mclk: es8388_mclk {
+                                compatible = "fixed-clock";
+                                #clock-cells = <0>;
+                                clock-frequency = <11289600>;
+                        };
+
+		};
+    };
+    fragment@2 {
+		target = <&i2c1>;
+		__overlay__ {
+			#address-cells = <1>;
+			#size-cells = <0>;
+			status = "okay";
+
+			es8388: es8388@11{
+				compatible = "everest,es8388";
+				reg = <0x11>;
+		    		clocks = <&es8388_mclk>;
+				clock-names = "mclk";
+				#sound-dai-cells = <0>;
+			};
+		};
+    };
+
+
+    fragment@3 {
+        target = <&sound>;
+        slave_overlay: __overlay__ {
+                compatible = "simple-audio-card";
+                simple-audio-card,format = "i2s";
+                simple-audio-card,name = "es8388"; 
+		simple-audio-card,bitclock-master = <&dailink0_slave>;
+		simple-audio-card,frame-master = <&dailink0_slave>;
+                status = "okay";
+                simple-audio-card,cpu {
+                    sound-dai = <&i2s>;
+                };
+
+                dailink0_slave: simple-audio-card,codec {
+                    sound-dai = <&es8388>;
+                };
+        };
+    };
+
+    __overrides__ {
+        alsaname = <&slave_overlay>,"simple-audio-card,name";
+        compatible = <&es8388>,"compatible";
+        master = <0>,"=2!3";
+    };
+};
+

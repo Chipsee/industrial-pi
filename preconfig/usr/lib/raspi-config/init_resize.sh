@@ -240,12 +240,19 @@ elif [ "X$CMVER" = "X4" ]; then
 		ln -sf /usr/lib/arm-linux-gnueabihf/libi2c.so.0.1.1 /usr/lib/arm-linux-gnueabihf/libi2c.so.0
 	fi
 	is_1a="NULL"
+	is_11="NULL"
 	is_32="NULL"
 	is_1a=$(i2cdetect -y  1 0x1a 0x1a | egrep "(1a|UU)" | awk '{print $2}')
+	is_11=$(i2cdetect -y  1 0x11 0x11 | egrep "(11|UU)" | awk '{print $2}')
 	is_32=$(i2cdetect -y  0 0x32 0x32 | egrep "(32|UU)" | awk '{print $2}')
 	echo "is_1a is $is_1a" >> $LOGF
+	echo "is_11 is $is_11" >> $LOGF
 	echo "is_32 is $is_32" >> $LOGF
-	if [ "X${is_1a}" = "X1a" ]; then
+	if [ "X${is_11}" = "X11" ]; then
+		echo "Board is CS12800RA4101AV4" >> $LOGF
+        	cp /boot/config-cs12800ra4101av4.txt /boot/config.txt
+		echo "CS12800RA4101AV4" > /opt/chipsee/.board
+	elif [ "X${is_1a}" = "X1a" ]; then
 		echo "Board is CS12800RA4101" >> $LOGF
         	cp /boot/config-cs12800ra4101.txt /boot/config.txt
 		echo "CS12800RA4101" > /opt/chipsee/.board

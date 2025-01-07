@@ -91,13 +91,25 @@ elif [ "X$CMVER" = "X4" ]; then
         echo "I2C0:" >> $LOGF
         i2cdetect -y 0 >> $LOGF
         is_1a="NULL"
+        is_11="NULL"
         is_32="NULL"
         is_1a=$(i2cdetect -y  1 0x1a 0x1a | egrep "(1a|UU)" | awk '{print $2}')
+        is_11=$(i2cdetect -y  1 0x11 0x11 | egrep "(11|UU)" | awk '{print $2}')
         is_32=$(i2cdetect -y  0 0x32 0x32 | egrep "(32|UU)" | awk '{print $2}')
         echo "is_1a is $is_1a"
+        echo "is_11 is $is_11"
         echo "is_32 is $is_32"
         dtparam -d $OVERLAYS audio=on
-        if [ "X${is_1a}" = "X1a" -o "X${is_1a}" = "XUU" ]; then
+        if [ "X${is_11}" = "X11" -o "X${is_11}" = "XUU" ]; then
+                echo "Board should be CS12800RA4101AV4"
+		if [ "x$BOARD" != "xCS12800RA4101AV4" ]; then
+			echo "SOM changed, reboot."
+			cp /opt/chipsee/.cmdline.txt /boot/cmdline.txt
+			reboot
+		fi
+        	echo "Init GPIO for CS12800RA4101AV4"
+        	BUZZER=
+        elif [ "X${is_1a}" = "X1a" -o "X${is_1a}" = "XUU" ]; then
                 echo "Board should be CS12800RA4101"
 		if [ "x$BOARD" != "xCS12800RA4101" ]; then
 			echo "SOM changed, reboot."
@@ -206,11 +218,13 @@ ln -sf /sys/class/gpio/gpio$i/value /dev/chipsee-gpio$num
 num=`expr $num + 1`
 done
 # Buzzer
-[ ! -d /sys/class/gpio/gpio$BUZZER ] && echo $BUZZER > /sys/class/gpio/export
-echo out > /sys/class/gpio/gpio$BUZZER/direction
-chmod a+w /sys/class/gpio/gpio$BUZZER/value 
-ln -sf /sys/class/gpio/gpio$BUZZER/value /dev/buzzer
-echo "GPIO Init done!!"
+if [ "x${BUZZER}" != "x" ]; then
+	[ ! -d /sys/class/gpio/gpio$BUZZER ] && echo $BUZZER > /sys/class/gpio/export
+	echo out > /sys/class/gpio/gpio$BUZZER/direction
+	chmod a+w /sys/class/gpio/gpio$BUZZER/value 
+	ln -sf /sys/class/gpio/gpio$BUZZER/value /dev/buzzer
+	echo "GPIO Init done!!"
+fi
 
 # Kernel Modules
 modprobe gt9xx
@@ -221,12 +235,19 @@ echo "Kernel modules load success!!"
 
 # Audio
 is_1a=$(i2cdetect -y  1 0x1a 0x1a | egrep "(1a|UU)" | awk '{print $2}')
+is_11=$(i2cdetect -y  1 0x11 0x11 | egrep "(11|UU)" | awk '{print $2}')
 overlay=""
 if [ "x${is_1a}" != "x" ]; then
     echo "install 2mic"
     overlay=seeed-2mic-voicecard
     asound_conf=/opt/chipsee/voicecard/asound_2mic.conf
     asound_state=/opt/chipsee/voicecard/wm8960_asound.state
+fi
+if [ "x${is_11}" != "x" ]; then
+    echo "CS12800RA4101AV4 Audio"
+    overlay=es8388
+    asound_conf=/opt/chipsee/voicecard/es8388.conf
+    asound_state=/opt/chipsee/voicecard/es8388_asound.state
 fi
 if [ "x${overlay}" != "x" -a "x${CMVER}" = "x4" ]; then
     echo Install $overlay ...
