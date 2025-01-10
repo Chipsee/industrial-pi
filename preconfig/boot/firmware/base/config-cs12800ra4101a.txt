@@ -35,7 +35,6 @@ hdmi_cvt=1280 800 60 5
 dtoverlay=gpio-key,gpio=9,label=KEY_VOLUMEUP,keycode=115
 dtoverlay=gpio-key,gpio=10,label=KEY_VOLUMEDOWN,keycode=114
 # Audio
-dtoverlay=i2s-mmap
 dtparam=i2s=on
 dtoverlay=seeed-2mic-voicecard
 #######################Chipsee Config#################################

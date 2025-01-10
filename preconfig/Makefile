@@ -5,12 +5,13 @@ install:
 	install -p -m 755 -D boot/firmware/config-cs10600ra070-$(LARCH).txt $(TP)/boot/firmware/config-cs10600ra070.txt
 	install -p -b -m 755 -D boot/firmware/config-cs12800ra101-$(LARCH).txt /boot/firmware/config-cs12800ra101.txt
 	install -p -m 755 -D boot/firmware/config-cs12800ra101-$(LARCH).txt $(TP)/boot/firmware/config-cs12800ra101.txt
-	install -p -b -m 755 -D boot/firmware/config-cs12800ra4101-$(LARCH).txt /boot/firmware/config-cs12800ra4101.txt
-	install -p -m 755 -D boot/firmware/config-cs12800ra4101-$(LARCH).txt $(TP)/boot/firmware/config-cs12800ra4101.txt
 	install -p -b -m 755 -D boot/firmware/config-cs12800ra4101box-$(LARCH).txt /boot/firmware/config-cs12800ra4101box.txt
 	install -p -m 755 -D boot/firmware/config-cs12800ra4101box-$(LARCH).txt $(TP)/boot/firmware/config-cs12800ra4101box.txt
+	# CM4
 	install -p -b -m 755 -D boot/firmware/config-cs12800ra4101a-$(LARCH).txt /boot/firmware/config-cs12800ra4101a.txt
 	install -p -m 755 -D boot/firmware/config-cs12800ra4101a-$(LARCH).txt $(TP)/boot/firmware/config-cs12800ra4101a.txt
+	install -p -b -m 755 -D boot/firmware/config-cs12800ra4101av4-$(LARCH).txt /boot/firmware/config-cs12800ra4101av4.txt
+	install -p -m 755 -D boot/firmware/config-cs12800ra4101av4-$(LARCH).txt $(TP)/boot/firmware/config-cs12800ra4101av4.txt
 	install -p -b -m 755 -D boot/firmware/config-cs12800ra4101p-$(LARCH).txt /boot/firmware/config-cs12800ra4101p.txt
 	install -p -m 755 -D boot/firmware/config-cs12800ra4101p-$(LARCH).txt $(TP)/boot/firmware/config-cs12800ra4101p.txt
 	install -p -b -m 755 -D boot/firmware/config-cs10600ra4070-$(LARCH).txt /boot/firmware/config-cs10600ra4070.txt
@@ -39,6 +40,36 @@ install:
 	install -p -m 755 -D boot/firmware/config-cs19108ra4215p-$(LARCH).txt $(TP)/boot/firmware/config-cs19108ra4215p.txt
 	install -p -b -m 755 -D boot/firmware/config-cs19108ra4236p-$(LARCH).txt /boot/firmware/config-cs19108ra4236p.txt
 	install -p -m 755 -D boot/firmware/config-cs19108ra4236p-$(LARCH).txt $(TP)/boot/firmware/config-cs19108ra4236p.txt
+	# CM5
+	install -p -b -m 755 -D boot/firmware/config-cs12720ra5050p-$(LARCH).txt /boot/firmware/config-cs12720ra5050p.txt
+	install -p -m 755 -D boot/firmware/config-cs12720ra5050p-$(LARCH).txt $(TP)/boot/firmware/config-cs12720ra5050p.txt
+	install -p -b -m 755 -D boot/firmware/config-cs10600ra5070p-$(LARCH).txt /boot/firmware/config-cs10600ra5070p.txt
+	install -p -m 755 -D boot/firmware/config-cs10600ra5070p-$(LARCH).txt $(TP)/boot/firmware/config-cs10600ra5070p.txt
+	install -p -b -m 755 -D boot/firmware/config-cs10600ra5070p-d-$(LARCH).txt /boot/firmware/config-cs10600ra5070p-d.txt
+	install -p -m 755 -D boot/firmware/config-cs10600ra5070p-d-$(LARCH).txt $(TP)/boot/firmware/config-cs10600ra5070p-d.txt
+	install -p -b -m 755 -D boot/firmware/config-cs12800ra5101a-$(LARCH).txt /boot/firmware/config-cs12800ra5101a.txt
+	install -p -m 755 -D boot/firmware/config-cs12800ra5101a-$(LARCH).txt $(TP)/boot/firmware/config-cs12800ra5101a.txt
+	install -p -b -m 755 -D boot/firmware/config-cs12800ra5101p-$(LARCH).txt /boot/firmware/config-cs12800ra5101p.txt
+	install -p -m 755 -D boot/firmware/config-cs12800ra5101p-$(LARCH).txt $(TP)/boot/firmware/config-cs12800ra5101p.txt
+	install -p -b -m 755 -D boot/firmware/config-cs10768ra5121p-$(LARCH).txt /boot/firmware/config-cs10768ra5121p.txt
+	install -p -m 755 -D boot/firmware/config-cs10768ra5121p-$(LARCH).txt $(TP)/boot/firmware/config-cs10768ra5121p.txt
+	install -p -b -m 755 -D boot/firmware/config-cs19108ra5133p-$(LARCH).txt /boot/firmware/config-cs19108ra5133p.txt
+	install -p -m 755 -D boot/firmware/config-cs19108ra5133p-$(LARCH).txt $(TP)/boot/firmware/config-cs19108ra5133p.txt
+	install -p -b -m 755 -D boot/firmware/config-cs10768ra5150p-$(LARCH).txt /boot/firmware/config-cs10768ra5150p.txt
+	install -p -m 755 -D boot/firmware/config-cs10768ra5150p-$(LARCH).txt $(TP)/boot/firmware/config-cs10768ra5150p.txt
+	install -p -b -m 755 -D boot/firmware/config-cs19108ra5156p-$(LARCH).txt /boot/firmware/config-cs19108ra5156p.txt
+	install -p -m 755 -D boot/firmware/config-cs19108ra5156p-$(LARCH).txt $(TP)/boot/firmware/config-cs19108ra5156p.txt
+	install -p -b -m 755 -D boot/firmware/config-cs12102ra5170p-$(LARCH).txt /boot/firmware/config-cs12102ra5170p.txt
+	install -p -m 755 -D boot/firmware/config-cs12102ra5170p-$(LARCH).txt $(TP)/boot/firmware/config-cs12102ra5170p.txt
+	install -p -b -m 755 -D boot/firmware/config-cs19108ra5185p-$(LARCH).txt /boot/firmware/config-cs19108ra5185p.txt
+	install -p -m 755 -D boot/firmware/config-cs19108ra5185p-$(LARCH).txt $(TP)/boot/firmware/config-cs19108ra5185p.txt
+	install -p -b -m 755 -D boot/firmware/config-cs12102ra5190p-$(LARCH).txt /boot/firmware/config-cs12102ra5190p.txt
+	install -p -m 755 -D boot/firmware/config-cs12102ra5190p-$(LARCH).txt $(TP)/boot/firmware/config-cs12102ra5190p.txt
+	install -p -b -m 755 -D boot/firmware/config-cs19108ra5215p-$(LARCH).txt /boot/firmware/config-cs19108ra5215p.txt
+	install -p -m 755 -D boot/firmware/config-cs19108ra5215p-$(LARCH).txt $(TP)/boot/firmware/config-cs19108ra5215p.txt
+	install -p -b -m 755 -D boot/firmware/config-cs19108ra5236p-$(LARCH).txt /boot/firmware/config-cs19108ra5236p.txt
+	install -p -m 755 -D boot/firmware/config-cs19108ra5236p-$(LARCH).txt $(TP)/boot/firmware/config-cs19108ra5236p.txt
+	# Other File
 	install -p -b -m 755 -D boot/firmware/config-$(LARCH).txt /boot/firmware/config.txt
 	install -p -m 755 -D boot/firmware/config-$(LARCH).txt $(TP)/boot/firmware/config.txt
 	install -p -b -m 755 -D boot/firmware/userconf /boot/firmware/userconf
@@ -91,24 +122,28 @@ install:
 	install -p -m 777 -D opt/chipsee/voicecard/asound_2mic.conf $(TP)/opt/chipsee/voicecard/asound_2mic.conf
 	install -p -m 777 -D opt/chipsee/voicecard/wm8960_asound.state /opt/chipsee/voicecard/wm8960_asound.state
 	install -p -m 777 -D opt/chipsee/voicecard/wm8960_asound.state $(TP)/opt/chipsee/voicecard/wm8960_asound.state
-	install -p -b -m 755 -D  opt/chipsee/test/linux-ppp-scripts/ip-up /opt/chipsee/test/linux-ppp-scripts/ip-up
-	install -p -m 755 -D  opt/chipsee/test/linux-ppp-scripts/ip-up $(TP)/opt/chipsee/test/linux-ppp-scripts/ip-up
-	install -p -b -m 755 -D  opt/chipsee/test/linux-ppp-scripts/quectel-chat-connect /opt/chipsee/test/linux-ppp-scripts/quectel-chat-connect
-	install -p -m 755 -D  opt/chipsee/test/linux-ppp-scripts/quectel-chat-connect $(TP)/opt/chipsee/test/linux-ppp-scripts/quectel-chat-connect
-	install -p -b -m 755 -D  opt/chipsee/test/linux-ppp-scripts/quectel-chat-disconnect /opt/chipsee/test/linux-ppp-scripts/quectel-chat-disconnect
-	install -p -m 755 -D  opt/chipsee/test/linux-ppp-scripts/quectel-chat-disconnect $(TP)/opt/chipsee/test/linux-ppp-scripts/quectel-chat-disconnect
-	install -p -b -m 755 -D  opt/chipsee/test/linux-ppp-scripts/quectel-ppp /opt/chipsee/test/linux-ppp-scripts/quectel-ppp
-	install -p -m 755 -D  opt/chipsee/test/linux-ppp-scripts/quectel-ppp $(TP)/opt/chipsee/test/linux-ppp-scripts/quectel-ppp
-	install -p -b -m 755 -D  opt/chipsee/test/linux-ppp-scripts/quectel-pppd.sh /opt/chipsee/test/linux-ppp-scripts/quectel-pppd.sh
-	install -p -m 755 -D  opt/chipsee/test/linux-ppp-scripts/quectel-pppd.sh $(TP)/opt/chipsee/test/linux-ppp-scripts/quectel-pppd.sh
-	install -p -b -m 755 -D  opt/chipsee/test/linux-ppp-scripts/quectel-ppp-kill /opt/chipsee/test/linux-ppp-scripts/quectel-ppp-kill
-	install -p -m 755 -D  opt/chipsee/test/linux-ppp-scripts/quectel-ppp-kill $(TP)/opt/chipsee/test/linux-ppp-scripts/quectel-ppp-kill
-	install -p -b -m 755 -D  opt/chipsee/test/linux-ppp-scripts/README /opt/chipsee/test/linux-ppp-scripts/README
-	install -p -m 755 -D  opt/chipsee/test/linux-ppp-scripts/README $(TP)/opt/chipsee/test/linux-ppp-scripts/README
+	# 4G
+	install -p -b -m 755 -D  opt/chipsee/test/quectel-linux-4g.tar.gz /opt/chipsee/test/quectel-linux-4g.tar.gz
+	install -p -m 755 -D  opt/chipsee/test/quectel-linux-4g.tar.gz $(TP)/opt/chipsee/test/quectel-linux-4g.tar.gz
+	install -p -b -m 755 -D  opt/chipsee/test/simcom-linux-4g.tar.gz /opt/chipsee/test/simcom-linux-4g.tar.gz
+	install -p -m 755 -D  opt/chipsee/test/simcom-linux-4g.tar.gz $(TP)/opt/chipsee/test/simcom-linux-4g.tar.gz
+	#install -p -b -m 755 -D  opt/chipsee/test/linux-ppp-scripts/ip-up /opt/chipsee/test/linux-ppp-scripts/ip-up
+	#install -p -m 755 -D  opt/chipsee/test/linux-ppp-scripts/ip-up $(TP)/opt/chipsee/test/linux-ppp-scripts/ip-up
+	#install -p -b -m 755 -D  opt/chipsee/test/linux-ppp-scripts/quectel-chat-connect /opt/chipsee/test/linux-ppp-scripts/quectel-chat-connect
+	#install -p -m 755 -D  opt/chipsee/test/linux-ppp-scripts/quectel-chat-connect $(TP)/opt/chipsee/test/linux-ppp-scripts/quectel-chat-connect
+	#install -p -b -m 755 -D  opt/chipsee/test/linux-ppp-scripts/quectel-chat-disconnect /opt/chipsee/test/linux-ppp-scripts/quectel-chat-disconnect
+	#install -p -m 755 -D  opt/chipsee/test/linux-ppp-scripts/quectel-chat-disconnect $(TP)/opt/chipsee/test/linux-ppp-scripts/quectel-chat-disconnect
+	#install -p -b -m 755 -D  opt/chipsee/test/linux-ppp-scripts/quectel-ppp /opt/chipsee/test/linux-ppp-scripts/quectel-ppp
+	#install -p -m 755 -D  opt/chipsee/test/linux-ppp-scripts/quectel-ppp $(TP)/opt/chipsee/test/linux-ppp-scripts/quectel-ppp
+	#install -p -b -m 755 -D  opt/chipsee/test/linux-ppp-scripts/quectel-pppd.sh /opt/chipsee/test/linux-ppp-scripts/quectel-pppd.sh
+	#install -p -m 755 -D  opt/chipsee/test/linux-ppp-scripts/quectel-pppd.sh $(TP)/opt/chipsee/test/linux-ppp-scripts/quectel-pppd.sh
+	#install -p -b -m 755 -D  opt/chipsee/test/linux-ppp-scripts/quectel-ppp-kill /opt/chipsee/test/linux-ppp-scripts/quectel-ppp-kill
+	#install -p -m 755 -D  opt/chipsee/test/linux-ppp-scripts/quectel-ppp-kill $(TP)/opt/chipsee/test/linux-ppp-scripts/quectel-ppp-kill
+	#install -p -b -m 755 -D  opt/chipsee/test/linux-ppp-scripts/README /opt/chipsee/test/linux-ppp-scripts/README
+	#install -p -m 755 -D  opt/chipsee/test/linux-ppp-scripts/README $(TP)/opt/chipsee/test/linux-ppp-scripts/README
+
 	install -p -b -m 755 -D usr/lib/raspberrypi-sys-mods/firstboot /usr/lib/raspberrypi-sys-mods/firstboot
 	install -p -m 755 -D usr/lib/raspberrypi-sys-mods/firstboot $(TP)/usr/lib/raspberrypi-sys-mods/firstboot
-	install -p -b -m 755 -D etc/issue /etc/issue
-	install -p -m 755 -D etc/issue $(TP)/etc/issue
 	systemctl enable chipsee-init.service
 
 clean: install

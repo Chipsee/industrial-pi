@@ -3,9 +3,13 @@
 GT9XX_DIR := ./gt9xx
 QUECTEL_CM_DIR := ./quectel-CM
 WM8960_DIR := ./wm8960
+ES8388_DIR := ./es8388
 PWMBL_DIR := ./pwmbl
 MCP23008_DIR := ./mcp23008
 PRECONFIG_DIR := ./preconfig
+AT24_DIR := ./at24
+AV4HELPER_DIR := ./av4helper
+MCP251XFD_DIR := ./mcp251xfd
 TOPDIR := $(shell pwd)
 KVER  := $(shell uname -r)
 TP=$(TOPDIR)/_tp
@@ -33,12 +37,20 @@ install:
 	@echo "Install quectel-cm success!!"
 	@make -C $(WM8960_DIR)
 	@echo "Install wm8960 success!!"
+	@make -C $(ES8388_DIR)
+	@echo "Install es8388 success!!"
 	@make -C $(PWMBL_DIR)
 	@echo "Install pwmbl success!!"
 	@make -C $(MCP23008_DIR)
 	@echo "Install mcp230008 success!!"
 	@make -C $(PRECONFIG_DIR)
 	@echo "Install preconfig success!!"
+	@make -C $(AT24_DIR)
+	@echo "Install at24 success!!"
+	@make -C $(AV4HELPER_DIR)
+	@echo "Install av4helper success!!"
+	@make -C $(MCP251XFD_DIR)
+	@echo "Install mcp251xfd success!!"
 	@sync
 	@echo ""
 	@echo "######Install industrial-pi drivers success!!######"
@@ -50,12 +62,20 @@ uninstall:
 	@echo "Uninstall quectel-cm success!!"
 	@make clean -C $(WM8960_DIR)
 	@echo "Uninstall wm8960 success!!"
+	@make clean -C $(ES8388_DIR)
+	@echo "Uninstall es8388 success!!"
 	@make clean -C $(PWMBL_DIR)
 	@echo "Uninstall pwmbl success!!"
 	@make clean -C $(MCP23008_DIR)
 	@echo "Uninstall mcp23008 success!!"
 	@make clean -C $(PRECONFIG_DIR)
 	@echo "Uninstall preconfig success!!"
+	@make clean -C $(AT24_DIR)
+	@echo "Uninstall at24 success!!"
+	@make clean -C $(AV4HELPER_DIR)
+	@echo "Uninstall av4helper success!!"
+	@make clean -C $(MCP251XFD_DIR)
+	@echo "Uninstall mcp251xfd success!!"
 	@sync
 	@echo ""
 	@echo "######Uninstall industrial-pi drivers success!!######"

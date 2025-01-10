@@ -23,7 +23,7 @@ display_auto_detect=1
 auto_initramfs=1
 
 # Enable DRM VC4 V3D driver
-dtoverlay=vc4-fkms-v3d
+dtoverlay=vc4-kms-v3d
 max_framebuffers=2
 
 # Don't have the firmware create an initial video= setting in cmdline.txt.
@@ -43,10 +43,15 @@ arm_boost=1
 # Enable host mode on the 2711 built-in XHCI USB controller.
 # This line should be removed if the legacy DWC2 controller is required
 # (e.g. for USB device mode) or if USB support is not required.
-#otg_mode=1
+# otg_mode=1
+
+[cm5]
+dtoverlay=dwc2,dr_mode=host
 
 [all]
 
+
+[cm4]
 #######################Chipsee Config#################################
 # I2C
 dtoverlay=i2c0,pins_44_45
@@ -63,4 +68,15 @@ dtoverlay=uart3
 dtparam=act_led_trigger=heartbeat
 # Disable buzzer for CS12800RA4101A
 gpio=12=op,dl
+#######################Chipsee Config#################################
+
+[cm5]
+#######################Chipsee Config#################################
+# if use I2C6 SCL0/PIN80/SDA0/PIN82, we need enalble follow
+#dtparam=i2c_csi_dsi0
+# RTC
+dtparam=rtc=off
+dtoverlay=i2c-rtc,ds1307,addr=0x32
+# Debug port
+dtparam=uart0_console=on
 #######################Chipsee Config#################################

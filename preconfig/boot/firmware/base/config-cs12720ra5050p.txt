@@ -1,0 +1,44 @@
+#######################Chipsee Config#################################
+# Audio
+gpio=6=op,dh
+# if use I2C6 SCL0/PIN80/SDA0/PIN82, we need enalble follow
+#dtparam=i2c_csi_dsi0
+# RTC
+dtparam=rtc=off
+dtoverlay=i2c-rtc,ds1307,addr=0x32
+# Debug port
+dtparam=uart0_console=on
+# GPIO14 GPIO15
+dtoverlay=uart0-pi5
+# Release GPIO0/GPIO1
+display_auto_detect=0
+# GPIO0(ID_SD) GPIO1(ID_SC)
+dtoverlay=uart1-pi5
+# GPIO4 GPIO5
+dtoverlay=uart2-pi5
+# GPIO12 GPIO13
+dtoverlay=uart4-pi5
+# LED
+dtparam=act_led_trigger=heartbeat
+# SD1
+dtoverlay=sdio-pi5
+# WiFI
+dtparam=ant2
+# Touch
+dtoverlay=goodix,interrupt=20,reset=21
+# HDMI
+##PWM
+#dtoverlay=pwm,pin=18,func=2
+##GPIO
+gpio=18=op,dh
+dtoverlay=pwm-backlight,pin=18,func=2,pwm_0
+# CAN
+dtparam=spi=on
+dtoverlay=mcp251xfd,spi0-0,interrupt=16
+# USB
+dtoverlay=dwc2,dr_mode=host
+# Camera
+camera_auto_detect=0
+dtoverlay=imx708,cam0
+dtoverlay=i2c-at24,at24c32
+########################Chipsee Config################################

@@ -1,4 +1,5 @@
 # Introduction
-Release for 6.6.20+rpt-rpi-v8, based on `2024-03-15-raspios-bookworm-arm64-lite.img.xz`
+Test for 6.6.51+rpt-rpi-2712, based on `2024-11-19-raspios-bookworm-arm64.img.xz`
+Only support Chipsee CM5 Industril product now.
 # WARRNING
 This released is under test!!!!

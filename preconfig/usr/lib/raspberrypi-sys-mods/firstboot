@@ -192,7 +192,7 @@ elif [ "X$CMVER" = "X4" ]; then
         is_20="NULL"
         ISVL805=`lspci | grep -c VL805`
         is_1a=$(i2cdetect -y  1 0x1a 0x1a | egrep "(1a|UU)" | awk '{print $2}')
-        is_32=$(i2cdetect -y  0 0x32 0x32 | egrep "(32|UU)" | awk '{print $2}')
+        is_32=$(i2cdetct -y  0 0x32 0x32 | egrep "(32|UU)" | awk '{print $2}')
         is_20=$(i2cdetect -y  1 0x20 0x20 | egrep "(20|UU)" | awk '{print $2}')
         echo "is_1a is $is_1a" >> $LOGF
         echo "is_32 is $is_32" >> $LOGF
@@ -293,6 +293,12 @@ elif [ "X$CMVER" = "X4" ]; then
                sed $FWLOC/config.txt -i -e "s/^#dtparam=ant2/dtparam=ant2/"
                echo "Enabled WIFIBT" >> $LOGF
         fi
+elif [ "X$CMVER" = "X5" ]; then
+        RBOARD=`cspn`
+        echo "Board is $RBOARD" >> $LOGF
+	CFGF="config-`echo ${RBOARD} | tr '[:upper:]' '[:lower:]'`.txt"
+	cp $CFGF $FWLOC/config.txt
+	echo $RBOARD > /opt/chipsee/.board
 fi
 sync
 mount / -o remount,ro

@@ -52,12 +52,11 @@ BOARDL=`echo $BOARD | tr '[:upper:]' '[:lower:]'`
 if [ "x$CMVER" = "x4" ]; then
 	raspi-gpio set 44 a1
 	raspi-gpio set 45 a1
+	##enable i2c1 interface
+	dtparam -d $OVERLAYS i2c_arm=on
+	modprobe i2c-dev
+	modprobe i2c_bcm2835
 fi
-
-##enable i2c1 interface
-dtparam -d $OVERLAYS i2c_arm=on
-modprobe i2c-dev
-modprobe i2c_bcm2835
 
 ISSOMCHANGED=0
 IS133PISO=0
@@ -225,6 +224,20 @@ elif [ "X$CMVER" = "X4" ]; then
 		fi
        		echo "Init GPIO for CS12720RA4050"
        		BUZZER=19
+		modprobe gt9xx
+	fi
+elif [ "X$CMVER" = "X5" ]; then
+       	BUZZER=604
+	OUT="586 588 591 592"
+        IN="593 594 595 596"
+	RBOARD=`cspn`
+        echo "Board should be $RBOARD"
+	CFGF="config-`echo ${RBOARD} | tr '[:upper:]' '[:lower:]'`.txt"
+	[ "x$BOARD" != "x$RBOARD" ] && ISSOMCHANGED=1 && cp ${FWLOC}/${CFGF} ${FWLOC}/config.txt
+	if [ "X$RBOARD = "XCS12720RA5050P" ]; then
+		BUZZER=588
+		OUT=""
+		IN=""
 	fi
 fi
 
@@ -240,94 +253,47 @@ if [ ${ISSOMCHANGED} -eq 1 ]; then
 	reboot
 fi
 
-# Funcs
-get_overlay() {
-    ov=$1
-    if grep -q -E "^dtoverlay=$ov" $CONFIG; then
-      echo 0
-    else
-      echo 1
-    fi
-}
-
-do_overlay() {
-    ov=$1
-    RET=$2
-    DEFAULT=--defaultno
-    CURRENT=0
-    if [ $(get_overlay $ov) -eq 0 ]; then
-        DEFAULT=
-        CURRENT=1
-    fi
-    if [ $RET -eq $CURRENT ]; then
-        ASK_TO_REBOOT=1
-    fi
-    if [ $RET -eq 0 ]; then
-        sed $CONFIG -i -e "s/^#dtoverlay=$ov/dtoverlay=$ov/"
-        if ! grep -q -E "^dtoverlay=$ov" $CONFIG; then
-            printf "dtoverlay=$ov\n" >> $CONFIG
-        fi
-        STATUS=enabled
-    elif [ $RET -eq 1 ]; then
-        sed $CONFIG -i -e "s/^dtoverlay=$ov/#dtoverlay=$ov/"
-        STATUS=disabled
-    else
-        return $RET
-    fi
-}
-
-_VER_RUN=
-function get_kernel_version() {
-    local ZIMAGE IMG_OFFSET
-
-    _VER_RUN=""
-    [ -z "$_VER_RUN" ] && {
-	ZIMAGE=${FWLOC}/kernel.img
-        IMG_OFFSET=$(LC_ALL=C grep -abo $'\x1f\x8b\x08\x00' $ZIMAGE | head -n 1 | cut -d ':' -f 1)
-        _VER_RUN=$(dd if=$ZIMAGE obs=64K ibs=4 skip=$(( IMG_OFFSET / 4)) | zcat | grep -a -m1 "Linux version" | strings | awk '{ print $3; }')
-    }
-    echo "$_VER_RUN"
-    return 0
-}
-
 # GPIO
 num=1
 nnum=1
-for i in $OUT; do
-[ ! -d /sys/class/gpio/gpio$i ] && echo $i > /sys/class/gpio/export
-echo out > /sys/class/gpio/gpio$i/direction
-chmod a+w /sys/class/gpio/gpio$i/value
-ln -sf /sys/class/gpio/gpio$i/value /dev/chipsee-gpio$num
-ln -sf /sys/class/gpio/gpio$i/value /dev/gpio-out$nnum
-num=`expr $num + 1`
-nnum=`expr $nnum + 1`
-done            
-sleep 1         
-nnum=1
-for i in $IN; do
-[ ! -d /sys/class/gpio/gpio$i ] && echo $i > /sys/class/gpio/export
-echo in > /sys/class/gpio/gpio$i/direction
-chmod a+r /sys/class/gpio/gpio$i/value
-ln -sf /sys/class/gpio/gpio$i/value /dev/chipsee-gpio$num
-ln -sf /sys/class/gpio/gpio$i/value /dev/gpio-in$nnum
-num=`expr $num + 1`
-nnum=`expr $nnum + 1`
-done
-# Buzzer
-[ ! -d /sys/class/gpio/gpio$BUZZER ] && echo $BUZZER > /sys/class/gpio/export
-echo out > /sys/class/gpio/gpio$BUZZER/direction
-chmod a+w /sys/class/gpio/gpio$BUZZER/value 
-ln -sf /sys/class/gpio/gpio$BUZZER/value /dev/buzzer
-echo "GPIO Init done!!"
+if [ x$OUT != "x" ]; then
+	for i in $OUT; do
+	[ ! -d /sys/class/gpio/gpio$i ] && echo $i > /sys/class/gpio/export
+	echo out > /sys/class/gpio/gpio$i/direction
+	chmod a+w /sys/class/gpio/gpio$i/value
+	ln -sf /sys/class/gpio/gpio$i/value /dev/chipsee-gpio$num
+	ln -sf /sys/class/gpio/gpio$i/value /dev/gpio-out$nnum
+	num=`expr $num + 1`
+	nnum=`expr $nnum + 1`
+	done            
+fi
 
-# Kernel Modules
-modprobe gt9xx
-#echo Goodix-TS 0x5d | tee /sys/bus/i2c/devices/i2c-1/new_device
-#modprobe lsm6ds3
-#echo lsm6ds3 0x6a | tee /sys/bus/i2c/devices/i2c-1/new_device
-echo "Kernel modules load success!!"
+sleep 1         
+
+nnum=1
+if [ x$IN != "x" ]; then
+	for i in $IN; do
+	[ ! -d /sys/class/gpio/gpio$i ] && echo $i > /sys/class/gpio/export
+	echo in > /sys/class/gpio/gpio$i/direction
+	chmod a+r /sys/class/gpio/gpio$i/value
+	ln -sf /sys/class/gpio/gpio$i/value /dev/chipsee-gpio$num
+	ln -sf /sys/class/gpio/gpio$i/value /dev/gpio-in$nnum
+	num=`expr $num + 1`
+	nnum=`expr $nnum + 1`
+	done
+fi
+
+# Buzzer
+if [ x$BUZZER != "x" ]; then
+	[ ! -d /sys/class/gpio/gpio$BUZZER ] && echo $BUZZER > /sys/class/gpio/export
+	echo out > /sys/class/gpio/gpio$BUZZER/direction
+	chmod a+w /sys/class/gpio/gpio$BUZZER/value 
+	ln -sf /sys/class/gpio/gpio$BUZZER/value /dev/buzzer
+	echo "GPIO Init done!!"
+fi
 
 # Audio
+if [ "x$BOARD" == "xCS12800RA4101A" -o "x$BOARD" == "xCS12800RA5101A" ]; then
 is_1a=$(i2cdetect -y  1 0x1a 0x1a | egrep "(1a|UU)" | awk '{print $2}')
 overlay=""
 if [ "x${is_1a}" != "x" ]; then
@@ -343,26 +309,8 @@ if [ "x${overlay}" != "x" -a "x${CMVER}" = "x4" ]; then
     rm /etc/asound.conf
     rm /var/lib/alsa/asound.state
 
-: <<\EOF
-    kernel_ver=$(get_kernel_version)
-    # echo kernel_ver=$kernel_ver
-
-    # TODO: dynamic dtoverlay Bug of v4.19.x
-    #       no DT node phandle inserted.
-    if [[ "$kernel_ver" =~ ^4\.19.*$ || "$kernel_ver" =~ ^5\.*$ ]]; then
-        for i in $RPI_HATS; do
-            if [ "$i" == "$overlay" ]; then
-                do_overlay $overlay 0
-            else
-                echo Uninstall $i ...
-                do_overlay $i 1
-            fi
-        done
-    fi
-EOF
     #make sure the driver loads correctly
     dtoverlay -d $OVERLAYS $overlay || true
-
 
     echo "create $overlay asound configure file"
     ln -s $asound_conf /etc/asound.conf
@@ -396,6 +344,7 @@ EOF
     	reboot
     fi
 
+fi
 fi
 
 # Backlight Control
