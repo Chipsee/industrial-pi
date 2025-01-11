@@ -298,7 +298,7 @@ elif [ "X$CMVER" = "X5" ]; then
         RBOARD=`cspn`
         echo "Board is $RBOARD" >> $LOGF
 	CFGF="config-`echo ${RBOARD} | tr '[:upper:]' '[:lower:]'`.txt"
-	cp $CFGF $FWLOC/config.txt
+	cp $FWLOC/$CFGF $FWLOC/config.txt
 	echo $RBOARD > /opt/chipsee/.board
 	if [ "$RBOARD" = "CS12720RA5050P" ]; then
 		if ! grep -q 'video=HDMI-A-1:720x1280M@60,rotate=90' $FWLOC/cmdline.txt; then

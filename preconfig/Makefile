@@ -72,8 +72,13 @@ install:
 	# Other File
 	install -p -b -m 755 -D boot/firmware/config-$(LARCH).txt /boot/firmware/config.txt
 	install -p -m 755 -D boot/firmware/config-$(LARCH).txt $(TP)/boot/firmware/config.txt
-	install -p -b -m 755 -D boot/firmware/userconf /boot/firmware/userconf
-	install -p -m 755 -D boot/firmware/userconf $(TP)/boot/firmware/userconf
+	# First boot
+	install -p -b -m 755 -D boot/firmware/cmdline.txt /boot/firmware/cmdline.txt
+	install -p -m 755 -D boot/firmware/cmdline.txt $(TP)/boot/firmware/cmdline.txt
+	install -p -b -m 755 -D boot/firmware/firstrun.sh /boot/firmware/firstrun.sh
+	install -p -m 755 -D boot/firmware/firstrun.sh $(TP)/boot/firmware/firstrun.sh
+	#install -p -b -m 755 -D boot/firmware/userconf /boot/firmware/userconf
+	#install -p -m 755 -D boot/firmware/userconf $(TP)/boot/firmware/userconf
 	install -p -m 644 -D usr/lib/systemd/system/chipsee-init.service /usr/lib/systemd/system/chipsee-init.service
 	install -p -m 644 -D usr/lib/systemd/system/chipsee-init.service $(TP)/usr/lib/systemd/system/chipsee-init.service
 	install -p -m 644 -D usr/lib/systemd/user/audioswitch.service /usr/lib/systemd/user/audioswitch.service
@@ -148,6 +153,9 @@ install:
 	install -p -m 777 -D usr/bin/csdev_$(LARCH) $(TP)/usr/bin/cspn
 	install -p -m 777 -D usr/bin/csdev_$(LARCH) /usr/bin/csrev
 	install -p -m 777 -D usr/bin/csdev_$(LARCH) $(TP)/usr/bin/csrev
+	# transform90
+	install -p -b -m 755 -D  etc/transform90.tar.gz /etc/transform90.tar.gz
+	install -p -m 755 -D  etc/transform90.tar.gz $(TP)/etc/transform90.tar.gz
 
 	install -p -b -m 755 -D usr/lib/raspberrypi-sys-mods/firstboot /usr/lib/raspberrypi-sys-mods/firstboot
 	install -p -m 755 -D usr/lib/raspberrypi-sys-mods/firstboot $(TP)/usr/lib/raspberrypi-sys-mods/firstboot

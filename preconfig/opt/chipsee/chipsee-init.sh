@@ -233,22 +233,22 @@ elif [ "X$CMVER" = "X5" ]; then
 		BUZZER=588
 		OUT=""
 		IN=""
-
-		if [ ! -f /opt/chipsee/.firstboot ]; then
-			USERS=$(awk -F: '($3 >= 1000) && ($3 < 65534) {print $1}' /etc/passwd)
-			echo "users list: $USERS"
-			for i in $USERS; do
-				if ! grep -q "transform 90" /home/$i/.config/kanshi/config; then
-cat <<EOT > /home/$i/.config/kanshi/config
-profile {
-	output HDMI-A-1 enable mode 720x1280@60.326 position 0,0 transform 90
-}
-EOT
-				fi
-			done
-			touch /opt/chipsee/.firstboot
-		fi
-
+		USERS=$(awk -F: '($3 >= 1000) && ($3 < 65534) {print $1}' /etc/passwd)
+		echo "users list: $USERS"
+		for i in $USERS; do
+			if [ ! -f /home/$i/.firstboot ]; then
+				[ ! -f /home/$i/.config ] && mkdir -p /home/$i/.config && chown $i:$i /home/$i/.config
+				[ -f /etc/transform90.tar.gz ] && tar xf /etc/transform90.tar.gz -C /home/$i/.config/
+				chmod 755 /home/$i/.config/kanshi
+				chmod 644 /home/$i/.config/kanshi/*
+				chmod 755 /home/$i/.config/labwc
+				chmod 644 /home/$i/.config/labwc/*
+				chown $i:$i /home/$i/.config/kanshi -R
+				chown $i:$i /home/$i/.config/labwc -R
+				touch /home/$i/.firstboot
+				reboot
+			fi
+		done
 	fi
 fi
 

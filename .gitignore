@@ -115,6 +115,7 @@ industrial-pi-*
 #
 !quectel-linux-4g.tar.gz
 !simcom-linux-4g.tar.gz
+!transform90.tar.gz
 
 #
 # Generated binary
