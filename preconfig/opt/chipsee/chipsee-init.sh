@@ -26,8 +26,6 @@ LOGF=/var/log/$(basename $0).log
 exec 1> >(tee $LOGF)
 exec 2>&1
 
-export PATH=$PATH:/opt/vc/bin
-
 FWLOC=$(/usr/lib/raspberrypi-sys-mods/get_fw_loc)
 
 OVERLAYS=/boot/overlays
@@ -39,9 +37,6 @@ CONFIG=/boot/config.txt
 # Backup log file
 [ -f /boot/chipseeinit_firstrun.log ] && cp /boot/chipseeinit_firstrun.log /var/log/ && sync
 [ -f /boot/firmware/chipseeinit_firstrun.log ] && cp /boot/firmware/chipseeinit_firstrun.log /var/log/ && sync
-
-# fix First run
-#grep -q firstrun /opt/chipsee/.cmdline.txt && sed -i 's| systemd.run.*||g' /opt/chipsee/.cmdline.txt
 
 CMVER=`cat /proc/device-tree/model | cut -d " " -f 5`
 SCREEN_SIZE=`fbset | grep -v endmode | grep mode | awk -F '"' '{print $2}'`
@@ -234,10 +229,26 @@ elif [ "X$CMVER" = "X5" ]; then
         echo "Board should be $RBOARD"
 	CFGF="config-`echo ${RBOARD} | tr '[:upper:]' '[:lower:]'`.txt"
 	[ "x$BOARD" != "x$RBOARD" ] && ISSOMCHANGED=1 && cp ${FWLOC}/${CFGF} ${FWLOC}/config.txt
-	if [ "X$RBOARD = "XCS12720RA5050P" ]; then
+	if [ "X$RBOARD" = "XCS12720RA5050P" ]; then
 		BUZZER=588
 		OUT=""
 		IN=""
+
+		if [ ! -f /opt/chipsee/.firstboot ]; then
+			USERS=$(awk -F: '($3 >= 1000) && ($3 < 65534) {print $1}' /etc/passwd)
+			echo "users list: $USERS"
+			for i in $USERS; do
+				if ! grep -q "transform 90" /home/$i/.config/kanshi/config; then
+cat <<EOT > /home/$i/.config/kanshi/config
+profile {
+	output HDMI-A-1 enable mode 720x1280@60.326 position 0,0 transform 90
+}
+EOT
+				fi
+			done
+			touch /opt/chipsee/.firstboot
+		fi
+
 	fi
 fi
 
@@ -256,7 +267,7 @@ fi
 # GPIO
 num=1
 nnum=1
-if [ x$OUT != "x" ]; then
+if [ "x$OUT" != "x" ]; then
 	for i in $OUT; do
 	[ ! -d /sys/class/gpio/gpio$i ] && echo $i > /sys/class/gpio/export
 	echo out > /sys/class/gpio/gpio$i/direction
@@ -271,7 +282,7 @@ fi
 sleep 1         
 
 nnum=1
-if [ x$IN != "x" ]; then
+if [ "x$IN" != "x" ]; then
 	for i in $IN; do
 	[ ! -d /sys/class/gpio/gpio$i ] && echo $i > /sys/class/gpio/export
 	echo in > /sys/class/gpio/gpio$i/direction
@@ -284,7 +295,7 @@ if [ x$IN != "x" ]; then
 fi
 
 # Buzzer
-if [ x$BUZZER != "x" ]; then
+if [ "x$BUZZER" != "x" ]; then
 	[ ! -d /sys/class/gpio/gpio$BUZZER ] && echo $BUZZER > /sys/class/gpio/export
 	echo out > /sys/class/gpio/gpio$BUZZER/direction
 	chmod a+w /sys/class/gpio/gpio$BUZZER/value 
@@ -348,7 +359,9 @@ fi
 fi
 
 # Backlight Control
-chmod a+w /sys/class/backlight/pwm-backlight/brightness
+if [ -f /sys/class/backlight/pwm-backlight/brightness ]; then
+	chmod a+w /sys/class/backlight/pwm-backlight/brightness
+fi
 if [ ! -f /home/pi/.config/systemd/user/default.target.wants/dpms-lcd.service ]; then
 	mkdir -p /home/pi/.config/systemd/user/default.target.wants
 	ln -s /usr/lib/systemd/user/dpms-lcd.service /home/pi/.config/systemd/user/default.target.wants/dpms-lcd.service

@@ -109,3 +109,17 @@ signing_key.x509
 x509.genkey
 
 industrial-pi-*
+
+#
+# tools we don't want to ignore
+#
+!quectel-linux-4g.tar.gz
+!simcom-linux-4g.tar.gz
+
+#
+# Generated binary
+#
+av4helper/av4_buzzer
+av4helper/av4helper
+av4helper/buzzer
+

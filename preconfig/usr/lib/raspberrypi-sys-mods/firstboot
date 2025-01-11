@@ -294,11 +294,29 @@ elif [ "X$CMVER" = "X4" ]; then
                echo "Enabled WIFIBT" >> $LOGF
         fi
 elif [ "X$CMVER" = "X5" ]; then
+        modprobe -a at24
         RBOARD=`cspn`
         echo "Board is $RBOARD" >> $LOGF
 	CFGF="config-`echo ${RBOARD} | tr '[:upper:]' '[:lower:]'`.txt"
 	cp $CFGF $FWLOC/config.txt
 	echo $RBOARD > /opt/chipsee/.board
+	if [ "$RBOARD" = "CS12720RA5050P" ]; then
+		if ! grep -q 'video=HDMI-A-1:720x1280M@60,rotate=90' $FWLOC/cmdline.txt; then
+			sed -i "$ s/$/ video=HDMI-A-1:720x1280M@60,rotate=90/" "$FWLOC/cmdline.txt"
+		fi
+
+		if ! grep -q 'plymouth.enable=0' $FWLOC/cmdline.txt; then
+			sed -i "$ s/$/ plymouth.enable=0/" "$FWLOC/cmdline.txt"
+		fi
+	fi
+
+	if ! grep -q 'vt.global_cursor_default=0' $FWLOC/cmdline.txt; then
+		sed -i "$ s/$/ vt.global_cursor_default=0/" "$FWLOC/cmdline.txt"
+	fi
+
+	if ! grep -q 'loglevel=0' $FWLOC/cmdline.txt; then
+		sed -i "$ s/$/ loglevel=0/" "$FWLOC/cmdline.txt"
+	fi
 fi
 sync
 mount / -o remount,ro

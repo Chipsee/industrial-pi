@@ -141,6 +141,13 @@ install:
 	#install -p -m 755 -D  opt/chipsee/test/linux-ppp-scripts/quectel-ppp-kill $(TP)/opt/chipsee/test/linux-ppp-scripts/quectel-ppp-kill
 	#install -p -b -m 755 -D  opt/chipsee/test/linux-ppp-scripts/README /opt/chipsee/test/linux-ppp-scripts/README
 	#install -p -m 755 -D  opt/chipsee/test/linux-ppp-scripts/README $(TP)/opt/chipsee/test/linux-ppp-scripts/README
+	# csdev
+	install -p -m 777 -D usr/bin/csdev_$(LARCH) /usr/bin/csdev
+	install -p -m 777 -D usr/bin/csdev_$(LARCH) $(TP)/usr/bin/csdev
+	install -p -m 777 -D usr/bin/csdev_$(LARCH) /usr/bin/cspn
+	install -p -m 777 -D usr/bin/csdev_$(LARCH) $(TP)/usr/bin/cspn
+	install -p -m 777 -D usr/bin/csdev_$(LARCH) /usr/bin/csrev
+	install -p -m 777 -D usr/bin/csdev_$(LARCH) $(TP)/usr/bin/csrev
 
 	install -p -b -m 755 -D usr/lib/raspberrypi-sys-mods/firstboot /usr/lib/raspberrypi-sys-mods/firstboot
 	install -p -m 755 -D usr/lib/raspberrypi-sys-mods/firstboot $(TP)/usr/lib/raspberrypi-sys-mods/firstboot
