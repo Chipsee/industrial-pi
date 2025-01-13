@@ -1,26 +1,16 @@
 #!/bin/sh
-canport=$1
 
-echo ""
-echo "Can0 init ..."
-echo ""
-./canconfig $canport stop
-./canconfig $canport bitrate 10000 ctrlmode triple-sampling on loopback off
-./canconfig $canport start
-echo ""
-echo "$canport inited!!"
-echo ""
 
-echo "$canport send date five times ..."
-i=0
-while [ $i -lt 5 ]
-do
-i=`expr $i + 1`
-./cansend $canport 0x11 0x22 0x33 0x44 0x55 0x66 0x77 0x88
-sleep 1
+sudo ip link set can0 down
+sudo ip link set can0 type can bitrate 1000000
+sudo ip link set can0 up
+candump can0 &
+
+sleep 20
+
+i=1000
+while [ $i -gt 0 ]; do
+echo $i
+sudo cansend can0 5A1#11.2233.44556677.88
+i=`expr $i - 1`
 done
-echo ""
-echo "$canport dump date in background"
-./candump $canport &
-
-echo "Can Tested done!!"
