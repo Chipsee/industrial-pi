@@ -90,9 +90,9 @@ This repository only support follow Chipsee Industrial Board, you can order them
 
 
 # Latest system images
- **2022-09-22 V5 64bit**
- - Desktop with small software [2022-09-22-raspios-bullseye-arm64-chipsee-v5.img.xz](https://chipsee-tmp.s3.amazonaws.com/PrebuiltImages/RaspberryPi/20220922/bullseye-arm64/2022-09-22-raspios-bullseye-arm64-chipsee-v5.img.xz)
- - Lite [2022-09-22-raspios-bullseye-arm64-lite-chipsee-v5.img.xz](https://chipsee-tmp.s3.amazonaws.com/PrebuiltImages/RaspberryPi/20220922/bullseye-arm64/2022-09-22-raspios-bullseye-arm64-lite-chipsee-v5.img.xz)
+ **2022-09-22 V7 64bit**
+ - Desktop with small software [2022-09-22-raspios-bullseye-arm64-chipsee-v7.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20220922/bullseye-arm64/2022-09-22-raspios-bullseye-arm64-chipsee-v7.img.xz)
+ - Lite [2022-09-22-raspios-bullseye-arm64-lite-chipsee-v7.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20220922/bullseye-arm64/2022-09-22-raspios-bullseye-arm64-lite-chipsee-v7.img.xz)
 
 **2021-10-30 V2 32bit**
  - Desktop with Full software [2021-10-30-raspios-bullseye-armhf-full-chipsee-v2.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20211030/2021-10-30-raspios-bullseye-armhf-full-chipsee-v2.img.xz)
@@ -100,6 +100,10 @@ This repository only support follow Chipsee Industrial Board, you can order them
  - Lite [2021-10-30-raspios-bullseye-armhf-lite-chipsee-v2.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20211030/2021-10-30-raspios-bullseye-armhf-lite-chipsee-v2.img.xz)
 
 # Release notes
+**2022-09-22 V7**
+
+- Added CS12800RA4101A-C141 support.
+
 **2022-9-22 V5:**
 
 - Add 170/190 product support.
@@ -134,6 +138,13 @@ This repository only support follow Chipsee Industrial Board, you can order them
 - Automatically load WiFi/Bt and disable SD slot as WiFi/Bt and SD slot can't be use at same time.
 
 # Older system images
+ **2022-09-22 V5 64bit**
+ - Desktop with small software [2022-09-22-raspios-bullseye-arm64-chipsee-v5.img.xz](https://chipsee-tmp.s3.amazonaws.com/PrebuiltImages/RaspberryPi/20220922/bullseye-arm64/2022-09-22-raspios-bullseye-arm64-chipsee-v5.img.xz)
+ - Lite [2022-09-22-raspios-bullseye-arm64-lite-chipsee-v5.img.xz](https://chipsee-tmp.s3.amazonaws.com/PrebuiltImages/RaspberryPi/20220922/bullseye-arm64/2022-09-22-raspios-bullseye-arm64-lite-chipsee-v5.img.xz)
+
+ **2022-09-22 V4 64bit**
+ - I don't like this version.
+
  **2022-09-22 V3 64bit**
  - Desktop with small software [2022-09-22-raspios-bullseye-arm64-chipsee-v3.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20220922/bullseye-arm64/2022-09-22-raspios-bullseye-arm64-chipsee-v3.img.xz)
  - Lite [2022-09-22-raspios-bullseye-arm64-lite-chipsee-v4.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20220922/bullseye-arm64/2022-09-22-raspios-bullseye-arm64-lite-chipsee-v4.img.xz)
