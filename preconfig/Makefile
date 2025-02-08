@@ -73,10 +73,10 @@ install:
 	install -p -b -m 755 -D boot/firmware/config-$(LARCH).txt /boot/firmware/config.txt
 	install -p -m 755 -D boot/firmware/config-$(LARCH).txt $(TP)/boot/firmware/config.txt
 	# First boot
-	install -p -b -m 755 -D boot/firmware/cmdline.txt /boot/firmware/cmdline.txt
-	install -p -m 755 -D boot/firmware/cmdline.txt $(TP)/boot/firmware/cmdline.txt
-	install -p -b -m 755 -D boot/firmware/firstrun.sh /boot/firmware/firstrun.sh
-	install -p -m 755 -D boot/firmware/firstrun.sh $(TP)/boot/firmware/firstrun.sh
+	#install -p -b -m 755 -D boot/firmware/cmdline.txt /boot/firmware/cmdline.txt
+	#install -p -m 755 -D boot/firmware/cmdline.txt $(TP)/boot/firmware/cmdline.txt
+	#install -p -b -m 755 -D boot/firmware/firstrun.sh /boot/firmware/firstrun.sh
+	#install -p -m 755 -D boot/firmware/firstrun.sh $(TP)/boot/firmware/firstrun.sh
 	#install -p -b -m 755 -D boot/firmware/userconf /boot/firmware/userconf
 	#install -p -m 755 -D boot/firmware/userconf $(TP)/boot/firmware/userconf
 	install -p -m 644 -D usr/lib/systemd/system/chipsee-init.service /usr/lib/systemd/system/chipsee-init.service

@@ -49,8 +49,6 @@ install:
 	@echo "=========>Install at24 success!!"
 	@make -C $(AV4HELPER_DIR)
 	@echo "=========>Install av4helper success!!"
-	@make -C $(MCP251XFD_DIR)
-	@echo "=========>Install mcp251xfd success!!"
 	@sync
 	@echo ""
 	@echo "######Install industrial-pi drivers success!!######"
@@ -74,8 +72,6 @@ uninstall:
 	@echo "=========>Uninstall at24 success!!"
 	@make clean -C $(AV4HELPER_DIR)
 	@echo "=========>Uninstall av4helper success!!"
-	@make clean -C $(MCP251XFD_DIR)
-	@echo "=========>Uninstall mcp251xfd success!!"
 	@sync
 	@echo ""
 	@echo "######Uninstall industrial-pi drivers success!!######"
