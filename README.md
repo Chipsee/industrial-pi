@@ -9,6 +9,7 @@ This repository only support follow [Raspberry Pi official system](https://www.r
  - 2020-12-02-raspios-buster
  - 2021-10-30-raspios-bullseye
  - 2022-9-22-raspios-bullseye
+ - 2024-11-19-raspios-bookworm (Only support CM5 now)
 
 If the system you are downloading not list in the above supported list, you also can try, use latest kernel branch to compile, maybe need to do some modification.
 
@@ -75,6 +76,7 @@ make help
 # Supported Chipsee Board
 This repository only support follow Chipsee Industrial Board, you can order them from the official Chipsee Web [chipsee web site](https://chipsee.com/product-category/ipc/arm-raspberry-pi/) or from your nearest distributor.
 
+## CM4
  - AIO-CM4-101 / CS12800RA4101A
  - EPC/PPC-CM4-050 / CS12720RA4050 (from 2021-10-30 V2 image)
  - EPC/PPC-CM4-070 / CS10600RA4070
@@ -88,18 +90,31 @@ This repository only support follow Chipsee Industrial Board, you can order them
  - PPC-CM4-070-D / CS10600RA4070D (from 2022-09-22 V3 image)
  - CS-CM4-BOX / CSRA4BOX (from 2022-09-22 V3 image)
 
+## CM5
+ - PPC-CM5-050 / CS12720RA5050P (from 2025-02-12 V1 image)
+ - EPC/PPC-CM5-070 / CS10600RA5070E/P (from 2025-02-12 V1 image)
+ - PPC-CM5-101 / CS12800RA5101P (from 2025-02-12 V1 image)
 
 # Latest system images
- **2022-09-22 V7 64bit**
+ **2025-02-12 V1 64bit** *[only support CM5]*
+ - Desktop with small software [2025-02-12-raspios-bookworm-arm64-chipsee-v1.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/CM5/2025-02-12-raspios-bookworm-arm64-chipsee-v1.img.xz)
+ - Lite [2025-02-12-raspios-bookworm-arm64-lite-chipsee-v1.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/CM5/2025-02-12-raspios-bookworm-arm64-lite-chipsee-v1.img.xz)
+
+ **2022-09-22 V7 64bit** *[only support CM4]*
  - Desktop with small software [2022-09-22-raspios-bullseye-arm64-chipsee-v7.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20220922/bullseye-arm64/2022-09-22-raspios-bullseye-arm64-chipsee-v7.img.xz)
  - Lite [2022-09-22-raspios-bullseye-arm64-lite-chipsee-v7.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20220922/bullseye-arm64/2022-09-22-raspios-bullseye-arm64-lite-chipsee-v7.img.xz)
 
-**2021-10-30 V2 32bit**
+**2021-10-30 V2 32bit** *[only support CM4]*
  - Desktop with Full software [2021-10-30-raspios-bullseye-armhf-full-chipsee-v2.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20211030/2021-10-30-raspios-bullseye-armhf-full-chipsee-v2.img.xz)
  - Desktop with small software [2021-10-30-raspios-bullseye-armhf-chipsee-v2.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20211030/2021-10-30-raspios-bullseye-armhf-chipsee-v2.img.xz)
  - Lite [2021-10-30-raspios-bullseye-armhf-lite-chipsee-v2.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20211030/2021-10-30-raspios-bullseye-armhf-lite-chipsee-v2.img.xz)
 
 # Release notes
+**2025-02-12 V1**
+
+- Added PPC-CM5-050 EPC/PPC-CM5-070 PPC-CM5-101 support.
+- NOT Support CM4 products.
+
 **2022-09-22 V7**
 
 - Added CS12800RA4101A-C141 support.
