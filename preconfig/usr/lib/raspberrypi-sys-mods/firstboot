@@ -296,10 +296,18 @@ elif [ "X$CMVER" = "X4" ]; then
 elif [ "X$CMVER" = "X5" ]; then
         modprobe -a at24
         RBOARD=`cspn`
+        RREV=`csrev`
         echo "Board is $RBOARD" >> $LOGF
+        echo "Rev is $RRREV" >> $LOGF
 	CFGF="config-`echo ${RBOARD} | tr '[:upper:]' '[:lower:]'`.txt"
 	cp $FWLOC/$CFGF $FWLOC/config.txt
 	echo $RBOARD > /opt/chipsee/.board
+	echo $RREV > /opt/chipsee/.rev
+
+	if [ "$RBOARD" = "CS19108RA5133P" -a "$RREV" = "C211" ]; then
+                cp $FWLOC/config-cs19108ra5133pc211.txt $FWLOC/config.txt
+        fi
+
 	if [ "$RBOARD" = "CS12720RA5050P" ]; then
 		if ! grep -q 'video=HDMI-A-1:720x1280M@60,rotate=90' $FWLOC/cmdline.txt; then
 			sed -i "$ s/$/ video=HDMI-A-1:720x1280M@60,rotate=90/" "$FWLOC/cmdline.txt"

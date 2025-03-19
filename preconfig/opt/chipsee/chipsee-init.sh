@@ -226,9 +226,15 @@ elif [ "X$CMVER" = "X5" ]; then
 	OUT="586 588 591 592"
         IN="593 594 595 596"
 	RBOARD=`cspn`
+        REV=`cat /opt/chipsee/.rev`
+        RREV=`csrev`
         echo "Board should be $RBOARD"
 	CFGF="config-`echo ${RBOARD} | tr '[:upper:]' '[:lower:]'`.txt"
 	[ "x$BOARD" != "x$RBOARD" ] && ISSOMCHANGED=1 && cp ${FWLOC}/${CFGF} ${FWLOC}/config.txt
+	[ "x$REV" != "x$RREV" ] && ISSOMCHANGED=1
+	if [ "X$RBOARD" = "XCS19108RA5133P"  -a "X$RREV" = "XC211" -a "$ISSOMCHANGED" -eq 1 ]; then
+                cp ${FWLOC}/config-cs19108ra5133pc211.txt ${FWLOC}/config.txt
+        fi
 	if [ "X$RBOARD" = "XCS12720RA5050P" ]; then
 		BUZZER=588
 		OUT=""
@@ -250,6 +256,11 @@ elif [ "X$CMVER" = "X5" ]; then
 			fi
 		done
 	fi
+
+        # Reset 4G Module
+        pinctrl set 6 op dl
+        sleep 1
+        pinctrl set 6 op dh
 fi
 
 if [ ${ISSOMCHANGED} -eq 1 ]; then
