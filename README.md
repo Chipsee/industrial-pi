@@ -97,8 +97,8 @@ This repository only support follow Chipsee Industrial Board, you can order them
 
 # Latest system images
  **2025-02-12 V1 64bit** *[only support CM5]*
- - Desktop with small software [2025-02-12-raspios-bookworm-arm64-chipsee-v1.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/CM5/2025-02-12-raspios-bookworm-arm64-chipsee-v1.img.xz)
- - Lite [2025-02-12-raspios-bookworm-arm64-lite-chipsee-v1.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/CM5/2025-02-12-raspios-bookworm-arm64-lite-chipsee-v1.img.xz)
+ - Desktop with small software [2025-02-12-raspios-bookworm-arm64-chipsee-v2.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/CM5/2025-02-12-raspios-bookworm-arm64-chipsee-v2.img.xz)
+ - Lite [2025-02-12-raspios-bookworm-arm64-lite-chipsee-v2.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/CM5/2025-02-12-raspios-bookworm-arm64-lite-chipsee-v2.img.xz)
 
  **2022-09-22 V7 64bit** *[only support CM4]*
  - Desktop with small software [2022-09-22-raspios-bullseye-arm64-chipsee-v7.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20220922/bullseye-arm64/2022-09-22-raspios-bullseye-arm64-chipsee-v7.img.xz)
@@ -110,6 +110,11 @@ This repository only support follow Chipsee Industrial Board, you can order them
  - Lite [2021-10-30-raspios-bullseye-armhf-lite-chipsee-v2.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20211030/2021-10-30-raspios-bullseye-armhf-lite-chipsee-v2.img.xz)
 
 # Release notes
+**2025-02-12 V2**
+
+- Added IGNHelper application.
+- Support 13.3H/21.5/23.6 products support.
+
 **2025-02-12 V1**
 
 - Added PPC-CM5-050 EPC/PPC-CM5-070 PPC-CM5-101 support.
