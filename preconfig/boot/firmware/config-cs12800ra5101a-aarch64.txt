@@ -71,8 +71,6 @@ dtoverlay=uart2-pi5
 dtoverlay=uart4-pi5
 # LED
 dtparam=act_led_trigger=heartbeat
-# SD1
-dtoverlay=sdio-pi5
 # WiFI
 dtparam=ant2
 # Touch
@@ -92,4 +90,9 @@ dtoverlay=dwc2,dr_mode=host
 camera_auto_detect=0
 dtoverlay=imx708,cam0
 dtoverlay=i2c-at24,at24c32
+# KEY
+dtoverlay=gpio-key,gpio=27,label=KEY_VOLUMEUP,keycode=115
+dtoverlay=gpio-key,gpio=26,label=KEY_VOLUMEDOWN,keycode=114
+# 4G
+gpio=19=op,dh
 ########################Chipsee Config################################
