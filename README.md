@@ -96,9 +96,9 @@ This repository only support follow Chipsee Industrial Board, you can order them
  - PPC-CM5-101 / CS12800RA5101P (from 2025-02-12 V1 image)
 
 # Latest system images
- **2025-02-12 V2 64bit** *[only support CM5]*
- - Desktop with small software [2025-02-12-raspios-bookworm-arm64-chipsee-v2.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/CM5/2025-02-12-raspios-bookworm-arm64-chipsee-v2.img.xz)
- - Lite [2025-02-12-raspios-bookworm-arm64-lite-chipsee-v2.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/CM5/2025-02-12-raspios-bookworm-arm64-lite-chipsee-v2.img.xz)
+ **2025-02-12 V3 64bit** *[only support CM5]*
+ - Desktop with small software [2025-02-12-raspios-bookworm-arm64-chipsee-v3.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/CM5/2025-02-12-raspios-bookworm-arm64-chipsee-v3.img.xz)
+ - Lite [2025-02-12-raspios-bookworm-arm64-lite-chipsee-v3.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/CM5/2025-02-12-raspios-bookworm-arm64-lite-chipsee-v3.img.xz)
 
  **2022-09-22 V7 64bit** *[only support CM4]*
  - Desktop with small software [2022-09-22-raspios-bullseye-arm64-chipsee-v7.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20220922/bullseye-arm64/2022-09-22-raspios-bullseye-arm64-chipsee-v7.img.xz)
@@ -110,6 +110,10 @@ This repository only support follow Chipsee Industrial Board, you can order them
  - Lite [2021-10-30-raspios-bullseye-armhf-lite-chipsee-v2.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20211030/2021-10-30-raspios-bullseye-armhf-lite-chipsee-v2.img.xz)
 
 # Release notes
+**2025-02-12 V3**
+
+- Added AIO-CM5-101 product support.
+
 **2025-02-12 V2**
 
 - Added IGNHelper application.
@@ -158,6 +162,10 @@ This repository only support follow Chipsee Industrial Board, you can order them
 - Automatically load WiFi/Bt and disable SD slot as WiFi/Bt and SD slot can't be use at same time.
 
 # Older system images
+ **2025-02-12 V2 64bit** *[only support CM5]*
+ - Desktop with small software [2025-02-12-raspios-bookworm-arm64-chipsee-v2.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/CM5/2025-02-12-raspios-bookworm-arm64-chipsee-v2.img.xz)
+ - Lite [2025-02-12-raspios-bookworm-arm64-lite-chipsee-v2.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/CM5/2025-02-12-raspios-bookworm-arm64-lite-chipsee-v2.img.xz)
+
  **2025-02-12 V1 64bit** *[only support CM5]*
  - Desktop with small software [2025-02-12-raspios-bookworm-arm64-chipsee-v1.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/CM5/2025-02-12-raspios-bookworm-arm64-chipsee-v1.img.xz)
  - Lite [2025-02-12-raspios-bookworm-arm64-lite-chipsee-v1.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/CM5/2025-02-12-raspios-bookworm-arm64-lite-chipsee-v1.img.xz)
