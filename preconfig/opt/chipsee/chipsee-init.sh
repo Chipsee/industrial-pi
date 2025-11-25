@@ -66,8 +66,8 @@ if [ "X$CMVER" = "X3" ]; then
 			cp ${FWLOC}/config-cs12800ra101.txt ${FWLOC}/config.txt
 		fi
         	echo "Init GPIO for CS12800RA101"
-        	OUT="503 502 501 500" 
-        	IN="496 497 498 499"
+                OUT="585 584 583 582"
+                IN="578 579 580 581"
         	BUZZER=40
        		# LVDS
         	lcdinit 
@@ -114,7 +114,7 @@ elif [ "X$CMVER" = "X4" ]; then
 			cp ${FWLOC}/config-cs12800ra4101a.txt ${FWLOC}/config.txt
 		fi
         	echo "Init GPIO for CS12800RA4101A"
-        	BUZZER=12
+        	BUZZER=524
        		# LVDS
         	lcdinit 
 	elif [ "X${is_32}" = "X32" -o "X${is_32}" = "XUU" ]; then
@@ -179,12 +179,12 @@ elif [ "X$CMVER" = "X4" ]; then
         	echo "Init GPIO for Big Size products"
 		if [ ${IS133PISO} -eq 1 ]; then
         		OUT="12 13" 
-        		IN="496 497 498 499 500 501 502 503"
+                        IN="578 579 580 581 582 583 584 585"
 		else
-        		OUT="503 502 501 500" 
-        		IN="496 497 498 499"
+                        OUT="585 584 583 582"
+                        IN="578 579 580 581"
 		fi
-        	BUZZER=19
+        	BUZZER=531
        		# LVDS
         	[ "x$BOARD" == "xCS12800RA4101BOX" ] && lcdinit 
         	[ "x$BOARD" == "xCS12800RA4101P" ] && lcdinit 
@@ -196,9 +196,9 @@ elif [ "X$CMVER" = "X4" ]; then
 			cp ${FWLOC}/config-cs10600ra4070d.txt ${FWLOC}/config.txt
                 fi
                 echo "Init GPIO for CS10600RA4070D"
-                OUT="503 502 501 500"
-                IN="496 497 498 499"
-                BUZZER=19
+                OUT="585 584 583 582"
+                IN="578 579 580 581"
+                BUZZER=531
 	elif [ "X${is_20}" = "X20" -o "X${is_20}" = "XUU" ]; then
                	echo "Board is CS10600RA4070"
 		if [ "x$BOARD" != "xCS10600RA4070" ]; then
@@ -207,9 +207,9 @@ elif [ "X$CMVER" = "X4" ]; then
 			cp ${FWLOC}/config-cs10600ra4070.txt ${FWLOC}/config.txt
 		fi
         	echo "Init GPIO for CS10600RA4070"
-        	OUT="503 502 501 500" 
-        	IN="496 497 498 499"
-        	BUZZER=19
+                OUT="585 584 583 582"
+                IN="578 579 580 581"
+        	BUZZER=531
 	else
         	echo "Board is CS12720RA4050"
 		if [ "x$BOARD" != "xCS12720RA4050" ]; then
@@ -218,7 +218,7 @@ elif [ "X$CMVER" = "X4" ]; then
 			cp ${FWLOC}/config-cs12720ra4050.txt ${FWLOC}/config.txt
 		fi
        		echo "Init GPIO for CS12720RA4050"
-       		BUZZER=19
+       		BUZZER=531
 		modprobe gt9xx
 	fi
 elif [ "X$CMVER" = "X5" ]; then
