@@ -3,135 +3,229 @@
 
 /*
 Legal pin,function combinations for each channel:
-  PWM0_CHAN2: 12,4(Alt0) 18,2(Alt5) 40,4(Alt0)            52,5(Alt1)
-  PWM0_CHAN3: 13,4(Alt0) 19,2(Alt5) 41,4(Alt0) 45,4(Alt0) 53,5(Alt1)
+  CM4:PWM0_CHAN0: 12,4(Alt0) 18,2(Alt5) 40,4(Alt0)            52,5(Alt1)
+  CM4:PWM0_CHAN1: 13,4(Alt0) 19,2(Alt5) 41,4(Alt0) 45,4(Alt0) 53,5(Alt1)
+  CM5:PWM0_CHAN2: 12,4(Alt0) 18,2(Alt5) 40,4(Alt0)            52,5(Alt1)
+  CM5:PWM0_CHAN3: 13,4(Alt0) 19,2(Alt5) 41,4(Alt0) 45,4(Alt0) 53,5(Alt1)
 */
 
 / {
-	fragment@0 {
-		target = <&gpio>;
-		__overlay__ {
-			pwm_pins: pwm_pins {
-				brcm,pins = <18>;
-				brcm,function = <2>; /* Alt5 */
-			};
-		};
-	};
+    fragment@0 {
+        target = <&gpio>;
+        __overlay__ {
+            pwm_pins: pwm_pins {
+                brcm,pins = <18>;
+                brcm,function = <2>; /* Alt5 */
+            };
+        };
+    };
 
-	fragment@1 {
-		target = <&pwm>;
-		frag1: __overlay__ {
-			pinctrl-names = "default";
-			pinctrl-0 = <&pwm_pins>;
-			assigned-clock-rates = <50000000>;
-			#pwm-cells = <3>;
-			status = "okay";
-		};
-	};
+    fragment@1 {
+        target = <&pwm>;
+        frag1: __overlay__ {
+            pinctrl-names = "default";
+            pinctrl-0 = <&pwm_pins>;
+            assigned-clock-rates = <50000000>;
+            #pwm-cells = <3>;
+            status = "okay";
+        };
+    };
 
-	fragment@2 {
-		target-path="/";
-		__dormant__ {
-			pwm-backlight {
-                		compatible = "pwm-backlight";
-						pwms = <&pwm 2 5000000 0>; /*200Hz*/
-                		brightness-levels = <
-                        		0  1  2  3  4  5  6  7  8  9
-                        		10 11 12 13 14 15 16 17 18 19
-                        		20 21 22 23 24 25 26 27 28 29
-                        		30 31 32 33 34 35 36 37 38 39
-                        		40 41 42 43 44 45 46 47 48 49
-                        		50 51 52 53 54 55 56 57 58 59
-                        		60 61 62 63 64 65 66 67 68 69
-                        		70 71 72 73 74 75 76 77 78 79
-                        		80 81 82 83 84 85 86 87 88 89
-                        		90 91 92 93 94 95 96 97 98 99
-                        		>;
-                		default-brightness-level = <90>;
-        		};
-		};
+    fragment@2 {
+        target-path="/";
+        __dormant__ {
+            pwm-backlight {
+                compatible = "pwm-backlight";
+                pwms = <&pwm 0 5000000 0>; /*200Hz*/
+                brightness-levels = <
+                    0  1  2  3  4  5  6  7  8  9
+                    10 11 12 13 14 15 16 17 18 19
+                    20 21 22 23 24 25 26 27 28 29
+                    30 31 32 33 34 35 36 37 38 39
+                    40 41 42 43 44 45 46 47 48 49
+                    50 51 52 53 54 55 56 57 58 59
+                    60 61 62 63 64 65 66 67 68 69
+                    70 71 72 73 74 75 76 77 78 79
+                    80 81 82 83 84 85 86 87 88 89
+                    90 91 92 93 94 95 96 97 98 99
+                    >;
+                default-brightness-level = <90>;
+            };
+        };
+    };
 
-	};
+    fragment@3 {
+        target-path="/";
+        __dormant__ {
+            pwm-backlight {
+                compatible = "pwm-backlight";
+                pwms = <&pwm 1 5000000 0>; /*200Hz*/
+                brightness-levels = <
+                    0  1  2  3  4  5  6  7  8  9
+                    10 11 12 13 14 15 16 17 18 19
+                    20 21 22 23 24 25 26 27 28 29
+                    30 31 32 33 34 35 36 37 38 39
+                    40 41 42 43 44 45 46 47 48 49
+                    50 51 52 53 54 55 56 57 58 59
+                    60 61 62 63 64 65 66 67 68 69
+                    70 71 72 73 74 75 76 77 78 79
+                    80 81 82 83 84 85 86 87 88 89
+                    90 91 92 93 94 95 96 97 98 99
+                    >;
+                default-brightness-level = <90>;
+            };
+        };
+    };
 
-	fragment@3 {
-		target-path="/";
-		__dormant__ {
-			pwm-backlight {
-                		compatible = "pwm-backlight";
-						pwms = <&pwm 3 5000000 0>; /*200Hz*/
-                		brightness-levels = <
-                        		0  1  2  3  4  5  6  7  8  9
-                        		10 11 12 13 14 15 16 17 18 19
-                        		20 21 22 23 24 25 26 27 28 29
-                        		30 31 32 33 34 35 36 37 38 39
-                        		40 41 42 43 44 45 46 47 48 49
-                        		50 51 52 53 54 55 56 57 58 59
-                        		60 61 62 63 64 65 66 67 68 69
-                        		70 71 72 73 74 75 76 77 78 79
-                        		80 81 82 83 84 85 86 87 88 89
-                        		90 91 92 93 94 95 96 97 98 99
-                        		>;
-                		default-brightness-level = <90>;
-        		};
-		};
+    fragment@4 {
+        target-path="/";
+        __dormant__ {
+            pwm-backlight {
+                compatible = "pwm-backlight";
+                pwms = <&pwm 2 5000000 0>; /*200Hz*/
+                brightness-levels = <
+                    0  1  2  3  4  5  6  7  8  9
+                    10 11 12 13 14 15 16 17 18 19
+                    20 21 22 23 24 25 26 27 28 29
+                    30 31 32 33 34 35 36 37 38 39
+                    40 41 42 43 44 45 46 47 48 49
+                    50 51 52 53 54 55 56 57 58 59
+                    60 61 62 63 64 65 66 67 68 69
+                    70 71 72 73 74 75 76 77 78 79
+                    80 81 82 83 84 85 86 87 88 89
+                    90 91 92 93 94 95 96 97 98 99
+                    >;
+                default-brightness-level = <90>;
+            };
+        };
+    };
 
-	};
+    fragment@5 {
+        target-path="/";
+        __dormant__ {
+            pwm-backlight {
+                compatible = "pwm-backlight";
+                pwms = <&pwm 3 5000000 0>; /*200Hz*/
+                brightness-levels = <
+                    0  1  2  3  4  5  6  7  8  9
+                    10 11 12 13 14 15 16 17 18 19
+                    20 21 22 23 24 25 26 27 28 29
+                    30 31 32 33 34 35 36 37 38 39
+                    40 41 42 43 44 45 46 47 48 49
+                    50 51 52 53 54 55 56 57 58 59
+                    60 61 62 63 64 65 66 67 68 69
+                    70 71 72 73 74 75 76 77 78 79
+                    80 81 82 83 84 85 86 87 88 89
+                    90 91 92 93 94 95 96 97 98 99
+                    >;
+                default-brightness-level = <90>;
+            };
+        };
+    };
 
-	fragment@4 {
-		target-path="/";
-		__dormant__ {
-			pwm-backlight {
-						compatible = "pwm-backlight";
-						pwms = <&pwm 2 5000000 1>; /*200Hz*/
-						brightness-levels = <
-								0  1  2  3  4  5  6  7  8  9
-								10 11 12 13 14 15 16 17 18 19
-								20 21 22 23 24 25 26 27 28 29
-								30 31 32 33 34 35 36 37 38 39
-								40 41 42 43 44 45 46 47 48 49
-								50 51 52 53 54 55 56 57 58 59
-								60 61 62 63 64 65 66 67 68 69
-								70 71 72 73 74 75 76 77 78 79
-								80 81 82 83 84 85 86 87 88 89
-								90 91 92 93 94 95 96 97 98 99
-								>;
-						default-brightness-level = <90>;
-        		};
-		};
+    fragment@6 {
+        target-path="/";
+        __dormant__ {
+            pwm-backlight {
+                compatible = "pwm-backlight";
+                pwms = <&pwm 0 5000000 1>; /*200Hz*/
+                brightness-levels = <
+                    0  1  2  3  4  5  6  7  8  9
+                    10 11 12 13 14 15 16 17 18 19
+                    20 21 22 23 24 25 26 27 28 29
+                    30 31 32 33 34 35 36 37 38 39
+                    40 41 42 43 44 45 46 47 48 49
+                    50 51 52 53 54 55 56 57 58 59
+                    60 61 62 63 64 65 66 67 68 69
+                    70 71 72 73 74 75 76 77 78 79
+                    80 81 82 83 84 85 86 87 88 89
+                    90 91 92 93 94 95 96 97 98 99
+                    >;
+                default-brightness-level = <90>;
+            };
+        };
+    };
 
-	};
+    fragment@7 {
+        target-path="/";
+        __dormant__ {
+            pwm-backlight {
+                compatible = "pwm-backlight";
+                pwms = <&pwm 1 5000000 1>; /*200Hz*/
+                brightness-levels = <
+                    0  1  2  3  4  5  6  7  8  9
+                    10 11 12 13 14 15 16 17 18 19
+                    20 21 22 23 24 25 26 27 28 29
+                    30 31 32 33 34 35 36 37 38 39
+                    40 41 42 43 44 45 46 47 48 49
+                    50 51 52 53 54 55 56 57 58 59
+                    60 61 62 63 64 65 66 67 68 69
+                    70 71 72 73 74 75 76 77 78 79
+                    80 81 82 83 84 85 86 87 88 89
+                    90 91 92 93 94 95 96 97 98 99
+                    >;
+                default-brightness-level = <90>;
+            };
+        };
+    };
 
-	fragment@5 {
-		target-path="/";
-		__dormant__ {
-			pwm-backlight {
-						compatible = "pwm-backlight";
-						pwms = <&pwm 3 5000000 1>; /*200Hz*/
-						brightness-levels = <
-								0  1  2  3  4  5  6  7  8  9
-								10 11 12 13 14 15 16 17 18 19
-								20 21 22 23 24 25 26 27 28 29
-								30 31 32 33 34 35 36 37 38 39
-								40 41 42 43 44 45 46 47 48 49
-								50 51 52 53 54 55 56 57 58 59
-								60 61 62 63 64 65 66 67 68 69
-								70 71 72 73 74 75 76 77 78 79
-								80 81 82 83 84 85 86 87 88 89
-								90 91 92 93 94 95 96 97 98 99
-								>;
-						default-brightness-level = <90>;
-        		};
-		};
+    fragment@8 {
+        target-path="/";
+        __dormant__ {
+            pwm-backlight {
+                compatible = "pwm-backlight";
+                pwms = <&pwm 2 5000000 1>; /*200Hz*/
+                brightness-levels = <
+                    0  1  2  3  4  5  6  7  8  9
+                    10 11 12 13 14 15 16 17 18 19
+                    20 21 22 23 24 25 26 27 28 29
+                    30 31 32 33 34 35 36 37 38 39
+                    40 41 42 43 44 45 46 47 48 49
+                    50 51 52 53 54 55 56 57 58 59
+                    60 61 62 63 64 65 66 67 68 69
+                    70 71 72 73 74 75 76 77 78 79
+                    80 81 82 83 84 85 86 87 88 89
+                    90 91 92 93 94 95 96 97 98 99
+                    >;
+                default-brightness-level = <90>;
+            };
+        };
+    };
 
-	};
+    fragment@9 {
+        target-path="/";
+        __dormant__ {
+            pwm-backlight {
+                compatible = "pwm-backlight";
+                pwms = <&pwm 3 5000000 1>; /*200Hz*/
+                brightness-levels = <
+                    0  1  2  3  4  5  6  7  8  9
+                    10 11 12 13 14 15 16 17 18 19
+                    20 21 22 23 24 25 26 27 28 29
+                    30 31 32 33 34 35 36 37 38 39
+                    40 41 42 43 44 45 46 47 48 49
+                    50 51 52 53 54 55 56 57 58 59
+                    60 61 62 63 64 65 66 67 68 69
+                    70 71 72 73 74 75 76 77 78 79
+                    80 81 82 83 84 85 86 87 88 89
+                    90 91 92 93 94 95 96 97 98 99
+                    >;
+                default-brightness-level = <90>;
+            };
+        };
+    };
 
-	__overrides__ {
-		pin   = <&pwm_pins>,"brcm,pins:0";
-		func  = <&pwm_pins>,"brcm,function:0";
-		clock = <&frag1>,"assigned-clock-rates:0";
-		pwm_2  = <0>,"+2";
-		pwm_3  = <0>,"+3";
-		pwm_2_r  = <0>,"+4";
-		pwm_3_r  = <0>,"+5";
-	};
+    __overrides__ {
+        pin   = <&pwm_pins>,"brcm,pins:0";
+        func  = <&pwm_pins>,"brcm,function:0";
+        clock = <&frag1>,"assigned-clock-rates:0";
+        pwm_0  = <0>,"+2";
+        pwm_1  = <0>,"+3";
+        pwm_2  = <0>,"+4";
+        pwm_3  = <0>,"+5";
+        pwm_0_r  = <0>,"+6";
+        pwm_1_r  = <0>,"+7";
+        pwm_2_r  = <0>,"+8";
+        pwm_3_r  = <0>,"+9";
+    };
 };

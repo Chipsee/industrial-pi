@@ -4,22 +4,26 @@
 # wait to avoid noise
 sleep 30
 
-DETIO=6
-SPKENIO=11
+if command -v pactl > /dev/null; then
+	card=`pactl list cards |  grep -i 'alsa.card.name' | sed 's/ //g'| sed 's/alsa.card.name=\"//g'| sed 's/\"//g'`
+fi
+
+DETIO=518
+SPKENIO=523
 while [ 1 ]; do
     isdet=`cat /sys/class/gpio/gpio$DETIO/value`
     if [ $isdet -eq 0 ] ; then
         echo 0 > /sys/class/gpio/gpio$SPKENIO/value
 	if command -v pactl > /dev/null; then
-		pactl set-sink-port 0 "analog-output-headphones"
+		pactl set-sink-port @DEFAULT_SINK@ "analog-output-headphones"
 	fi
 	#echo "Headphone"
     else
         echo 1 > /sys/class/gpio/gpio$SPKENIO/value
 	if command -v pactl > /dev/null; then
-		pactl set-sink-port 0 "analog-output-speaker"
+		pactl set-sink-port @DEFAULT_SINK@ "analog-output-speaker"
 	fi
-	#echo "Speaker"
+	#echo "Speaker and Microphone"
     fi
     sleep 1
 done

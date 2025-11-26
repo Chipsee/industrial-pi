@@ -1,7 +1,7 @@
 DEPMOD  = /sbin/depmod
 ARCH := arm
 CROSS_COMPILE ?=
-KVER  := $(shell uname -r)
+KVER  ?= $(shell uname -r)
 KSRC := /lib/modules/$(KVER)/build
 MODDESTDIR := $(INSTALL_MOD_PATH)/usr/lib/modules/$(KVER)/kernel/sound/soc/codecs/
 MODULE_NAME := snd-soc-es8388

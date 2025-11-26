@@ -24,6 +24,8 @@ install:
 	install -p -m 755 -D boot/firmware/config-cs10768ra4121p-$(LARCH).txt $(TP)/boot/firmware/config-cs10768ra4121p.txt
 	install -p -b -m 755 -D boot/firmware/config-cs19108ra4133p-$(LARCH).txt /boot/firmware/config-cs19108ra4133p.txt
 	install -p -m 755 -D boot/firmware/config-cs19108ra4133p-$(LARCH).txt $(TP)/boot/firmware/config-cs19108ra4133p.txt
+	install -p -b -m 755 -D boot/firmware/config-cs19108ra4133pc211-$(LARCH).txt /boot/firmware/config-cs19108ra4133pc211.txt
+	install -p -m 755 -D boot/firmware/config-cs19108ra4133pc211-$(LARCH).txt $(TP)/boot/firmware/config-cs19108ra4133pc211.txt
 	install -p -b -m 755 -D boot/firmware/config-cs19108ra4133piso-$(LARCH).txt /boot/firmware/config-cs19108ra4133piso.txt
 	install -p -m 755 -D boot/firmware/config-cs19108ra4133piso-$(LARCH).txt $(TP)/boot/firmware/config-cs19108ra4133piso.txt
 	install -p -b -m 755 -D boot/firmware/config-cs10768ra4150p-$(LARCH).txt /boot/firmware/config-cs10768ra4150p.txt
@@ -55,6 +57,8 @@ install:
 	install -p -m 755 -D boot/firmware/config-cs10768ra5121p-$(LARCH).txt $(TP)/boot/firmware/config-cs10768ra5121p.txt
 	install -p -b -m 755 -D boot/firmware/config-cs19108ra5133p-$(LARCH).txt /boot/firmware/config-cs19108ra5133p.txt
 	install -p -m 755 -D boot/firmware/config-cs19108ra5133p-$(LARCH).txt $(TP)/boot/firmware/config-cs19108ra5133p.txt
+	install -p -b -m 755 -D boot/firmware/config-cs19108ra5133pc211-$(LARCH).txt /boot/firmware/config-cs19108ra5133pc211.txt
+	install -p -m 755 -D boot/firmware/config-cs19108ra5133pc211-$(LARCH).txt $(TP)/boot/firmware/config-cs19108ra5133pc211.txt
 	install -p -b -m 755 -D boot/firmware/config-cs10768ra5150p-$(LARCH).txt /boot/firmware/config-cs10768ra5150p.txt
 	install -p -m 755 -D boot/firmware/config-cs10768ra5150p-$(LARCH).txt $(TP)/boot/firmware/config-cs10768ra5150p.txt
 	install -p -b -m 755 -D boot/firmware/config-cs19108ra5156p-$(LARCH).txt /boot/firmware/config-cs19108ra5156p.txt
@@ -72,13 +76,6 @@ install:
 	# Other File
 	install -p -b -m 755 -D boot/firmware/config-$(LARCH).txt /boot/firmware/config.txt
 	install -p -m 755 -D boot/firmware/config-$(LARCH).txt $(TP)/boot/firmware/config.txt
-	# First boot
-	#install -p -b -m 755 -D boot/firmware/cmdline.txt /boot/firmware/cmdline.txt
-	#install -p -m 755 -D boot/firmware/cmdline.txt $(TP)/boot/firmware/cmdline.txt
-	#install -p -b -m 755 -D boot/firmware/firstrun.sh /boot/firmware/firstrun.sh
-	#install -p -m 755 -D boot/firmware/firstrun.sh $(TP)/boot/firmware/firstrun.sh
-	#install -p -b -m 755 -D boot/firmware/userconf /boot/firmware/userconf
-	#install -p -m 755 -D boot/firmware/userconf $(TP)/boot/firmware/userconf
 	install -p -m 644 -D usr/lib/systemd/system/chipsee-init.service /usr/lib/systemd/system/chipsee-init.service
 	install -p -m 644 -D usr/lib/systemd/system/chipsee-init.service $(TP)/usr/lib/systemd/system/chipsee-init.service
 	install -p -m 644 -D usr/lib/systemd/user/audioswitch.service /usr/lib/systemd/user/audioswitch.service
@@ -123,29 +120,11 @@ install:
 	install -p -m 777 -D opt/chipsee/test/cantest/cantest.sh $(TP)/opt/chipsee/test/cantest/cantest.sh
 	install -p -m 777 -D opt/chipsee/test/cantest/README /opt/chipsee/test/cantest/README
 	install -p -m 777 -D opt/chipsee/test/cantest/README $(TP)/opt/chipsee/test/cantest/README
-	install -p -m 777 -D opt/chipsee/voicecard/asound_2mic.conf /opt/chipsee/voicecard/asound_2mic.conf
-	install -p -m 777 -D opt/chipsee/voicecard/asound_2mic.conf $(TP)/opt/chipsee/voicecard/asound_2mic.conf
-	install -p -m 777 -D opt/chipsee/voicecard/wm8960_asound.state /opt/chipsee/voicecard/wm8960_asound.state
-	install -p -m 777 -D opt/chipsee/voicecard/wm8960_asound.state $(TP)/opt/chipsee/voicecard/wm8960_asound.state
 	# 4G
 	install -p -b -m 755 -D  opt/chipsee/test/quectel-linux-4g.tar.gz /opt/chipsee/test/quectel-linux-4g.tar.gz
 	install -p -m 755 -D  opt/chipsee/test/quectel-linux-4g.tar.gz $(TP)/opt/chipsee/test/quectel-linux-4g.tar.gz
 	install -p -b -m 755 -D  opt/chipsee/test/simcom-linux-4g.tar.gz /opt/chipsee/test/simcom-linux-4g.tar.gz
 	install -p -m 755 -D  opt/chipsee/test/simcom-linux-4g.tar.gz $(TP)/opt/chipsee/test/simcom-linux-4g.tar.gz
-	#install -p -b -m 755 -D  opt/chipsee/test/linux-ppp-scripts/ip-up /opt/chipsee/test/linux-ppp-scripts/ip-up
-	#install -p -m 755 -D  opt/chipsee/test/linux-ppp-scripts/ip-up $(TP)/opt/chipsee/test/linux-ppp-scripts/ip-up
-	#install -p -b -m 755 -D  opt/chipsee/test/linux-ppp-scripts/quectel-chat-connect /opt/chipsee/test/linux-ppp-scripts/quectel-chat-connect
-	#install -p -m 755 -D  opt/chipsee/test/linux-ppp-scripts/quectel-chat-connect $(TP)/opt/chipsee/test/linux-ppp-scripts/quectel-chat-connect
-	#install -p -b -m 755 -D  opt/chipsee/test/linux-ppp-scripts/quectel-chat-disconnect /opt/chipsee/test/linux-ppp-scripts/quectel-chat-disconnect
-	#install -p -m 755 -D  opt/chipsee/test/linux-ppp-scripts/quectel-chat-disconnect $(TP)/opt/chipsee/test/linux-ppp-scripts/quectel-chat-disconnect
-	#install -p -b -m 755 -D  opt/chipsee/test/linux-ppp-scripts/quectel-ppp /opt/chipsee/test/linux-ppp-scripts/quectel-ppp
-	#install -p -m 755 -D  opt/chipsee/test/linux-ppp-scripts/quectel-ppp $(TP)/opt/chipsee/test/linux-ppp-scripts/quectel-ppp
-	#install -p -b -m 755 -D  opt/chipsee/test/linux-ppp-scripts/quectel-pppd.sh /opt/chipsee/test/linux-ppp-scripts/quectel-pppd.sh
-	#install -p -m 755 -D  opt/chipsee/test/linux-ppp-scripts/quectel-pppd.sh $(TP)/opt/chipsee/test/linux-ppp-scripts/quectel-pppd.sh
-	#install -p -b -m 755 -D  opt/chipsee/test/linux-ppp-scripts/quectel-ppp-kill /opt/chipsee/test/linux-ppp-scripts/quectel-ppp-kill
-	#install -p -m 755 -D  opt/chipsee/test/linux-ppp-scripts/quectel-ppp-kill $(TP)/opt/chipsee/test/linux-ppp-scripts/quectel-ppp-kill
-	#install -p -b -m 755 -D  opt/chipsee/test/linux-ppp-scripts/README /opt/chipsee/test/linux-ppp-scripts/README
-	#install -p -m 755 -D  opt/chipsee/test/linux-ppp-scripts/README $(TP)/opt/chipsee/test/linux-ppp-scripts/README
 	# csdev
 	install -p -m 777 -D usr/bin/csdev_$(LARCH) /usr/bin/csdev
 	install -p -m 777 -D usr/bin/csdev_$(LARCH) $(TP)/usr/bin/csdev
@@ -153,13 +132,23 @@ install:
 	install -p -m 777 -D usr/bin/csdev_$(LARCH) $(TP)/usr/bin/cspn
 	install -p -m 777 -D usr/bin/csdev_$(LARCH) /usr/bin/csrev
 	install -p -m 777 -D usr/bin/csdev_$(LARCH) $(TP)/usr/bin/csrev
+	# csdet
+	install -p -m 777 -D usr/bin/csdet_$(LARCH) /usr/bin/csdet
+	install -p -m 777 -D usr/bin/csdet_$(LARCH) $(TP)/usr/bin/csdet
+
 	# transform90
 	install -p -b -m 755 -D  etc/transform90.tar.gz /etc/transform90.tar.gz
 	install -p -m 755 -D  etc/transform90.tar.gz $(TP)/etc/transform90.tar.gz
-
 	install -p -b -m 755 -D usr/lib/raspberrypi-sys-mods/firstboot /usr/lib/raspberrypi-sys-mods/firstboot
 	install -p -m 755 -D usr/lib/raspberrypi-sys-mods/firstboot $(TP)/usr/lib/raspberrypi-sys-mods/firstboot
 	systemctl enable chipsee-init.service
+
+imageinstall:
+	# First boot
+	install -p -b -m 755 -D boot/firmware/cmdline.txt /boot/firmware/cmdline.txt
+	install -p -m 755 -D boot/firmware/cmdline.txt $(TP)/boot/firmware/cmdline.txt
+	install -p -b -m 755 -D boot/firmware/firstrun.sh /boot/firmware/firstrun.sh
+	install -p -m 755 -D boot/firmware/firstrun.sh $(TP)/boot/firmware/firstrun.sh
 
 clean: install
 	systemctl disable chipsee-init.service

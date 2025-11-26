@@ -3,7 +3,7 @@ EXTRA_CFLAGS +=-Wno-date-time
 DEPMOD  = /sbin/depmod
 FWLOC:= $(shell /usr/lib/raspberrypi-sys-mods/get_fw_loc)
 CROSS_COMPILE ?=
-KVER := $(shell uname -r)
+KVER ?= $(shell uname -r)
 
 all: install
 

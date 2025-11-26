@@ -59,7 +59,9 @@ dtoverlay=i2c-rtc,ds1307,addr=0x32
 # UART
 dtoverlay=miniuart-bt
 enable_uart=1
-core_freq=250
+# core_freq=250 will cause vc4_atomic_commit_tail kernel warning log flood
+# core_freq=250
+core_freq_fixed=1
 dtoverlay=uart2
 dtoverlay=uart3
 dtoverlay=uart5
@@ -74,11 +76,6 @@ dtoverlay=dwc2,dr_mode=host
 gpio=7=op,dh
 gpio=18=op,dl
 dtoverlay=pwm-backlight,pin=18,func=2,pwm_0_r
-## Follow Can fix some hardware issue
-hdmi_force_hotplug=1
-hdmi_group=2
-hdmi_drive=2
-hdmi_mode=35
 # MCP23008
 dtoverlay=mcp23017,mcp23008,addr=0x20,noints
 # MCP2517

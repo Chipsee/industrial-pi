@@ -29,7 +29,7 @@ dtoverlay=goodix,interrupt=20,reset=21
 #dtoverlay=pwm,pin=18,func=2
 ##GPIO
 gpio=18=op,dh
-#dtoverlay=pwm-backlight,pin=18,func=2,pwm_0
+dtoverlay=pwm-backlight,pin=18,func=2,pwm_2
 # CAN
 dtparam=spi=on
 dtoverlay=mcp251xfd,spi0-0,interrupt=16

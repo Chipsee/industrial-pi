@@ -60,7 +60,9 @@ dtoverlay=i2c-rtc,ds1307,addr=0x32
 # UART
 dtoverlay=miniuart-bt
 enable_uart=1
-core_freq=250
+# core_freq=250 will cause vc4_atomic_commit_tail kernel warning log flood
+# core_freq=250
+core_freq_fixed=1
 dtoverlay=uart2
 dtoverlay=uart3
 dtoverlay=uart5
@@ -70,18 +72,10 @@ dtparam=act_led_trigger=heartbeat
 dtoverlay=sdio,poll_once=off
 #dtparam=ant2
 # Touch
-dtoverlay=gt9xx,interrupt=20,reset=21,swapped-x-y=1,inverted-x=1,size=5
+dtoverlay=goodix,interrupt=20,reset=21
 # HDMI
 gpio=18=op,dh
 dtoverlay=pwm-backlight,pin=18,func=2,pwm_0
-# Follow Can fix some hardware issue
-hdmi_force_hotplug=1
-hdmi_group=2
-hdmi_drive=2
-hdmi_mode=87
-hdmi_cvt=720 1280 60
-hdmi_ignore_edid=0xa5000080
-hdmi_pixel_encoding=1
 # CAN
 dtoverlay=mcp2515-can0,oscillator=8000000,interrupt=16
 # USB

@@ -75,13 +75,6 @@ dtoverlay=goodix,interrupt=38,reset=37
 # HDMI
 gpio=41=op,dh
 dtoverlay=pwm-backlight,pin=41,func=4,pwm_1
-## Follow Can fix some hardware issue
-hdmi_force_hotplug=1
-hdmi_group=2
-hdmi_drive=2
-#hdmi_mode=28
-hdmi_mode=87
-hdmi_cvt=1280 800 60 5
 # MCP23008
 dtoverlay=mcp23017,mcp23008,addr=0x20,noints
 # MCP2517

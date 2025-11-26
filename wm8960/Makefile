@@ -1,7 +1,7 @@
 DEPMOD  = /sbin/depmod
 CROSS_COMPILE ?=
 FWLOC:= $(shell /usr/lib/raspberrypi-sys-mods/get_fw_loc)
-KVER  := $(shell uname -r)
+KVER  ?= $(shell uname -r)
 KSRC := /lib/modules/$(KVER)/build
 MODDESTDIR := $(INSTALL_MOD_PATH)/usr/lib/modules/$(KVER)/kernel/sound/soc/codecs/
 MODULE_NAME := snd-soc-wm8960
@@ -39,12 +39,21 @@ install: compile
 	install -p -m 644 -D $(MODULE_NAME).ko $(TP)$(MODDESTDIR)$(MODULE_NAME).ko
 	install -p -m 644 -D seeed-2mic-voicecard.dtbo $(FWLOC)/overlays/seeed-2mic-voicecard.dtbo
 	install -p -m 644 -D seeed-2mic-voicecard.dtbo $(TP)$(FWLOC)/overlays/seeed-2mic-voicecard.dtbo
+	install -p -m 644 -D asound_2mic.conf /opt/chipsee/voicecard/
+	install -p -m 644 -D asound_2mic.conf $(TP)/opt/chipsee/voicecard/
+	install -p -m 644 -D wm8960_asound.state /opt/chipsee/voicecard/
+	install -p -m 644 -D wm8960_asound.state $(TP)/opt/chipsee/voicecard/
 	$(DEPMOD) -a ${KVER}
 
 clean:
 	make -C $(KSRC) M=`pwd` clean
 	rm $(MODDESTDIR)$(MODULE_NAME).ko
 	rm $(FWLOC)/overlays/seeed-2mic-voicecard.dtbo
+	rm /opt/chipsee/voicecard/asound_2mic.conf
+	rm /opt/chipsee/voicecard/wm8960_asound.state
 	$(DEPMOD) -a ${KVER}
+
+cleancur:
+	make -C $(KSRC) M=`pwd` clean
 
 #endif
