@@ -39,10 +39,10 @@ install: compile
 	install -p -m 644 -D $(MODULE_NAME).ko $(TP)$(MODDESTDIR)$(MODULE_NAME).ko
 	install -p -m 644 -D seeed-2mic-voicecard.dtbo $(FWLOC)/overlays/seeed-2mic-voicecard.dtbo
 	install -p -m 644 -D seeed-2mic-voicecard.dtbo $(TP)$(FWLOC)/overlays/seeed-2mic-voicecard.dtbo
-	install -p -m 644 -D asound_2mic.conf /opt/chipsee/voicecard/
-	install -p -m 644 -D asound_2mic.conf $(TP)/opt/chipsee/voicecard/
-	install -p -m 644 -D wm8960_asound.state /opt/chipsee/voicecard/
-	install -p -m 644 -D wm8960_asound.state $(TP)/opt/chipsee/voicecard/
+	install -p -m 644 -D asound_2mic.conf /opt/chipsee/voicecard/asound_2mic.conf
+	install -p -m 644 -D asound_2mic.conf $(TP)/opt/chipsee/voicecard/asound_2mic.conf
+	install -p -m 644 -D wm8960_asound.state /opt/chipsee/voicecard/wm8960_asound.state
+	install -p -m 644 -D wm8960_asound.state $(TP)/opt/chipsee/voicecard/wm8960_asound.state
 	$(DEPMOD) -a ${KVER}
 
 clean:
