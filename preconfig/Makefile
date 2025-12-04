@@ -1,13 +1,17 @@
 all: install
 
 install:
+	# Useful package for lite
+	apt-get update > /dev/null
+	apt-get install i2c-tools > /dev/null
+	# CM3
 	install -p -b -m 755 -D boot/firmware/config-cs10600ra070-$(LARCH).txt /boot/firmware/config-cs10600ra070.txt
 	install -p -m 755 -D boot/firmware/config-cs10600ra070-$(LARCH).txt $(TP)/boot/firmware/config-cs10600ra070.txt
 	install -p -b -m 755 -D boot/firmware/config-cs12800ra101-$(LARCH).txt /boot/firmware/config-cs12800ra101.txt
 	install -p -m 755 -D boot/firmware/config-cs12800ra101-$(LARCH).txt $(TP)/boot/firmware/config-cs12800ra101.txt
+	# CM4
 	install -p -b -m 755 -D boot/firmware/config-cs12800ra4101box-$(LARCH).txt /boot/firmware/config-cs12800ra4101box.txt
 	install -p -m 755 -D boot/firmware/config-cs12800ra4101box-$(LARCH).txt $(TP)/boot/firmware/config-cs12800ra4101box.txt
-	# CM4
 	install -p -b -m 755 -D boot/firmware/config-cs12800ra4101a-$(LARCH).txt /boot/firmware/config-cs12800ra4101a.txt
 	install -p -m 755 -D boot/firmware/config-cs12800ra4101a-$(LARCH).txt $(TP)/boot/firmware/config-cs12800ra4101a.txt
 	install -p -b -m 755 -D boot/firmware/config-cs12800ra4101av4-$(LARCH).txt /boot/firmware/config-cs12800ra4101av4.txt
