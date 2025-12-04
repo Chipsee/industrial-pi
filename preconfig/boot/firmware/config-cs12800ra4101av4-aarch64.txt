@@ -83,5 +83,5 @@ dtoverlay=gpio-key,gpio=10,label=KEY_VOLUMEUP,keycode=115
 dtoverlay=gpio-key,gpio=9,label=KEY_VOLUMEDOWN,keycode=114
 # Audio
 dtparam=i2s=on
-dtoverlay=es8388
+#dtoverlay=es8388
 #######################Chipsee Config#################################
