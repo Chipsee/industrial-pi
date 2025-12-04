@@ -71,8 +71,6 @@ dtoverlay=uart2-pi5
 dtoverlay=uart4-pi5
 # LED
 dtparam=act_led_trigger=heartbeat
-# SD1
-dtoverlay=sdio-pi5
 # WiFI
 dtparam=ant2
 # Touch
