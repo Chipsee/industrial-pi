@@ -3,7 +3,7 @@ all: install
 install:
 	# Useful package for lite
 	apt-get update > /dev/null
-	apt-get install i2c-tools > /dev/null
+	apt-get install -y i2c-tools > /dev/null
 	# CM3
 	install -p -b -m 755 -D boot/firmware/config-cs10600ra070-$(LARCH).txt /boot/firmware/config-cs10600ra070.txt
 	install -p -m 755 -D boot/firmware/config-cs10600ra070-$(LARCH).txt $(TP)/boot/firmware/config-cs10600ra070.txt
