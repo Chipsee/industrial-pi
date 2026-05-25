@@ -10,6 +10,8 @@ This repository only support follow [Raspberry Pi official system](https://www.r
  - 2021-10-30-raspios-bullseye
  - 2022-9-22-raspios-bullseye
  - 2024-11-19-raspios-bookworm (Only support CM5 now)
+ - 2025-02-12-raspios-bookworm (Only support CM5 now)
+ - 2025-11-24-raspios-bookworm
 
 If the system you are downloading not list in the above supported list, you also can try, use latest kernel branch to compile, maybe need to do some modification.
 
@@ -85,6 +87,8 @@ This repository only support follow Chipsee Industrial Board, you can order them
  - PPC-CM4-133 / CS19108RA4133P (from 2021-10-30 V2 image)
  - PPC-CM4-150 / CS10768RA4150P (from 2021-10-30 V2 image)
  - PPC-CM4-156 / CS19108RA4156P (from 2021-10-30 V2 image)
+ - PPC-CM4-170 / CS12102RA4170P (from 2022-09-22 V5 image)
+ - PPC-CM4-190 / CS12102RA4190P (from 2022-09-22 V5 image)
  - PPC-CM4-215 / CS19108RA4215P (from 2021-10-30 V2 image)
  - PPC-CM4-236 / CS19108RA4236P (from 2021-10-30 V2 image)
  - PPC-CM4-070-D / CS10600RA4070D (from 2022-09-22 V3 image)
@@ -93,23 +97,34 @@ This repository only support follow Chipsee Industrial Board, you can order them
 ## CM5
  - PPC-CM5-050 / CS12720RA5050P (from 2025-02-12 V1 image)
  - EPC/PPC-CM5-070 / CS10600RA5070E/P (from 2025-02-12 V1 image)
+ - PPC-CM5-070-D / CS10600RA5070D (from 2025-02-12 V2 image)
+ - AIO-CM5-101 / CS12800RA5101A (from 2025-02-12 V3 image)
  - PPC-CM5-101 / CS12800RA5101P (from 2025-02-12 V1 image)
+ - PPC-CM5-121 / CS10768RA5121P (from 2025-02-12 V2 image)
+ - PPC-CM5-133 / CS19108RA5133P (from 2025-02-12 V2 image)
+ - PPC-CM5-150 / CS10768RA5150P (from 2025-02-12 V2 image)
+ - PPC-CM5-156 / CS10768RA5150P (from 2025-02-12 V2 image)
+ - PPC-CM5-170 / CS12102RA5170P (from 2025-02-12 V4 image)
+ - PPC-CM5-190 / CS12102RA5190P (from 2025-02-12 V4 image)
+ - PPC-CM5-215 / CS19108RA5215P (from 2025-02-12 V2 image)
+ - PPC-CM5-236 / CS19108RA5236P (from 2025-02-12 V2 image)
+ - CS-CM5-BOX / CSRA5BOX (from 2025-02-12 V2 image)
 
 # Latest system images
- **2025-02-12 V3 64bit:** ![only support CM5](https://img.shields.io/badge/Warnning-only_support_CM5-red)
- - Desktop with small software [2025-02-12-raspios-bookworm-arm64-chipsee-v3.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/CM5/2025-02-12-raspios-bookworm-arm64-chipsee-v3.img.xz)
- - Lite [2025-02-12-raspios-bookworm-arm64-lite-chipsee-v3.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/CM5/2025-02-12-raspios-bookworm-arm64-lite-chipsee-v3.img.xz)
+ **2025-11-24 V1 64bit:** ![Both CM4 and CM5](https://img.shields.io/badge/Both_CM4_and_CM5-green) ![CM4 from 20251201](https://img.shields.io/badge/Warnning-CM4_products_from_20251201-red) 
+ - Desktop with small software [2025-11-24-raspios-bookworm-arm64-chipsee-v1.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20251124/bookworm-arm64/2025-11-24-raspios-bookworm-arm64-chipsee-v1.img.xz)
+ - Lite [2025-11-24-raspios-bookworm-arm64-lite-chipsee-v1.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20251124/bookworm-arm64/2025-11-24-raspios-bookworm-arm64-lite-chipsee-v1.img.xz)
+ 
+ **2025-11-24 V1 32bit:** ![Both CM4 and CM5](https://img.shields.io/badge/Both_CM4_and_CM5-green) ![CM4 from 20251201](https://img.shields.io/badge/Warnning-CM4_products_from_20251201-red)
+ - Desktop with small software [2025-11-24-raspios-bookworm-armhf-chipsee-v1.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20251124/bookworm-armhf/2025-11-24-raspios-bookworm-armhf-chipsee-v1.img.xz)
+ - Lite [2025-11-24-raspios-bookworm-armhf-lite-chipsee-v1.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20251124/bookworm-armhf/2025-11-24-raspios-bookworm-armhf-lite-chipsee-v1.img.xz)
 
- **2022-09-22 V7 64bit:** ![only support CM4](https://img.shields.io/badge/Warnning-only_support_CM4-red)
- - Desktop with small software [2022-09-22-raspios-bullseye-arm64-chipsee-v7.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20220922/bullseye-arm64/2022-09-22-raspios-bullseye-arm64-chipsee-v7.img.xz)
- - Lite [2022-09-22-raspios-bullseye-arm64-lite-chipsee-v7.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20220922/bullseye-arm64/2022-09-22-raspios-bullseye-arm64-lite-chipsee-v7.img.xz)
-
-**2021-10-30 V2 32bit:** ![only support CM4](https://img.shields.io/badge/Warnning-only_support_CM4-red)
- - Desktop with Full software [2021-10-30-raspios-bullseye-armhf-full-chipsee-v2.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20211030/2021-10-30-raspios-bullseye-armhf-full-chipsee-v2.img.xz)
- - Desktop with small software [2021-10-30-raspios-bullseye-armhf-chipsee-v2.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20211030/2021-10-30-raspios-bullseye-armhf-chipsee-v2.img.xz)
- - Lite [2021-10-30-raspios-bullseye-armhf-lite-chipsee-v2.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20211030/2021-10-30-raspios-bullseye-armhf-lite-chipsee-v2.img.xz)
 
 # Release notes
+**2025-11-24 V1**
+
+- Support CM4(hardware from 20251201) and CM5 products.
+
 **2025-02-12 V3**
 
 - Added AIO-CM5-101 product support.
@@ -162,6 +177,11 @@ This repository only support follow Chipsee Industrial Board, you can order them
 - Automatically load WiFi/Bt and disable SD slot as WiFi/Bt and SD slot can't be use at same time.
 
 # Older system images
+
+ **2025-02-12 V3 64bit:** ![only support CM5](https://img.shields.io/badge/Warnning-only_support_CM5-red)
+ - Desktop with small software [2025-02-12-raspios-bookworm-arm64-chipsee-v3.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/CM5/2025-02-12-raspios-bookworm-arm64-chipsee-v3.img.xz)
+ - Lite [2025-02-12-raspios-bookworm-arm64-lite-chipsee-v3.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/CM5/2025-02-12-raspios-bookworm-arm64-lite-chipsee-v3.img.xz)
+   
  **2025-02-12 V2 64bit** *[only support CM5]*
  - Desktop with small software [2025-02-12-raspios-bookworm-arm64-chipsee-v2.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/CM5/2025-02-12-raspios-bookworm-arm64-chipsee-v2.img.xz)
  - Lite [2025-02-12-raspios-bookworm-arm64-lite-chipsee-v2.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/CM5/2025-02-12-raspios-bookworm-arm64-lite-chipsee-v2.img.xz)
@@ -170,6 +190,10 @@ This repository only support follow Chipsee Industrial Board, you can order them
  - Desktop with small software [2025-02-12-raspios-bookworm-arm64-chipsee-v1.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/CM5/2025-02-12-raspios-bookworm-arm64-chipsee-v1.img.xz)
  - Lite [2025-02-12-raspios-bookworm-arm64-lite-chipsee-v1.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/CM5/2025-02-12-raspios-bookworm-arm64-lite-chipsee-v1.img.xz)
 
+ **2022-09-22 V7 64bit:** ![only support CM4](https://img.shields.io/badge/Warnning-only_support_CM4-red)
+ - Desktop with small software [2022-09-22-raspios-bullseye-arm64-chipsee-v7.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20220922/bullseye-arm64/2022-09-22-raspios-bullseye-arm64-chipsee-v7.img.xz)
+ - Lite [2022-09-22-raspios-bullseye-arm64-lite-chipsee-v7.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20220922/bullseye-arm64/2022-09-22-raspios-bullseye-arm64-lite-chipsee-v7.img.xz)
+ 
  **2022-09-22 V5 64bit**
  - Desktop with small software [2022-09-22-raspios-bullseye-arm64-chipsee-v5.img.xz](https://chipsee-tmp.s3.amazonaws.com/PrebuiltImages/RaspberryPi/20220922/bullseye-arm64/2022-09-22-raspios-bullseye-arm64-chipsee-v5.img.xz)
  - Lite [2022-09-22-raspios-bullseye-arm64-lite-chipsee-v5.img.xz](https://chipsee-tmp.s3.amazonaws.com/PrebuiltImages/RaspberryPi/20220922/bullseye-arm64/2022-09-22-raspios-bullseye-arm64-lite-chipsee-v5.img.xz)
@@ -184,6 +208,11 @@ This repository only support follow Chipsee Industrial Board, you can order them
  **2022-09-22 V2 64bit:**
  - Desktop with small software [2022-09-22-raspios-bullseye-arm64-chipsee-v2.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20220922/bullseye-arm64/2022-09-22-raspios-bullseye-arm64-chipsee-v2.img.xz)
  - Lite [2022-09-22-raspios-bullseye-arm64-lite-chipsee-v2.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20220922/bullseye-arm64/2022-09-22-raspios-bullseye-arm64-lite-chipsee-v2.img.xz)
+
+ **2021-10-30 V2 32bit:** ![only support CM4](https://img.shields.io/badge/Warnning-only_support_CM4-red)
+ - Desktop with Full software [2021-10-30-raspios-bullseye-armhf-full-chipsee-v2.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20211030/2021-10-30-raspios-bullseye-armhf-full-chipsee-v2.img.xz)
+ - Desktop with small software [2021-10-30-raspios-bullseye-armhf-chipsee-v2.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20211030/2021-10-30-raspios-bullseye-armhf-chipsee-v2.img.xz)
+ - Lite [2021-10-30-raspios-bullseye-armhf-lite-chipsee-v2.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20211030/2021-10-30-raspios-bullseye-armhf-lite-chipsee-v2.img.xz)
  
  **2021-10-30 V1:**
  - Desktop with Full software [2021-10-30-raspios-bullseye-armhf-full-chipsee-v1.img.xz](https://chipsee-tmp.s3.amazonaws.com/mksdcardfiles/RaspberryPi/20211030/2021-10-30-raspios-bullseye-armhf-full-chipsee-v1.img.xz)
